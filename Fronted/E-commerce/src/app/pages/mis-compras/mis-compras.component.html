@@ -1,0 +1,122 @@
+<style>
+    .img-product {
+        object-fit: contain;
+        width: 120px;
+        height: 120px;
+    }
+
+    .container-compras {
+        border: 1px solid black;
+    }
+
+    .container-compras .col-6 {
+        border: 1px solid red;
+    }
+
+    /***/
+    .container-pago {
+        border: 1px solid purple;
+        height: 610px;
+        overflow: auto;
+    }
+
+    .container-pago .col-6 ,  .container-pago .col-12 {
+        border: 1px solid blue;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+</style>
+
+<app-navbar></app-navbar>
+<br><br>
+
+<div class="container-fluid container-compras">
+    <div class="row">
+        <div class="col-7">
+            <div class="card">
+                <p-dataView #dv [value]="listProductosAgregados" [rows]="5" [paginator]="true">
+                    <ng-template let-product pTemplate="listItem">
+                        <div class="col-12 mt-2" style="border: 2px solid whitesmoke;">
+                            <div class="d-flex flex-column flex-xl-row align-items-start p-4 gap-4">
+                                <img class="img-product" src="{{product.urlImg}}" [alt]="product.name" />
+                                <div
+                                    class="d-flex flex-column flex-sm-row justify-content-between align-items-center align-items-xl-start flex-grow-1 gap-4">
+                                    <div class="d-flex flex-column align-items-center align-items-sm-start gap-3">
+                                        <div class="text-2xl font-bold text-900">{{ product.productoNombre }}</div>
+
+                                        <span class="font-semibold">{{ 'Cantidad ' + product.cantidadSeleccionada
+                                            }}</span>
+
+                                        <div class="d-flex align-items-center gap-3">
+                                            <span class="d-flex align-items-center gap-2">
+                                                <i class="pi pi-tag"></i>
+                                                <span class="font-semibold">{{ product.nombreCategoria }}</span>
+                                            </span>
+                                            <!--
+                                    <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product)"></p-tag>
+                                    -->
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="d-flex flex-sm-column align-items-center align-items-sm-end gap-3 gap-sm-2">
+                                        <span class="text-2xl font-semibold">{{ '$' + product.productoPrecioUnidad
+                                            }}</span>
+                                        <p-button label="Eliminar" severity="danger"></p-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-dataView>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="container-fluid container-pago">
+                <div class="row">
+                    <div class="col-12">
+                        <label for="">Numero de tarjeta</label>
+                        <span class="p-input-icon-right">
+                            <i class="pi pi-credit-card"></i>
+                            <input type="text" pInputText />
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label for="">Nombre Completo del Titular</label>
+                        <span class="p-input-icon-right">
+                            <i class="pi pi-credit-card"></i>
+                            <input type="text" pInputText />
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label>Caducidad</label>
+                        <p-inputMask mask="99/99"  placeholder="00/00"></p-inputMask>
+                    </div>
+                    <div class="col-6">
+                        <label>CV</label>
+                        <p-inputNumber inputId="integeronly"> </p-inputNumber>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label>Dirreccion</label>
+                        <input type="text" pInputText />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p-button label="PAGAR" [raised]="true"></p-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

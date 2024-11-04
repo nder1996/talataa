@@ -1,0 +1,103 @@
+<p-table [value]="listaOrdenCompra" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines"
+    [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [scrollable]="true" scrollHeight="700px"
+    [resizableColumns]="true">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Numero Orden</th>
+            <th>Nombre Completo</th>
+            <th>Tipo Documento</th>
+            <th>Numero de Documento</th>
+            <th>Dirreccion</th>
+            <th>Telefono</th>
+            <th>Genero</th>
+            <th>Ciudad</th>
+            <th>SubTotal</th>
+            <th>Descuento</th>
+            <th>Total</th>
+            <th>Detalles de Orden</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-orden>
+        <tr>
+            <td>{{ orden.idOrden }}</td>
+            <td>{{ orden.nombreCompleto }}</td>
+            <td>{{ orden.descripcion }}</td>
+            <td>{{ orden.numeroDocumento }}</td>
+            <td>NO DISPONIBLE</td>
+            <td>{{ orden.telefono || 'NO DISPONIBLE' }}</td>
+            <td>{{ orden.genero }}</td>
+            <td>{{ orden.ciudad }}</td>
+            <td>{{ orden.subTotalCompra }}</td>
+            <td>{{ orden.descuento }}</td>
+            <td>{{ orden.totalCompra }}</td>
+            <td>
+                <p-button label="Detalles" [text]="true" [raised]="true" severity="help" (click)="abrirModalDetalleOrden(orden)"></p-button>
+            </td>
+            <td>
+                <p-button icon="pi pi-pen-to-square" [text]="true" label="Editar" [raised]="true" severity="warning"
+                    (click)="showModalEditar=true;abrirModalEditar()"></p-button>
+            </td>
+            <td>
+                <p-button icon="pi pi-times" [text]="true" label="Eliminar" [raised]="true" severity="danger"
+                    (click)="showModalEliminar=true"></p-button>
+
+            </td>
+
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+            Un total de {{listaOrdenCompra ? listaOrdenCompra.length : 0 }} Lista Ordenes Compra.
+        </div>
+    </ng-template>
+</p-table>
+
+
+<p-dialog header="Editar Registro" [(visible)]="showTablaDetalleOrden" *ngIf="showTablaDetalleOrden" [modal]="true"
+    [style]="{ width: '98%' }">
+
+<div class="container-fluid tablaDetallesOrden">
+    <p-table [value]="listaDetallesCompra" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines"
+    [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [scrollable]="true" scrollHeight="700px"
+    [resizableColumns]="true">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Nombre del Producto</th>
+            <th>Descripcion del Producto</th>
+            <th>Precio Unidad del Producto</th>
+            <th>SubTotal del Producto</th>
+            <th>Cantidad Producto</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-detalle>
+        <tr>
+            <td>{{ detalle.nombreProducto }}</td>
+            <td>{{ detalle.descripcion }}</td>
+            <td>{{ detalle.unidadPrecio }}</td>
+            <td>{{ detalle.subTotal }}</td>
+            <td>{{ detalle.cantidadProducto }}</td>
+            <td>
+                <p-button icon="pi pi-pen-to-square" [text]="true" label="Editar" [raised]="true" severity="warning"
+                   ></p-button>
+            </td>
+            <td>
+                <p-button icon="pi pi-times" [text]="true" label="Eliminar" [raised]="true" severity="danger"
+                    ></p-button>
+
+            </td>
+
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+            Un total de {{listaOrdenCompra ? listaOrdenCompra.length : 0 }} Lista Ordenes Compra.
+        </div>
+    </ng-template>
+</p-table>
+</div>
+
+</p-dialog>

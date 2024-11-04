@@ -1,0 +1,58 @@
+<style>
+  .product-container {
+    /* border: 1px solid red;*/
+  }
+
+  .product-container .col-3 {
+    border: 1px solid whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding: 10px;
+  }
+
+  .product-container .img-card {
+    /* border: 1px solid black;*/
+    width: 250px;
+    height: 200px;
+    overflow: contain !important;
+  }
+
+
+  .p-button {
+    background-color: #F28322 !important;
+  }
+</style>
+
+<app-navbar></app-navbar>
+
+<br><br>
+<div class="card" style="width: 100% !important;height: 100vh;">
+  <p-panel>
+    <ng-template pTemplate="header"> <span class="text-primary font-semibold text-xl">Header</span></ng-template>
+    <div class="container-fuild product-container">
+      <div class="row">
+        <div *ngFor="let product of listaProducto" class="col-3">
+          <div class="card" style="width: 98%;">
+            <!-- Imagen principal -->
+            <img src="{{product.urlImg}}" class="card-img-top img-card mx-auto">
+            <!-- Cuerpo de la tarjeta -->
+            <div class="card-body">
+              <h5 class="card-title">{{product.productoNombre}}</h5>
+              <p class="card-text">{{product.productoDescripcion}}</p>
+              <p class="card-text"><small class="text-body-secondary">Precio: ${{product.productoPrecioUnidad}} |
+                  Disponibles: {{product.cantidadDisponible}}</small></p>
+            </div>
+            <!-- Footer de la tarjeta -->
+            <div class="card-footer text-center">
+              <p-button label="Agregar" [raised]="true" (click)="AgregarProducto(product)"></p-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template pTemplate="footer"> Footer content here </ng-template>
+  </p-panel>
+</div>
+

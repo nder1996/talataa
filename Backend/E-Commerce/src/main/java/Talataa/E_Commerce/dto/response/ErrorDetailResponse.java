@@ -29,6 +29,7 @@ public class ErrorDetailResponse {
             new ErrorDetailResponse(404, "NO_PRODUCTS_FOUND", "No se encontraron productos que coincidan con los criterios de búsqueda."),
             new ErrorDetailResponse(400, "INVALID_PRODUCT_DATA", "Los datos del producto proporcionados no son válidos o están incompletos."),
             new ErrorDetailResponse(400, "PRODUCT_OUT_OF_STOCK", "El producto solicitado no tiene existencias disponibles."),
+            new ErrorDetailResponse(400, "PRODUCTS_NOT_FOUND", "No existen productos registrados en la base de datos."),
 
             // Errores de Inventario (400, 404)
             new ErrorDetailResponse(400, "INSUFFICIENT_STOCK", "No hay suficiente stock disponible para completar la orden."),
@@ -36,10 +37,9 @@ public class ErrorDetailResponse {
             new ErrorDetailResponse(400, "INVALID_INVENTORY_UPDATE", "La actualización de inventario no es válida. La cantidad no puede ser negativa."),
 
             // Errores de Órdenes (400, 404)
-            new ErrorDetailResponse(404, "ORDER_NOT_FOUND", "La orden solicitada no existe en el sistema."),
-            new ErrorDetailResponse(400, "INVALID_ORDER_DATA", "Los datos de la orden no son válidos o están incompletos."),
-            new ErrorDetailResponse(400, "EMPTY_CART", "No se puede crear una orden con un carrito vacío."),
-            new ErrorDetailResponse(400, "INVALID_PAYMENT_INFO", "La información de pago proporcionada no es válida."),
+
+
+
 
             // Errores de Descuentos y Promociones (400)
             new ErrorDetailResponse(400, "DISCOUNT_NOT_APPLICABLE", "El descuento solicitado no es aplicable a esta orden."),
@@ -83,9 +83,56 @@ public class ErrorDetailResponse {
 
             // Errores para Rol (400, 404)
             new ErrorDetailResponse(404, "ROLE_NOT_FOUND", "No se encontró el rol especificado en el sistema."),
-            new ErrorDetailResponse(400, "NO_ROLE_DATA", "No existen datos del rol en el sistema.")
+            new ErrorDetailResponse(400, "NO_ROLE_DATA", "No existen datos del rol en el sistema."),
 
-            );
+            // Errores para Rol (400, 404)
+            new ErrorDetailResponse(404, "RECORD_NOT_FOUND", "No se encontró el registro relacionado al ID especificado."),
+     new ErrorDetailResponse(404, "USER_NOT_FOUND", "No se encontró ningún registro de usuarios."),
+     new ErrorDetailResponse(400, "UPDATE_FAILED", "No se pudo actualizar el registro."),
+            new ErrorDetailResponse(400, "DELETE_FAILED", "No se pudo eliminar el registro del usuario."),
 
+
+     new ErrorDetailResponse(
+            404,
+                    "CATEGORY_NOT_FOUND",
+                    "No se encontró la categoría de producto especificada."),
+    new ErrorDetailResponse(
+            404,
+                    "NO_PRODUCT_CATEGORIES",
+                    "No existen categorías de productos en el sistema."),
+
+    new ErrorDetailResponse(
+        404,
+                "INVENTORY_NOT_FOUND",
+                "No se encontraron datos en el inventario."),
+new ErrorDetailResponse(
+        404,
+                "INVENTORY_ITEM_NOT_FOUND",
+                "El item buscado en el inventario no se encontró."),
+            new ErrorDetailResponse(
+                    404,
+                    "ORDER_NOT_FOUND",
+                    "No se encontró la orden especificada."),
+            new ErrorDetailResponse(
+                    404,
+                    "NO_ORDERS_FOUND",
+                    "No existen órdenes en el sistema."),
+            new ErrorDetailResponse(
+                    404,
+                    "DETAIL_ORDER_NOT_FOUND",
+                    "No se encontró el detalle de orden especificado."),
+            new ErrorDetailResponse(
+                    404,
+                    "NO_DETAILS_FOUND",
+                    "No existen detalles de orden en el sistema."),
+            new ErrorDetailResponse(
+                    404,
+                    "NO_DETAILS_FOUND_FOR_ORDER",
+                    "No existen detalles para la orden especificada.")
+
+
+
+    );
+    //
 
 }

@@ -20,6 +20,7 @@ public class Producto {
     private String estado;
     private Date createAt;
     private Integer updateAt;
+    private String url_img;
 
     // Relaciones
     private List<CategoriaProducto> categorias;

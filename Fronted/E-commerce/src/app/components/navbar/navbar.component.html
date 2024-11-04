@@ -1,0 +1,71 @@
+<style>
+    .item-contenedor {
+        /* border:1px solid red !important;*/
+    }
+
+    .item-contenedor li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container-img a img {
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 125px;
+        width: 125px;
+        object-fit: contain;
+    }
+
+    .p-button {
+        border-radius: 8px;
+        padding: 10px 20px;
+        background-color: #6089BF !important;
+        color: white !important;
+        border-color: none !important;
+    }
+    .p-button:enabled:hover{
+        border-color: none;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid container-img">
+        <a class="navbar-brand" href="#">
+            <img src="assets/logo-img.png" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto item-contenedor">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Pagina Principal</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mis Compras</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <p-button class="btn-iniciar-estilo" class="btn-iniciar btn-iniciar-estilo"
+                            label="Iniciar Session"></p-button>
+                    </a>
+                </li>
+                <!--
+             <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown link
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          -->
+
+            </ul>
+        </div>
+    </div>
+</nav>

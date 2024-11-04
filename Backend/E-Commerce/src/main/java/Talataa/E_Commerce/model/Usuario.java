@@ -17,6 +17,7 @@ public class Usuario {
     private Integer idCiudad;
     private Integer idTipoDocumento;
     private Integer idGenero;
+    private String numeroDocumento;
     private String nombreUsuario;
     private String contraseña;
     private String estado;
@@ -26,6 +27,7 @@ public class Usuario {
     private String direccion;
     private String nombres;
     private String apellidos;
+    private String telefono;
 
     // Relaciones
     private Ciudad ciudad;

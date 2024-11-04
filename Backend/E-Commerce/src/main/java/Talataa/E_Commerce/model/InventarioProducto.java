@@ -17,6 +17,4 @@ public class InventarioProducto {
     private Date updateAt;
     private String estado;
 
-    // Relación
-    private Producto producto;
 }
