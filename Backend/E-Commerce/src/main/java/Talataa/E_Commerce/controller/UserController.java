@@ -23,10 +23,19 @@ public class UserController {
         return new ResponseEntity<>(this.userService.getAllUsuarios(), HttpStatus.OK);
     }
 
+    @GetMapping("/login")
+    public ResponseEntity<ApiResponse<String>> login(@RequestParam String username,
+                                                     @RequestParam String password) {
+        ApiResponse<String> response = userService.UserAutenticacion(username, password);
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping("/guardarUsuarioXRol")
     public ResponseEntity<ApiResponse<String>> guardarUsuario(@RequestBody UsuarioRequest usuarioRequest) {
         return new ResponseEntity<>(this.userService.guardarUsuariosXRol(usuarioRequest), HttpStatus.OK);
     }
+
+
 
     @PutMapping("/actualizarUsuarioXRol")
     public ResponseEntity<ApiResponse<String>> actualizarUsuario(@RequestBody UsuarioRequest usuarioRequest) {

@@ -1,0 +1,24 @@
+  .p-datatable-gridlines {
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      width: 100% !important;
+      margin: 0 auto;
+  }
+
+  .p-datatable-gridlines tr th,
+  .p-datatable-gridlines tr td {
+      border: 1px solid whitesmoke !important;
+      text-align: center;
+      vertical-align: middle;
+      width: 300px !important;
+  }
+
+  .container-orden {
+      width: 100% !important;
+      height: 100vh !important;
+      /*display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 10px;
+      overflow-x: hidden !important;*/
+  }

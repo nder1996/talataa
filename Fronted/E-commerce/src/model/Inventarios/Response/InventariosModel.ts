@@ -1,5 +1,6 @@
 export class InventariosModel {
     idInventario?: number;
+    idProducto?: number;
     productoNombre?: string;
     productoDescripcion?: string;
     cantidadDisponible?: string;
@@ -9,11 +10,13 @@ export class InventariosModel {
         productoNombre?: string,
         productoDescripcion?: string,
         cantidadDisponible?: string,
+        idProducto?: number
 
     ) {
         this.idInventario = idInventario;
         this.productoNombre = productoNombre;
         this.productoDescripcion = productoDescripcion;
         this.cantidadDisponible = cantidadDisponible;
+        this.idProducto = idProducto;
     }
 }

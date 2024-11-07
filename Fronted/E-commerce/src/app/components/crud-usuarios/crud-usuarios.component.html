@@ -21,14 +21,18 @@
     }
 
     .container-usuario {
-        border: 1px solid red !important;
-        width: 100vw !important;
-        height: 100vh !important;
+        width: 100% !important;
+        /*height: 100vh !important;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        gap: 10px;
+        gap: 10px;*/
+        padding: 0 !important;
+    }
+
+    .p-datatable-gridlines{
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
 
     .p-datatable-gridlines tr th , .p-datatable-gridlines tr td {
@@ -39,9 +43,11 @@
 </style>
 
 <div class="container-fluid container-usuario">
-    <p-button label="Agregar Usuario" [outlined]="true" severity="success" icon="pi pi-user-plus" (click)="showModaAgregar=true;abrirModalAgregar()"></p-button>    
-    <p-table [value]="listaUsuarios" [tableStyle]="{ 'width': '98%' }" styleClass="p-datatable-gridlines"
-        [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [scrollable]="true" scrollHeight="500px"
+    <div class="text-center">
+        <p-button label="Agregar Usuario" [raised]="true"  severity="success" icon="pi pi-user-plus" (click)="showModaAgregar=true;abrirModalAgregar()"></p-button>    
+    </div>
+    <p-table [value]="listaUsuarios" [tableStyle]="{ 'width': '100%' }" styleClass="p-datatable-gridlines"
+        [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [scrollable]="true" scrollHeight="600px"
         [resizableColumns]="true" [ngStyle]="{'border': '2px solid whitesmoke'}">
         <ng-template pTemplate="header">
             <tr>
@@ -52,6 +58,7 @@
                 <th>email</th>
                 <th>Dirreccion</th>
                 <th>Telefono</th>
+                <th>Username</th>
                 <th>Rol</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
@@ -66,13 +73,15 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.dirreccion }}</td>
                 <td>{{ user.telefono }}</td>
+                <th><small>{{ user.nombreUsuario}}</small></th>
                 <th><small>{{ user.rolNombre}}</small></th>
+               
                 <td>
-                    <p-button icon="pi pi-pen-to-square" [text]="true" label="Editar" [raised]="true" severity="warning"
-                        (click)="showModalEditar=true;abrirModalEditar()"></p-button>
+                    <p-button icon="pi pi-pen-to-square"  label="Editar" [outlined]="true" severity="warning"
+                        (click)="showModalEditar=true;abrirModalEditar(user)"></p-button>
                 </td>
                 <td>
-                    <p-button icon="pi pi-times" [text]="true" label="Eliminar" [raised]="true" severity="danger"
+                    <p-button icon="pi pi-times" label="Eliminar" [outlined]="true" severity="danger"
                         (click)="showModalEliminar=true;abrirModalEliminar(user)"></p-button>
 
                 </td>
@@ -191,6 +200,7 @@
 
 
 <!--MODAL EDITAR-->
+<!--
 <p-dialog header="Editar Registro" [(visible)]="showModalEditar" *ngIf="showModalEditar" [modal]="true"
     [style]="{ width: '32rem' }">
     <form>
@@ -260,6 +270,106 @@
         </div>
     </form>
 </p-dialog>
+-->
+<p-dialog header="Editar Registro" [(visible)]="showModalEditar" *ngIf="showModalEditar" [modal]="true"
+    [style]="{ width: '32rem' }">
+    <form [formGroup]="userForm">
+        <div class="container container-modal-registro" style="padding: 1rem;">
+            <div class="row">
+                <div class="col-12">
+                    <label>Nombres</label>
+                    <input type="text" pInputText [style]="{width: '420px'}" placeholder="Nombre Completo" formControlName="nombres"/>
+                    <span class="msj-validation" *ngIf="userForm.get('nombres')?.errors?.['required'] && userForm.get('nombres')?.touched">El campo es requerido</span>
+                </div>
+                <div class="col-12">
+                    <label>Apellidos</label>
+                    <input type="text" pInputText [style]="{width: '420px'}" placeholder="Apellidos" formControlName="apellidos"/>
+                    <span class="msj-validation" *ngIf="userForm.get('apellidos')?.errors?.['required'] && userForm.get('apellidos')?.touched">El campo es requerido</span>
+                </div>
+                <div class="col-12">
+                    <label>Tipo Documento</label>
+                    <p-dropdown [style]="{width: '420px'}" [options]="listaTipoDocumento" optionLabel="descripcion"
+                        [filter]="true" filterBy="descripcion" [showClear]="true"
+                        placeholder="Selecciona un Tipo de Documento" formControlName="tipoDocumento" optionValue="id">
+                        <ng-template let-selectedOption>
+                            <div class="flex align-items-center gap-2">
+                                <div>{{ selectedOption.descripcion }}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                    <span class="msj-validation" *ngIf="userForm.get('tipoDocumento')?.errors?.['required'] && userForm.get('tipoDocumento')?.touched">El campo es requerido</span>
+                </div>
+                <div class="col-12">
+                    <label>Número Documento</label>
+                    <input type="text" pInputText [style]="{width: '420px'}" placeholder="Número Documento" formControlName="numeroDocumento"/>
+                    <span class="msj-validation" *ngIf="userForm.get('numeroDocumento')?.errors?.['required'] && userForm.get('numeroDocumento')?.touched">El campo es requerido</span>
+                </div>
+                <div class="col-12">
+                    <label>Genero</label>
+                    <p-dropdown [options]="listaGenero" optionLabel="descripcion" [filter]="true" filterBy="descripcion"
+                        [showClear]="true" placeholder="Seleccione un Género" [style]="{width: '420px'}" formControlName="genero" optionValue="id">
+                        <ng-template let-selectedOption>
+                            <div class="flex align-items-center gap-2">
+                                <div>{{ selectedOption.descripcion }}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                    <span class="msj-validation" *ngIf="userForm.get('genero')?.errors?.['required'] && userForm.get('genero')?.touched">El campo es requerido</span>
+                </div>
+                <div class="col-12">
+                    <label>Rol</label>
+                    <p-dropdown [options]="listaRol" optionLabel="nombre" [filter]="true" filterBy="nombre"
+                        [showClear]="true" placeholder="Seleccione un Rol" [style]="{width: '420px'}" formControlName="rol" optionValue="id">
+                        <ng-template let-selectedOption>
+                            <div class="flex align-items-center gap-2">
+                                <div>{{ selectedOption.nombre }}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                    <span class="msj-validation" *ngIf="userForm.get('rol')?.errors?.['required'] && userForm.get('rol')?.touched">El campo es requerido</span>
+                </div>
+                <div class="col-12">
+                    <label>Ciudad</label>
+                    <p-dropdown [options]="listaCiudad" optionLabel="nombre" [filter]="true" filterBy="nombre"
+                        [showClear]="true" placeholder="Seleccione una Ciudad" [style]="{width: '420px'}" formControlName="ciudad" optionValue="id">
+                        <ng-template let-selectedOption>
+                            <div class="flex align-items-center gap-2">
+                                <div>{{ selectedOption.nombre }}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                    <span class="msj-validation" *ngIf="userForm.get('ciudad')?.errors?.['required'] && userForm.get('ciudad')?.touched">El campo es requerido</span>
+                </div>
+                <div class="col-12">
+                    <label>Username</label>
+                    <input type="text" pInputText [style]="{width: '420px'}" placeholder="Username" formControlName="nombreUsuario"/>
+                    <span class="msj-validation" *ngIf="userForm.get('nombreUsuario')?.errors?.['required'] && userForm.get('nombreUsuario')?.touched">El campo es requerido</span>
+                </div>
+                <div class="col-12">
+                    <label>Email</label>
+                    <input type="text" pInputText [style]="{width: '420px'}" placeholder="Email" formControlName="email"/>
+                    <span class="msj-validation" *ngIf="userForm.get('email')?.errors?.['required'] && userForm.get('email')?.touched">El campo es requerido</span>
+                </div>
+                <div class="col-12">
+                    <label>Dirección</label>
+                    <input type="text" pInputText [style]="{width: '420px'}" placeholder="Dirección" formControlName="direccion"/>
+                    <span class="msj-validation" *ngIf="userForm.get('direccion')?.errors?.['required'] && userForm.get('direccion')?.touched">El campo es requerido</span>
+                </div>
+                <div class="col-12">
+                    <label>Teléfono</label>
+                    <input type="text" pInputText [style]="{width: '420px'}" placeholder="Teléfono" formControlName="telefono"/>
+                    <span class="msj-validation" *ngIf="userForm.get('telefono')?.errors?.['required'] && userForm.get('telefono')?.touched">El campo es requerido</span>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-2">
+            <p-button icon="pi pi-times" label="Cancelar" [text]="true" [raised]="true" severity="secondary" (click)="showModalEditar=false"></p-button>
+            &nbsp;&nbsp;
+            <p-button icon="pi pi-check" label="Actualizar" [text]="true" [raised]="true" severity="warning" (click)="actualizarRegistroDB()"></p-button>
+        </div>
+    </form>
+</p-dialog>
+
 
 <!--MODAL ELIMINAR-->
 <p-dialog header="¿Eliminar registro?" [(visible)]="showModalEliminar" *ngIf="showModalEliminar"

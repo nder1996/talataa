@@ -38,6 +38,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CrudDetallesComponent } from './components/crud-detalles/crud-detalles.component';
 
+import { TabViewModule } from 'primeng/tabview';
+import { PasswordModule } from 'primeng/password';
+import { SplitterModule } from 'primeng/splitter';
+import { MenuModule } from 'primeng/menu';
+import { GenerateReportComponent } from './components/generate-report/generate-report.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +58,7 @@ import { CrudDetallesComponent } from './components/crud-detalles/crud-detalles.
     NavbarComponent,
     MisComprasComponent,
     CrudDetallesComponent,
+    GenerateReportComponent,
     
   ],
   imports: [
@@ -73,7 +80,11 @@ import { CrudDetallesComponent } from './components/crud-detalles/crud-detalles.
     AvatarModule,
     DropdownModule,
     InputTextareaModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TabViewModule,
+    PasswordModule,
+    SplitterModule,
+    MenuModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

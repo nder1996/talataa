@@ -1,5 +1,6 @@
 package Talataa.E_Commerce.service;
 
+import Talataa.E_Commerce.dto.request.InventarioRequest;
 import Talataa.E_Commerce.dto.request.ProductoRequest;
 import Talataa.E_Commerce.dto.response.ApiResponse;
 import Talataa.E_Commerce.dto.response.ProductosResponse;
@@ -20,6 +21,9 @@ public class ProductService {
 
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    InventoryService inventoryService;
 
     @Autowired
     ResponseApiBuilderService responseApiBuilderService;
@@ -74,10 +78,22 @@ public class ProductService {
             if (row1 != null && row1 > 0) {
                 Integer row2 = this.guardarProductoCategoria(producto.getId(), producto.getIdCategoriaProducto());
                 if (row2 != null && row2 > 0) {
-                    return this.responseApiBuilderService.successRespuesta(
-                            "El producto se guardó correctamente en el sistema",
-                            "PRODUCTO"
-                    );
+                    /**/
+                    InventarioRequest inventarioRequest = new InventarioRequest(null,producto.getId(),1);;
+                    ApiResponse<String> respuesta =  this.inventoryService.guardarInventario(inventarioRequest);
+                    /**/
+                    if(respuesta.getError()==null){
+                        return this.responseApiBuilderService.successRespuesta(
+                                "El producto se guardó correctamente en el sistema",
+                                "PRODUCTO"
+                        );
+                    }else{
+                        return this.responseApiBuilderService.errorRespuestaPersonalizado(
+                                404,
+                                "ERROR_SAVE",
+                                "Ocurrió un error al guardar la categoría del producto. Por favor, intenta nuevamente o contacta al administrador."
+                        );
+                    }
                 } else {
                     return this.responseApiBuilderService.errorRespuestaPersonalizado(
                             404,

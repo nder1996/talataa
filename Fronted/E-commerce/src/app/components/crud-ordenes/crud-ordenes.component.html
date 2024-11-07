@@ -1,103 +1,144 @@
-<p-table [value]="listaOrdenCompra" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines"
-    [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [scrollable]="true" scrollHeight="700px"
-    [resizableColumns]="true">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Numero Orden</th>
-            <th>Nombre Completo</th>
-            <th>Tipo Documento</th>
-            <th>Numero de Documento</th>
-            <th>Dirreccion</th>
-            <th>Telefono</th>
-            <th>Genero</th>
-            <th>Ciudad</th>
-            <th>SubTotal</th>
-            <th>Descuento</th>
-            <th>Total</th>
-            <th>Detalles de Orden</th>
-            <th>Editar</th>
-            <th>Eliminar</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-orden>
-        <tr>
-            <td>{{ orden.idOrden }}</td>
-            <td>{{ orden.nombreCompleto }}</td>
-            <td>{{ orden.descripcion }}</td>
-            <td>{{ orden.numeroDocumento }}</td>
-            <td>NO DISPONIBLE</td>
-            <td>{{ orden.telefono || 'NO DISPONIBLE' }}</td>
-            <td>{{ orden.genero }}</td>
-            <td>{{ orden.ciudad }}</td>
-            <td>{{ orden.subTotalCompra }}</td>
-            <td>{{ orden.descuento }}</td>
-            <td>{{ orden.totalCompra }}</td>
-            <td>
-                <p-button label="Detalles" [text]="true" [raised]="true" severity="help" (click)="abrirModalDetalleOrden(orden)"></p-button>
-            </td>
-            <td>
-                <p-button icon="pi pi-pen-to-square" [text]="true" label="Editar" [raised]="true" severity="warning"
-                    (click)="showModalEditar=true;abrirModalEditar()"></p-button>
-            </td>
-            <td>
-                <p-button icon="pi pi-times" [text]="true" label="Eliminar" [raised]="true" severity="danger"
-                    (click)="showModalEliminar=true"></p-button>
 
-            </td>
+<div class="container-fluid container-orden mt-5">
+    <p-table [value]="listaOrdenCompra" [tableStyle]="{ 'width': '100%' }" styleClass="p-datatable-gridlines"
+        [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [scrollable]="true" scrollHeight="600px"
+        [resizableColumns]="true">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Número de Orden</th>
+                <th>Nombre Completo</th>
+                <th>Tipo Documento</th>
+                <th>Número de Documento</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Género</th>
+                <th>Ciudad</th>
+                <th>Sub-Total</th>
+                <th>Descuento</th>
+                <th>Total</th>
+                <th>Detalles de Orden</th>
+                <th>Eliminar</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-orden>
+            <tr>
+                <td>{{ orden.idOrden }}</td>
+                <td>{{ orden.nombreCompleto }}</td>
+                <td>{{ orden.descripcion }}</td>
+                <td>{{ orden.numeroDocumento }}</td>
+                <td>No disponible</td>
+                <td>{{ orden.telefono || 'No disponible' }}</td>
+                <td>{{ orden.genero }}</td>
+                <td>{{ orden.ciudad }}</td>
+                <td>$ {{ orden.subTotalCompra.toLocaleString('es-CO', {
+                    style: 'decimal',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                    }) }} COP</td>
+                <td>{{ orden.descuento || 0 }}%</td>
+                <td>$ {{ orden.totalCompra.toLocaleString('es-CO', {
+                    style: 'decimal',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                    }) }} COP</td>
+                <td>
+                    <p-button icon="pi pi-eye" label="Detalles" [outlined]="true" severity="help"
+                        (click)="abrirModalDetalleOrden(orden)"></p-button>
+                </td>
+                <td>
+                    <p-button icon="pi pi-times" label="Eliminar" [outlined]="true" severity="danger"
+                        (click)="showModalEliminar=true;idEliminarOrden=orden.idOrden"></p-button>
 
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="summary">
-        <div class="flex align-items-center justify-content-between">
-            Un total de {{listaOrdenCompra ? listaOrdenCompra.length : 0 }} Lista Ordenes Compra.
-        </div>
-    </ng-template>
-</p-table>
+                </td>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                Un total de {{listaOrdenCompra ? listaOrdenCompra.length : 0 }} Orden Compra.
+            </div>
+        </ng-template>
+    </p-table>
 
 
-<p-dialog header="Editar Registro" [(visible)]="showTablaDetalleOrden" *ngIf="showTablaDetalleOrden" [modal]="true"
-    [style]="{ width: '98%' }">
-
-<div class="container-fluid tablaDetallesOrden">
-    <p-table [value]="listaDetallesCompra" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines"
-    [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [scrollable]="true" scrollHeight="700px"
-    [resizableColumns]="true">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Nombre del Producto</th>
-            <th>Descripcion del Producto</th>
-            <th>Precio Unidad del Producto</th>
-            <th>SubTotal del Producto</th>
-            <th>Cantidad Producto</th>
-            <th>Editar</th>
-            <th>Eliminar</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-detalle>
-        <tr>
-            <td>{{ detalle.nombreProducto }}</td>
-            <td>{{ detalle.descripcion }}</td>
-            <td>{{ detalle.unidadPrecio }}</td>
-            <td>{{ detalle.subTotal }}</td>
-            <td>{{ detalle.cantidadProducto }}</td>
-            <td>
-                <p-button icon="pi pi-pen-to-square" [text]="true" label="Editar" [raised]="true" severity="warning"
-                   ></p-button>
-            </td>
-            <td>
-                <p-button icon="pi pi-times" [text]="true" label="Eliminar" [raised]="true" severity="danger"
-                    ></p-button>
-
-            </td>
-
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="summary">
-        <div class="flex align-items-center justify-content-between">
-            Un total de {{listaOrdenCompra ? listaOrdenCompra.length : 0 }} Lista Ordenes Compra.
-        </div>
-    </ng-template>
-</p-table>
 </div>
 
+
+<p-dialog header="Detalles de la Orden de Compra" [(visible)]="showTablaDetalleOrden" *ngIf="showTablaDetalleOrden"
+    [modal]="true" [style]="{ width: '98%' }" [position]="'top'"  >
+
+    <div class="container-fluid tablaDetallesOrden">
+        <p-table [value]="listaDetallesCompra" [tableStyle]="{ 'width': '100%' }" styleClass="p-datatable-gridlines"
+            [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [scrollable]="true" scrollHeight="700px"
+            [resizableColumns]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Nombre del Producto</th>
+                    <th>Descripcion del Producto</th>
+                    <th>Precio Unidad del Producto</th>
+                    <th>SubTotal del Producto</th>
+                    <th>Cantidad Producto</th>
+                    <th>Eliminar</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-detalle>
+                <tr>
+                    <td>{{ detalle.nombreProducto }}</td>
+                    <td>{{ detalle.descripcion }}</td>
+                    <td>{{ detalle.unidadPrecio }}</td>
+                    <td>{{ detalle.subTotal }}</td>
+                    <td>{{ detalle.cantidadProducto }}</td>
+                    <td>
+                        <p-button icon="pi pi-times" label="Eliminar" [outlined]="true" severity="danger"
+                            (click)="showModalEliminarDetalle=true;idEliminarDetalle=detalle.idDetalle"></p-button>
+
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="flex align-items-center justify-content-between">
+                    Un total de {{listaDetallesCompra ? listaDetallesCompra.length : 0 }} Productos
+                </div>
+            </ng-template>
+        </p-table>
+    </div>
+
+</p-dialog>
+
+
+<!--MODAL ELIMINAR-->
+<p-dialog header="¿Eliminar registro?" [(visible)]="showModalEliminar" *ngIf="showModalEliminar"
+    [style]="{width: '50vw'}" [modal]="true">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                Esta acción eliminará permanentemente el registro del sistema.
+            </div>
+            <div class="col-12 mt-3 text-end">
+                <p-button label="Cancelar"   [outlined]="true" severity="success" (click)="showModalEliminar=false"></p-button>
+                &nbsp;&nbsp;
+                <p-button label="Eliminar"   [outlined]="true" severity="danger"
+                    (click)="inactivarOrden()"></p-button>
+            </div>
+        </div>
+    </div>
+</p-dialog>
+
+
+<!--MODAL ELIMINAR-->
+<p-dialog header="¿Eliminar registro?" [(visible)]="showModalEliminarDetalle" *ngIf="showModalEliminarDetalle"
+    [style]="{width: '50vw'}" [modal]="true">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                Esta acción eliminará permanentemente el registro del sistema.
+            </div>
+            <div class="col-12 mt-3 text-end">
+                <p-button label="Cancelar"   [outlined]="true" severity="success" (click)="showModalEliminar=false"></p-button>
+                &nbsp;&nbsp;
+                <p-button label="Eliminar"   [outlined]="true" severity="danger" (click)="inactivarDetalle()"
+                    ></p-button>
+            </div>
+        </div>
+    </div>
 </p-dialog>

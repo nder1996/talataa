@@ -13,7 +13,7 @@ public interface InventoryRepository {
 
 
 
-    @Select("select inventario.id AS idInventario , product.nombre AS productoNombre, product.descripcion AS productoDescripcion , inventario.cantidadDisponible from INVENTARIO_PRODUCTOS as inventario " +
+    @Select("select inventario.id AS idInventario , product.id as idProducto ,product.nombre AS productoNombre, product.descripcion AS productoDescripcion , inventario.cantidadDisponible from INVENTARIO_PRODUCTOS as inventario " +
             "left join PRODUCTOS as product on inventario.idProducto = product.id " +
             "where inventario.estado = 'A' and  product.estado = 'A'")
     List<InventariosResponse> getAllInventarios();
@@ -37,7 +37,7 @@ public interface InventoryRepository {
     @Update("UPDATE INVENTARIO_PRODUCTOS SET " +
             "cantidadDisponible = #{cantidadDisponible}, " +
             "update_at = CURRENT_TIMESTAMP " +
-            "WHERE idProducto = #{idProducto} " +
+            "WHERE id = #{idInventario} " +
             "AND estado = 'A'")
     Integer actualizarInventario(InventarioRequest inventario);
 

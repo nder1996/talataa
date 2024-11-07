@@ -12,10 +12,10 @@ import { UserRequestModel } from 'src/model/Usuarios/request/UserRequestModel';
 })
 export class UsuariosService {
 
- 
+
   constructor(private httpClient: HttpClient) { }
 
-  public usuarioUrl:string = enviroment.apiRestURL + 'api/user'
+  public usuarioUrl: string = enviroment.apiRestURL + 'api/user'
 
   public getAllUsuarios(): Observable<ApiResponse<UserModel[]>> {
     return this.httpClient.get<ApiResponse<UserModel[]>>(`${this.usuarioUrl}/getAllUsuarios`);
@@ -28,4 +28,15 @@ export class UsuariosService {
   inactivarUsuario(id: number): Observable<ApiResponse<string>> {
     return this.httpClient.put<ApiResponse<string>>(`${this.usuarioUrl}/inactivar/${id}`, {});
   }
+
+  actualizarUsuario(usuarioRequest: UserRequestModel): Observable<ApiResponse<string>> {
+    return this.httpClient.put<ApiResponse<string>>(`${this.usuarioUrl}/actualizarUsuarioXRol`, usuarioRequest);
+  }
+
+  login(username: string, password: string): Observable<ApiResponse<string>> {
+    return this.httpClient.get<ApiResponse<string>>(`${this.usuarioUrl}/login`, {
+      params: { username, password }
+    });
+  }
+
 }

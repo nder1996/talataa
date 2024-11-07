@@ -8,6 +8,8 @@ import { CrudProductosComponent } from './components/crud-productos/crud-product
 import { CrudOrdenesComponent } from './components/crud-ordenes/crud-ordenes.component';
 import { PaginaPrincipalComponent } from './pages/pagina-principal/pagina-principal.component';
 import { MisComprasComponent } from './pages/mis-compras/mis-compras.component';
+import { GenerateReportComponent } from './components/generate-report/generate-report.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'principal', pathMatch: 'full' },
@@ -17,6 +19,7 @@ const routes: Routes = [
       { path: 'modulo-inventario', component: CrudInventariosComponent },
       { path: 'modulo-producto', component: CrudProductosComponent },
       { path: 'modulo-orden', component: CrudOrdenesComponent },
+      { path: 'modulo-reporte', component: GenerateReportComponent } 
     ]
   },
  
@@ -27,7 +30,8 @@ const routes: Routes = [
   { path: 'modulo-usuario', component: CrudUsuariosComponent },
   { path: 'modulo-inventario', component: CrudInventariosComponent },
   { path: 'modulo-producto', component: CrudProductosComponent },
-  { path: 'modulo-orden', component: CrudOrdenesComponent }      
+  { path: 'modulo-orden', component: CrudOrdenesComponent },
+  { path: 'modulo-reporte', component: GenerateReportComponent }        
 ];
 
 @NgModule({

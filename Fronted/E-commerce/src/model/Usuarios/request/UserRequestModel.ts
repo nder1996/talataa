@@ -11,6 +11,7 @@ export class UserRequestModel {
     numeroDocumento?: string;
     dirreccion?: string;
     nombreUsuario?: string;
+    password?: string;
     constructor(
         userId?: number,
         idTipoDocumento?: number,
@@ -24,6 +25,7 @@ export class UserRequestModel {
         numeroDocumento?: string,
         dirreccion?: string,
         nombreUsuario?: string,
+        password?: string
     ) {
         this.userId = userId;
         this.idTipoDocumento = idTipoDocumento;
@@ -37,5 +39,6 @@ export class UserRequestModel {
         this.numeroDocumento = numeroDocumento;
         this.dirreccion = dirreccion;
         this.nombreUsuario = nombreUsuario;
+        this.password = password;
     }
 }

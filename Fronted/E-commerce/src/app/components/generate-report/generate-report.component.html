@@ -1,0 +1,297 @@
+<!-- ejemplo.component.html -->
+<div id="contenidoParaPDF">
+    <div class="container-fluid p-4">
+        <!-- Encabezado del Dashboard -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Dashboard de Reportes</h2>
+            <div class="actions">
+                <button class="btn btn-outline-primary me-2">
+                    <i class="bi bi-file-earmark-excel me-2"></i>Exportar Todo
+                </button>
+                <button class="btn btn-outline-secondary">
+                    <i class="bi bi-printer me-2"></i>Imprimir
+                </button>
+            </div>
+        </div>
+    
+        <!-- Filtros Globales -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Período</label>
+                        <select class="form-select">
+                            <option>Último mes</option>
+                            <option>Último trimestre</option>
+                            <option>Último año</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Categoría</label>
+                        <select class="form-select">
+                            <option>Todas</option>
+                            <option>Electrónicos</option>
+                            <option>Ropa</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Estado</label>
+                        <select class="form-select">
+                            <option>Todos</option>
+                            <option>Activo</option>
+                            <option>Inactivo</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">&nbsp;</label>
+                        <button class="btn btn-primary d-block w-100">Aplicar Filtros</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Pestañas de Navegación -->
+        <ul class="nav nav-tabs mb-4" id="reportTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#productos" type="button">
+                    <i class="bi bi-box me-2"></i>Productos Activos
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#ventas" type="button">
+                    <i class="bi bi-graph-up me-2"></i>Top 5 Ventas
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#clientes" type="button">
+                    <i class="bi bi-people me-2"></i>Top 5 Clientes
+                </button>
+            </li>
+        </ul>
+    
+        <!-- Contenido de las Pestañas -->
+        <div class="tab-content" id="reportTabsContent">
+            <!-- Pestaña de Productos Activos -->
+            <div class="tab-pane fade show active" id="productos">
+                <div class="row g-4 mb-4">
+                    <div class="col-md-3">
+                        <div class="stat-card bg-success bg-opacity-10 p-3 rounded">
+                            <h6 class="text-success">Total Productos Activos</h6>
+                            <h2 class="mb-0">154</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card bg-primary bg-opacity-10 p-3 rounded">
+                            <h6 class="text-primary">En Stock</h6>
+                            <h2 class="mb-0">132</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card bg-warning bg-opacity-10 p-3 rounded">
+                            <h6 class="text-warning">Stock Bajo</h6>
+                            <h2 class="mb-0">22</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card bg-info bg-opacity-10 p-3 rounded">
+                            <h6 class="text-info">Categorías</h6>
+                            <h2 class="mb-0">8</h2>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Código</th>
+                                        <th>Producto</th>
+                                        <th>Categoría</th>
+                                        <th>Stock</th>
+                                        <th>Precio</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>#PRD001</strong></td>
+                                        <td>Laptop HP 15"</td>
+                                        <td>Electrónicos</td>
+                                        <td>25</td>
+                                        <td>$899.99</td>
+                                        <td><span class="badge bg-success">Activo</span></td>
+                                    </tr>
+                                    <!-- Más filas aquí -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Pestaña de Top 5 Ventas -->
+            <div class="tab-pane fade" id="ventas">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="chart-container" style="height: 300px;">
+                                    <div class="text-center text-muted py-5">
+                                        [Área para Gráfico de Barras]
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="top-products">
+                                    <div class="product-rank d-flex align-items-center p-3 border-bottom">
+                                        <div class="rank-badge bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                            1
+                                        </div>
+                                        <div class="product-info flex-grow-1">
+                                            <h6 class="mb-1">iPhone 13 Pro</h6>
+                                            <p class="mb-0 text-muted">1,245 unidades</p>
+                                        </div>
+                                        <div class="sales-amount">
+                                            $1.2M
+                                        </div>
+                                    </div>
+                                    <!-- Repetir para otros productos -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Pestaña de Top 5 Clientes -->
+            <div class="tab-pane fade" id="clientes">
+                <div class="row g-4">
+                    <!-- Cards de Cliente -->
+                    <div class="col-md-4">
+                        <div class="customer-card p-4 border rounded">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="customer-avatar bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 48px; height: 48px;">
+                                    JD
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">Juan Díaz</h6>
+                                    <span class="badge bg-primary">Cliente Premium</span>
+                                </div>
+                            </div>
+                            <div class="customer-stats">
+                                <div class="row g-3">
+                                    <div class="col-6">
+                                        <div class="stat-item">
+                                            <small class="text-muted">Compras</small>
+                                            <h5 class="mb-0">45</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="stat-item">
+                                            <small class="text-muted">Total</small>
+                                            <h5 class="mb-0">$12.5k</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <small>Nivel de lealtad</small>
+                                    <small class="text-primary">95%</small>
+                                </div>
+                                <div class="progress" style="height: 6px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Repetir para otros clientes -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <style>
+    :root {
+        --primary-color: #4361ee;
+        --success-color: #4caf50;
+        --warning-color: #ff9800;
+        --info-color: #2196f3;
+        --border-color: #e9ecef;
+        --text-muted: #6c757d;
+    }
+    
+    body {
+        background-color: #f8f9fa;
+    }
+    
+    .nav-tabs .nav-link {
+        color: var(--text-muted);
+        border: none;
+        padding: 1rem 1.5rem;
+    }
+    
+    .nav-tabs .nav-link.active {
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--primary-color);
+    }
+    
+    .stat-card h6 {
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .stat-card h2 {
+        font-size: 1.75rem;
+        font-weight: 600;
+    }
+    
+    .chart-container {
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+    
+    .customer-card {
+        transition: transform 0.2s;
+    }
+    
+    .customer-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .stat-item {
+        background: #f8f9fa;
+        padding: 0.75rem;
+        border-radius: 8px;
+    }
+    
+    .progress {
+        background-color: #e9ecef;
+    }
+    
+    .progress-bar {
+        background-color: var(--primary-color);
+    }
+    
+    .rank-badge {
+        font-weight: 600;
+    }
+    
+    .product-rank:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .table > :not(caption) > * > * {
+        padding: 1rem;
+    }
+    </style>
+    
+</div>
+<button (click)="descargarPDF()">Generar PDF</button>

@@ -1,5 +1,6 @@
 export class ProductosModel {
     idProducto?: number;
+    idCategoriaProducto?: number;
     productoNombre?: string;
     productoDescripcion?: Date;
     productoPrecioUnidad?: number;
@@ -11,6 +12,7 @@ export class ProductosModel {
   
     constructor(
         idProducto?: number,
+        idCategoriaProducto?: number,
         productoNombre?: string,
         productoDescripcion?: Date,
         productoPrecioUnidad?: number,
@@ -22,6 +24,7 @@ export class ProductosModel {
 
     ) {
       this.idProducto = idProducto;
+      this.idCategoriaProducto = idCategoriaProducto;
       this.productoNombre = productoNombre;
       this.productoDescripcion = productoDescripcion;
       this.productoPrecioUnidad = productoPrecioUnidad;

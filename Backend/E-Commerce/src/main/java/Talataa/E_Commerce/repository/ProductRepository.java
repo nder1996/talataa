@@ -19,7 +19,7 @@ public interface ProductRepository {
 
     @Select(" select product.id as idProducto, product.nombre as productoNombre," +
             " product.descripcion as productoDescripcion , product.precioUnidad productoPrecioUnidad," +
-            " categoria.nombre as nombreCategoria, categoria.id as idCategoria ,categoria.descripcion descripcionCategoria," +
+            " categoria.id as idCategoriaProducto, categoria.nombre as nombreCategoria, categoria.id as idCategoria ,categoria.descripcion descripcionCategoria," +
             " inventarioProducto.cantidadDisponible as cantidadDisponible , product.url_img as urlImg from PRODUCTOS as product" +
             " left join PRODUCTOS_CATEGORIAS as productoXCategoria on product.id = productoXCategoria.idProducto " +
             " left join CATEGORIA_PRODUCTO as categoria on productoXCategoria.idCategoriaProducto = categoria.id" +

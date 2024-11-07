@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ApiResponse } from 'src/model/api-response.model';  // Importa tu modelo
 import { CategoriaProductoModel } from 'src/model/Productos/Response/CategoriaProductoModel';
 import { ProductModel } from 'src/model/Productos/Response/ProductMode';
+import { ProductoRequestModel } from 'src/model/Productos/Request/ProductoRequestModel';
 
 
 @Injectable({
@@ -28,6 +29,28 @@ export class ProductosService {
 
   public getAllProductos(): Observable<ApiResponse<ProductModel[]>> {
     return this.httpClient.get<ApiResponse<ProductModel[]>>(`${this.productoUrl}/getAllProducto`);
+  }
+  /* */
+
+  guardarProductoXCategoria(producto: ProductoRequestModel): Observable<ApiResponse<string>> {
+    return this.httpClient.post<ApiResponse<string>>(
+      `${this.productoUrl}/guardarProductoXCategoria`, 
+      producto
+    );
+  }
+  
+  actualizarProducto(productoRequest: ProductoRequestModel): Observable<ApiResponse<string>> {
+    return this.httpClient.put<ApiResponse<string>>(
+      `${this.productoUrl}/actualizarProductoXCategoria`, 
+      productoRequest
+    );
+  }
+  
+  inactivarProducto(id: number): Observable<ApiResponse<string>> {
+    return this.httpClient.put<ApiResponse<string>>(
+      `${this.productoUrl}/inactivar/${id}`, 
+      {}
+    );
   }
 
 }

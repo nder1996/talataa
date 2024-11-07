@@ -1,71 +1,480 @@
 <style>
-    .item-contenedor {
-        /* border:1px solid red !important;*/
+    .navbar-brand img {
+        width: 120px;
+        height: 80px;
+        object-fit: contain;
     }
 
-    .item-contenedor li {
+    .navbar-nav li {
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    .container-img a img {
-        margin: 0 !important;
-        padding: 0 !important;
-        height: 125px;
-        width: 125px;
-        object-fit: contain;
+    .nav-item .p-button {
+        border-radius: 5px !important;
     }
 
-    .p-button {
-        border-radius: 8px;
-        padding: 10px 20px;
-        background-color: #6089BF !important;
-        color: white !important;
-        border-color: none !important;
+    .p-tabview-nav {
+        border: 1px solid black;
+        color: black !important;
+        border: none !important;
     }
-    .p-button:enabled:hover{
-        border-color: none;
+
+    /**/
+    .login-container {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        width: 400px;
+    }
+
+    .login-container h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 30px;
+        font-size: 2em;
+    }
+
+    .input-group {
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 15px;
+        border: none;
+        outline: none;
+        background: #f5f5f5;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .input-group input:focus {
+        background: #fff;
+        box-shadow: 0 0 0 2px #2193b0;
+    }
+
+    .input-group label {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #888;
+        pointer-events: none;
+        transition: all 0.3s ease;
+    }
+
+    .input-group input:focus+label,
+    .input-group input:valid+label {
+        top: -10px;
+        left: 10px;
+        font-size: 14px;
+        background: white;
+        padding: 0 5px;
+        color: #2193b0;
+    }
+
+    .remember-forgot {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .remember-forgot label {
+        color: #666;
+        cursor: pointer;
+    }
+
+    .remember-forgot a {
+        color: #2193b0;
+        text-decoration: none;
+    }
+
+    .remember-forgot a:hover {
+        text-decoration: underline;
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 15px;
+        background: #2193b0;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .login-btn:hover {
+        background: #1c7a94;
+    }
+
+    .register-link {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+        color: #666;
+    }
+
+    .register-link a {
+        color: #2193b0;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .register-link a:hover {
+        text-decoration: underline;
+    }
+
+    /**/
+    .register-container {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 700px;
+    }
+
+    .register-container h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 30px;
+        font-size: 2em;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .input-group {
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .input-group input,
+    .input-group select {
+        width: 100%;
+        padding: 15px;
+        border: 1px solid #ddd;
+        outline: none;
+        background: #f8f9fa;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .input-group select {
+        cursor: pointer;
+    }
+
+    .input-group input:focus,
+    .input-group select:focus {
+        border-color: #3a7bd5;
+        background: #fff;
+        box-shadow: 0 0 0 2px rgba(58, 123, 213, 0.2);
+    }
+
+    .input-group label {
+        position: absolute;
+        left: 15px;
+        top: -10px;
+        background: white;
+        padding: 0 5px;
+        color: #666;
+        font-size: 14px;
+    }
+
+    .register-btn {
+        width: 100%;
+        padding: 15px;
+        background: #3a7bd5;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        margin-top: 20px;
+    }
+
+    .register-btn:hover {
+        background: #2d62aa;
+    }
+
+    .required {
+        color: #e74c3c;
+        margin-left: 3px;
+    }
+
+    /**/
+
+    .container-registrar {
+
+        height: 650px;
+        overflow: hidden !important;
+    }
+
+    /**/
+    .container-modal-registro {
+        height: 620px;
+        overflow: auto;
+        overflow-x: hidden !important;
+        border: 1px solid whitesmoke;
+    }
+
+    .container-modal-registro .col-12 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        border: 1px solid whitesmoke;
+        gap: 10px;
+    }
+
+    .container-modal-registro .msj-validation {
+        color: red !important;
+    }
+
+    /**/
+    .p-tabview-panels {
+        padding: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .p-dialog-content {
+        overflow: hidden !important;
+    }
+
+    .btn-registro-cliente {
+        background-color: none !important;
+      
+    }
+
+    .login-container{
+        width: 480px !important;
+    }
+
+    .login-container .col-12{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+
     }
 </style>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid container-img">
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+    <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img src="assets/logo-img.png" alt="Logo">
+            <img src="assets/logo-ico.ico" alt="Logo">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ms-auto item-contenedor">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Pagina Principal</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Mis Compras</a>
+                    <a class="nav-link" routerLink="/mis-compras">Mis Compras</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <p-button class="btn-iniciar-estilo" class="btn-iniciar btn-iniciar-estilo"
-                            label="Iniciar Session"></p-button>
+                    <a class="nav-link">
+                        <a class="nav-link" *ngIf="userSession">{{userSession}}</a>
+                        <p-button *ngIf="!userSession" class="btn-iniciar-estilo" class="btn-iniciar btn-iniciar-estilo"
+                            label="Iniciar Session" size="small"
+                            (click)="showModalBienvenida=true; modalBienvenida()"></p-button>
                     </a>
                 </li>
-                <!--
-             <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown link
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          -->
-
             </ul>
         </div>
     </div>
 </nav>
+
+
+
+<p-dialog header="Bienvenido al Centro Comercial Santa Fe" *ngIf="showModalBienvenida" [(visible)]="showModalBienvenida"
+    [style]="{width: '600px', height: '990px'}" [modal]="true">
+    <div class="container-fluid container-login">
+        <p-tabView>
+            <p-tabPanel header="Iniciar Session">
+                <div class="container-fluid d-flex flex-column justify-content-start align-items-center" style="height: 650px;">
+                    <div class="login-container mt-5">
+                        <form  [formGroup]="loginForm">
+                            <h2>Iniciar Sesión</h2>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="">Username</label>
+                                    <input type="text" pInputText   [style]="{width: '370px'}" formControlName="username"/>
+                                </div>
+                                <div class="col-12">
+                                    <label>Contraseña</label>
+                                    <p-password  [toggleMask]="true"  [style]="{width: '370px'}"  formControlName="password"/>
+                                </div>
+                                <div class="col-12">
+                                    <p-button label="Ingresar" [outlined]="true" severity="success" [style]="{width: '350px'}" (click)="login()"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="Registrar">
+                <div
+                    class="container-fluid container-registrar d-flex flex-column justify-content-center align-items-center">
+                    <form [formGroup]="userForm">
+                        <div class="container container-modal-registro" style="padding: 1rem ;">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label>Nombres</label>
+                                    <input type="text" pInputText [style]="{width: '420px'}"
+                                        placeholder="Nombre Completo" formControlName="nombres" />
+                                    <span class="msj-validation"
+                                        *ngIf="userForm.get('nombres')?.errors?.['required'] && userForm.get('nombres')?.touched">El
+                                        campo es requerido</span>
+                                </div>
+                                <div class="col-12">
+                                    <label>Apellidos</label>
+                                    <input type="text" pInputText [style]="{width: '420px'}" placeholder="Apellidos"
+                                        formControlName="apellidos" />
+                                    <span class="msj-validation"
+                                        *ngIf="userForm.get('apellidos')?.errors?.['required'] && userForm.get('apellidos')?.touched">El
+                                        campo es requerido</span>
+                                </div>
+                                <div class="col-12">
+                                    <label>Tipo Documento</label>
+                                    <p-dropdown [style]="{width: '420px'}" [options]="listaTipoDocumento"
+                                        optionLabel="descripcion" [filter]="true" filterBy="descripcion"
+                                        [showClear]="true" placeholder="Selecciona un Tipo de Documento"
+                                        formControlName="tipoDocumento" optionValue="id">
+                                        <ng-template let-selectedOption>
+                                            <div class="flex align-items-center gap-2">
+                                                <div>{{ selectedOption.descripcion }}</div>
+                                            </div>
+                                        </ng-template>
+                                    </p-dropdown>
+                                    <span class="msj-validation"
+                                        *ngIf="userForm.get('tipoDocumento')?.errors?.['required'] && userForm.get('tipoDocumento')?.touched">El
+                                        campo es requerido</span>
+                                </div>
+                                <div class="col-12">
+                                    <label>Número Documento</label>
+                                    <input type="text" pInputText [style]="{width: '420px'}"
+                                        placeholder="Número Documento" formControlName="numeroDocumento" />
+                                    <span class="msj-validation"
+                                        *ngIf="userForm.get('numeroDocumento')?.errors?.['required'] && userForm.get('numeroDocumento')?.touched">El
+                                        campo es requerido</span>
+                                </div>
+                                <div class="col-12">
+                                    <label>Genero</label>
+                                    <p-dropdown [options]="listaGenero" optionLabel="descripcion" [filter]="true"
+                                        filterBy="descripcion" [showClear]="true" placeholder="Seleccione un Género"
+                                        [style]="{width: '420px'}" formControlName="genero" optionValue="id">
+                                        <ng-template let-selectedOption>
+                                            <div class="flex align-items-center gap-2">
+                                                <div>{{ selectedOption.descripcion }}</div>
+                                            </div>
+                                        </ng-template>
+                                    </p-dropdown>
+                                    <span class="msj-validation"
+                                        *ngIf="userForm.get('genero')?.errors?.['required'] && userForm.get('genero')?.touched">El
+                                        campo es requerido</span>
+                                </div>
+                                <div class="col-12">
+                                    <label>Rol</label>
+                                    <p-dropdown [options]="listaRol" optionLabel="nombre" [filter]="true"
+                                        filterBy="nombre" [showClear]="true" placeholder="Seleccione un Rol"
+                                        [style]="{width: '420px'}" formControlName="rol" optionValue="id">
+                                        <ng-template let-selectedOption>
+                                            <div class="flex align-items-center gap-2">
+                                                <div>{{ selectedOption.nombre }}</div>
+                                            </div>
+                                        </ng-template>
+                                    </p-dropdown>
+                                    <span class="msj-validation"
+                                        *ngIf="userForm.get('rol')?.errors?.['required'] && userForm.get('rol')?.touched">El
+                                        campo es requerido</span>
+                                </div>
+                                <div class="col-12">
+                                    <label>Ciudad</label>
+                                    <p-dropdown [options]="listaCiudad" optionLabel="nombre" [filter]="true"
+                                        filterBy="nombre" [showClear]="true" placeholder="Seleccione una Ciudad"
+                                        [style]="{width: '420px'}" formControlName="ciudad" optionValue="id">
+                                        <ng-template let-selectedOption>
+                                            <div class="flex align-items-center gap-2">
+                                                <div>{{ selectedOption.nombre }}</div>
+                                            </div>
+                                        </ng-template>
+                                    </p-dropdown>
+                                    <span class="msj-validation"
+                                        *ngIf="userForm.get('ciudad')?.errors?.['required'] && userForm.get('ciudad')?.touched">El
+                                        campo es requerido</span>
+                                </div>
+                                <div class="col-12">
+                                    <label>Username</label>
+                                    <input type="text" pInputText [style]="{width: '420px'}" placeholder="Username"
+                                        formControlName="nombreUsuario" />
+                                    <span class="msj-validation"
+                                        *ngIf="userForm.get('nombreUsuario')?.errors?.['required'] && userForm.get('nombreUsuario')?.touched">El
+                                        campo es requerido</span>
+                                </div>
+                                <div class="col-12">
+                                    <label>Contraseña</label>
+                                    <p-password [toggleMask]="true" [style]="{width: '420px'}" placeholder="Contraseña"
+                                    formControlName="password"/>
+
+                                    <span class="msj-validation"
+                                        *ngIf="userForm.get('password')?.errors?.['required'] && userForm.get('password')?.touched">El
+                                        campo es requerido</span>
+                                </div>
+                                <div class="col-12">
+                                    <label>Email</label>
+                                    <input type="text" pInputText [style]="{width: '420px'}" placeholder="Email"
+                                        formControlName="email" />
+                                    <span class="msj-validation"
+                                        *ngIf="userForm.get('email')?.errors?.['required'] && userForm.get('email')?.touched">El
+                                        campo es requerido</span>
+                                </div>
+                                <div class="col-12">
+                                    <label>Dirección</label>
+                                    <input type="text" pInputText [style]="{width: '420px'}" placeholder="Dirección"
+                                        formControlName="direccion" />
+                                    <span class="msj-validation"
+                                        *ngIf="userForm.get('direccion')?.errors?.['required'] && userForm.get('direccion')?.touched">El
+                                        campo es requerido</span>
+                                </div>
+                                <div class="col-12">
+                                    <label>Teléfono</label>
+                                    <input type="text" pInputText [style]="{width: '420px'}" placeholder="Teléfono"
+                                        formControlName="telefono" />
+                                    <span class="msj-validation"
+                                        *ngIf="userForm.get('telefono')?.errors?.['required'] && userForm.get('telefono')?.touched">El
+                                        campo es requerido</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-2 mb-2 btn-registro-cliente">
+                            <p-button icon="pi pi-save" label="Agregar" [outlined]="true" (click)="guardarRegistro()" />
+                        </div>
+                        <br>
+                    </form>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+</p-dialog>

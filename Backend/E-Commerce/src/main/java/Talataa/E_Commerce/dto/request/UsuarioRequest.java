@@ -23,4 +23,5 @@ public class UsuarioRequest {
     private String numeroDocumento;
     private String dirreccion;
     private String nombreUsuario;
+    private String password;
 }

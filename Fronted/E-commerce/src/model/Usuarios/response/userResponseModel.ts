@@ -8,11 +8,14 @@ export class UserModel {
     dirreccion?: string;
     telefono?: string;
     rolNombre	?: string;
+    nombreUsuario	?: string;
     //
     idTipoDocumento	?: number;
     idGenero	?: number;
     idCiudad	?: number;
     idRol	?: number;
+    nombres	?: string;
+    apellidos	?: string;
   
     constructor(
         userId?: number,
@@ -27,7 +30,10 @@ export class UserModel {
         idTipoDocumento	?: number,
         idGenero	?: number,
         idCiudad	?: number,
-        idRol	?: number
+        idRol	?: number,
+        nombreUsuario	?: string,
+        nombres	?: string,
+        apellidos	?: string,
     ) {
       this.userId = userId;
       this.nombreCompleto = nombreCompleto;
@@ -38,10 +44,14 @@ export class UserModel {
       this.dirreccion = dirreccion;
       this.telefono = telefono  ;
       this.rolNombre = rolNombre  ;
+      this.nombreUsuario = nombreUsuario  ;
       //
       this.idTipoDocumento = idTipoDocumento  ;
       this.idGenero = idGenero  ;
       this.idCiudad = idCiudad  ;
       this.idRol = idRol  ;
+      //
+      this.nombres = nombres  ;
+      this.apellidos = apellidos  ;
     }
   }

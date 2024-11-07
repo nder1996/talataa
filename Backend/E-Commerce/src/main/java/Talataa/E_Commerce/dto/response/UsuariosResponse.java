@@ -19,6 +19,9 @@ public class UsuariosResponse {
     private String dirreccion;
     private String telefono;
     private String rolNombre;
+    private String nombreUsuario;
+    private String nombres;
+    private String apellidos;
     /**/
     private Integer idTipoDocumento;
     private Integer idGenero;

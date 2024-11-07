@@ -4,6 +4,7 @@ import { ProductosService } from 'src/service/Productos/productos-service';
 import { MessageService } from 'primeng/api';
 import { ProductosModel } from 'src/model/Productos/Response/ProductosModel';
 import { LocalStorageService } from 'src/service/local-storage.service';
+import { ProductModel } from 'src/model/Productos/Response/ProductMode';
 
 
 @Component({
@@ -36,9 +37,10 @@ export class PaginaPrincipalComponent {
 
   async getAllProductos() {
     try {
-      const response = await this.productoService.getAllProductos().toPromise();
+      const response = await this.productoService.getAllProductoDisponibles().toPromise();
       if (response?.data && response?.data['PRODUCTOS']) {
         this.listaProducto = response.data['PRODUCTOS'];
+        console.log("lista de productos : "+JSON.stringify(this.listaProducto))
       } else {
         this.messageService.add({
           severity: 'warn',
@@ -57,6 +59,7 @@ export class PaginaPrincipalComponent {
   }
 
  // public lstaAgregadoProducto: ProductosModel[] = [];
+ 
   AgregarProducto(product: ProductosModel) {
       if (!product) return;
 
@@ -76,6 +79,9 @@ export class PaginaPrincipalComponent {
       this.localStorage.updateCompleteList("ProductosAgregados", productsList);
      // console.log("Lista de productos:", this.localStorage.getList("ProductosAgregados"));
   }
+
+
+  
 
 
 }

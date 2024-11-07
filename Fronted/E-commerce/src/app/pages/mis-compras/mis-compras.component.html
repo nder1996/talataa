@@ -5,41 +5,40 @@
         height: 120px;
     }
 
-    .container-compras {
-        border: 1px solid black;
-    }
+    .container-compras {}
 
-    .container-compras .col-6 {
-        border: 1px solid red;
-    }
 
     /***/
     .container-pago {
-        border: 1px solid purple;
-        height: 610px;
+        border: 1px solid whitesmoke;
+        height: 660px;
         overflow: auto;
     }
 
-    .container-pago .col-6 ,  .container-pago .col-12 {
-        border: 1px solid blue;
+    .container-pago .col-6,
+    .container-pago .col-12 {
         padding: 10px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        gap: 10px;
     }
-
-
+    /**/
+    .card-pago{
+        width: 80% !important;
+    }
 </style>
 
 <app-navbar></app-navbar>
 <br><br>
-
 <div class="container-fluid container-compras">
     <div class="row">
         <div class="col-7">
             <div class="card">
-                <p-dataView #dv [value]="listProductosAgregados" [rows]="5" [paginator]="true">
+                <h2 class="text-center"><strong>Mis Productos Seleccionados</strong></h2>
+                <p-dataView #dv [value]="listProductosAgregados" [rows]="5" [paginator]="true"
+                    [ngStyle]="{'height': '610px', 'overflow-y': 'auto'}">
                     <ng-template let-product pTemplate="listItem">
                         <div class="col-12 mt-2" style="border: 2px solid whitesmoke;">
                             <div class="d-flex flex-column flex-xl-row align-items-start p-4 gap-4">
@@ -47,26 +46,23 @@
                                 <div
                                     class="d-flex flex-column flex-sm-row justify-content-between align-items-center align-items-xl-start flex-grow-1 gap-4">
                                     <div class="d-flex flex-column align-items-center align-items-sm-start gap-3">
-                                        <div class="text-2xl font-bold text-900">{{ product.productoNombre }}</div>
-
-                                        <span class="font-semibold">{{ 'Cantidad ' + product.cantidadSeleccionada
-                                            }}</span>
-
+                                        <div class="text-2xl font-bold text-900"><strong>{{ product.productoNombre
+                                                }}</strong></div>
+                                        <span class="font-semibold">
+                                            {{ product.cantidadSeleccionada}}</span>
                                         <div class="d-flex align-items-center gap-3">
                                             <span class="d-flex align-items-center gap-2">
                                                 <i class="pi pi-tag"></i>
                                                 <span class="font-semibold">{{ product.nombreCategoria }}</span>
                                             </span>
-                                            <!--
-                                    <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product)"></p-tag>
-                                    -->
+                                            <span class="text-2xl font-semibold">{{ '$' + product.productoPrecioUnidad
+                                                }}</span>
                                         </div>
                                     </div>
                                     <div
                                         class="d-flex flex-sm-column align-items-center align-items-sm-end gap-3 gap-sm-2">
-                                        <span class="text-2xl font-semibold">{{ '$' + product.productoPrecioUnidad
-                                            }}</span>
-                                        <p-button label="Eliminar" severity="danger"></p-button>
+                                        <p-button icon="pi pi-times" [rounded]="true" severity="danger"
+                                            [outlined]="true" (click)="eliminarProducto(product)" />
                                     </div>
                                 </div>
                             </div>
@@ -76,45 +72,87 @@
             </div>
         </div>
         <div class="col-5">
-            <div class="container-fluid container-pago">
-                <div class="row">
-                    <div class="col-12">
-                        <label for="">Numero de tarjeta</label>
-                        <span class="p-input-icon-right">
-                            <i class="pi pi-credit-card"></i>
-                            <input type="text" pInputText />
-                        </span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <label for="">Nombre Completo del Titular</label>
-                        <span class="p-input-icon-right">
-                            <i class="pi pi-credit-card"></i>
-                            <input type="text" pInputText />
-                        </span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <label>Caducidad</label>
-                        <p-inputMask mask="99/99"  placeholder="00/00"></p-inputMask>
-                    </div>
-                    <div class="col-6">
-                        <label>CV</label>
-                        <p-inputNumber inputId="integeronly"> </p-inputNumber>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <label>Dirreccion</label>
-                        <input type="text" pInputText />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <p-button label="PAGAR" [raised]="true"></p-button>
-                    </div>
+            <div class="container-fluid container-pago d-flex flex-column justify-content-start align-items-center">
+                <h1 class="'text-center"><strong>Información de Pago</strong></h1>
+                <p class="'text-center">Ingresa los detalles de tu tarjeta</p>
+                <div class="card card-pago mt-2">
+                    <form [formGroup]="formTarjeta" (ngSubmit)="enviarCompra()">
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="nombreTitular">Nombre Completo del Titular</label>
+                                <span class="p-input-icon-right">
+                                    <i class="pi pi-credit-card"></i>
+                                    <input 
+                                        id="nombreTitular"
+                                        type="text" 
+                                        pInputText 
+                                        formControlName="nombreTitular"
+                                        [style]="{width: '450px'}" />
+                                </span>
+                                <small class="text-danger" *ngIf="formTarjeta.get('nombreTitular')?.touched && formTarjeta.get('nombreTitular')?.errors?.['required']">
+                                    El nombre es requerido
+                                </small>
+                            </div>
+                        </div>
+                    
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="numeroTarjeta">Numero de tarjeta</label>
+                                <span class="p-input-icon-right">
+                                    <i class="pi pi-credit-card"></i>
+                                    <input 
+                                        id="numeroTarjeta"
+                                        type="text" 
+                                        pInputText 
+                                        formControlName="numeroTarjeta"
+                                        [style]="{width: '450px'}" />
+                                </span>
+                                <small class="text-danger" *ngIf="formTarjeta.get('numeroTarjeta')?.touched && formTarjeta.get('numeroTarjeta')?.errors?.['required']">
+                                    El número de tarjeta es requerido
+                                </small>
+                            </div>
+                        </div>
+                    
+                        <div class="row">
+                            <div class="col-12 d-flex flex-row justify-content-center">
+                                <div class="d-flex flex-column">
+                                    <label>Fecha de Expiracion</label>
+                                    <p-inputMask 
+                                        mask="99/99" 
+                                        placeholder="00/00" 
+                                        formControlName="fechaExpiracion"
+                                        [style]="{width: '100%'}">
+                                    </p-inputMask>
+                                    <small class="text-danger" *ngIf="formTarjeta.get('fechaExpiracion')?.touched && formTarjeta.get('fechaExpiracion')?.errors?.['required']">
+                                        La fecha es requerida
+                                    </small>
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <label>CVV</label>
+                                    <p-inputNumber 
+                                        inputId="cvv" 
+                                        formControlName="cvv"
+                                        [style]="{width: '100%'}">
+                                    </p-inputNumber>
+                                    <small class="text-danger" *ngIf="formTarjeta.get('cvv')?.touched && formTarjeta.get('cvv')?.errors?.['required']">
+                                        El CVV es requerido
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <p-button 
+                                    type="submit"
+                                    label="Pagar" 
+                                    [outlined]="true" 
+                                    severity="success" 
+                                    [style]="{width: '100%'}" 
+                                    size="large"/>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

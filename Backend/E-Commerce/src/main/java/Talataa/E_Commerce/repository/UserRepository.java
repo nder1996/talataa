@@ -14,7 +14,7 @@ import java.util.List;
 public interface UserRepository {
 
     @Select("select useri.id as userId, tipoDocumento.id as idTipoDocumento , genero.id as idGenero ,ciudad.id as idCiudad , rol.id as idRol  " +
-            " , CONCAT(Nombres, ' ', Apellidos) AS nombreCompleto ,tipoDocumento.descripcion as tipoDocumento, useri.numeroDocumento as numeroDocumento ,genero.descripcion genero, ciudad.nombre  as ciudad,useri.correoElectronico as email, useri.direccion as dirreccion , useri.telefono as telefono , rol.nombre as rolNombre " +
+            " , CONCAT(Nombres, ' ', Apellidos) AS nombreCompleto ,tipoDocumento.descripcion as tipoDocumento, useri.numeroDocumento as numeroDocumento ,genero.descripcion genero, ciudad.nombre  as ciudad,useri.correoElectronico as email, useri.direccion as dirreccion , useri.telefono as telefono , rol.nombre as rolNombre , useri.NombreUsuario , useri.Nombres, useri.Apellidos " +
             "from USUARIOS as useri " +
             "left join TIPO_DOCUMENTO as tipoDocumento on useri.idTipoDocumento = tipoDocumento.id " +
             "left join GENEROS as genero on useri.idGenero = genero.id " +
@@ -27,7 +27,7 @@ public interface UserRepository {
 
 
     @Insert("INSERT INTO USUARIOS (idCiudad, idTipoDocumento, idGenero, numeroDocumento, estado, create_at, update_at, correoElectronico, direccion, Nombres, Apellidos, telefono, nombreUsuario, contraseña) " +
-            "VALUES (#{idCiudad}, #{idTipoDocumento}, #{idGenero}, #{numeroDocumento}, 'A', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{email}, #{dirreccion}, #{nombres}, #{apellidos}, #{telefono}, #{nombreUsuario}, 'default123')")
+            "VALUES (#{idCiudad}, #{idTipoDocumento}, #{idGenero}, #{numeroDocumento}, 'A', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{email}, #{dirreccion}, #{nombres}, #{apellidos}, #{telefono}, #{nombreUsuario}, #{password})")
     @Options(useGeneratedKeys = true, keyProperty = "userId", keyColumn = "id")
     Integer guardarUsuario(UsuarioRequest usuario);
 
@@ -43,5 +43,10 @@ public interface UserRepository {
 
     @Update("UPDATE USUARIOS_ROLES SET idUsuario = #{idUsuario}, idRol = #{idRol} WHERE id = #{id}")
     Integer actualizarRolUsuario(@Param("id") Integer id, @Param("idUsuario") Integer idUsuario, @Param("idRol") Integer idRol);
+
+    /**/
+    @Select("select * from USUARIOS as useri where " +
+            "useri.estado = 'A' and useri.nombreUsuario = #{username} and useri.contraseña = #{password}")
+    Usuario BuscarUserActivo(@Param("username") String username, @Param("password") String password);
 
 }

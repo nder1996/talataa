@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class ProductosResponse {
 
     private Integer idProducto;
+    private Integer idCategoriaProducto;
     private String productoNombre;
     private String productoDescripcion;
     private Double productoPrecioUnidad;
