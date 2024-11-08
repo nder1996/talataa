@@ -11,7 +11,10 @@ import Talataa.E_Commerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class OrderService {
@@ -22,6 +25,12 @@ public class OrderService {
 
     @Autowired
     ResponseApiBuilderService responseApiBuilderService;
+
+    private final DescuentoService descuentoService;
+
+    public OrderService() {
+        this.descuentoService = new DescuentoService();
+    }
 
 
     public ApiResponse<String> getAllOrdenesDisponibles() {
@@ -70,38 +79,62 @@ public class OrderService {
         }
     }
 
-    /**/
+
+
     public ApiResponse<String> procesarOrdenCompleta(CompraRequest request) {
         try {
             OrdenCompraRequest orden = request.getOrden();
             MetodoPagoRequest metodoPago = request.getPago();
             List<DetalleOrdenRequest> detalle = request.getDetailsOrden();
 
+            // Calcular el total original
+            double totalOriginal = calcularTotalOriginal(detalle);
+
+            // Calcular descuentos aplicables
+            double descuentoPorcentaje = descuentoService.calcularDescuentoOrden(
+                    Long.valueOf(orden.getIdUsuario()),
+                    this.isOrdenAleatoria(),
+                    orden.getIdOrden()
+            );
+
+            double totalConDescuento = totalOriginal * (1 - descuentoPorcentaje);
+            orden.setTotalCompra(totalConDescuento);
+
             Integer ordenId = this.guardarOrden(orden);
             if (ordenId != null && ordenId > 0) {
                 PagoOrdenRequest pago = new PagoOrdenRequest();
                 pago.setIdOrdenCompra(orden.getIdOrden());
-                String json = "{"
-                        + "\"success\": true, "
-                        + "\"data\": { "
-                        + "\"ORDEN\": { "
-                        + "\"ordenId\": \"ORD-2024-001\", "
-                        + "\"estado\": \"COMPLETADO\", "
-                        + "\"mensaje\": \"Compra realizada exitosamente\", "
-                        + "\"fechaCompra\": \"2024-03-20T10:30:00\", "
-                        + "\"total\": 1500.00 "
-                        + "} "
-                        + "}, "
-                        + "\"message\": \"Orden procesada correctamente\""
-                        + "}";
+
+                String json = String.format("""
+                    {
+                        "success": true,
+                        "data": {
+                            "ORDEN": {
+                                "ordenId": "%s",
+                                "estado": "COMPLETADO",
+                                "mensaje": "Compra realizada exitosamente",
+                                "fechaCompra": "%s",
+                                "totalOriginal": %.2f,
+                                "descuentoAplicado": %.2f,
+                                "totalFinal": %.2f
+                            }
+                        },
+                        "message": "Orden procesada correctamente"
+                    }""",
+                        orden.getIdOrden(),
+                        LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
+                        totalOriginal,
+                        descuentoPorcentaje * 100, // Convertir a porcentaje
+                        totalConDescuento
+                );
 
                 pago.setJsonRespuesta(json);
                 Integer idPago = this.guardarPago(pago);
                 if (idPago != null && idPago > 0) {
                     boolean details = this.guardarDetallesOrden(detalle, orden.getIdOrden());
-                    if (details == true) {
+                    if (details) {
                         return this.responseApiBuilderService.successRespuesta(
-                                "La orden se procesó correctamente",
+                                "La orden se procesó correctamente con los descuentos aplicados",
                                 "ORDEN_COMPRA"
                         );
                     }
@@ -120,6 +153,18 @@ public class OrderService {
                     "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
             );
         }
+    }
+
+    public boolean isOrdenAleatoria() {
+        Random random = new Random();
+        return random.nextInt(10) == 0;
+    }
+
+    private double calcularTotalOriginal(List<DetalleOrdenRequest> detalles) {
+        return detalles.stream()
+                .mapToDouble(detalle ->
+                        detalle.getUnidadPrecio() * detalle.getCantidadProducto())
+                .sum();
     }
 
     // Método para cambiar estado de la orden
@@ -174,6 +219,9 @@ public class OrderService {
             );
         }
     }
+
+
+
 
 
 

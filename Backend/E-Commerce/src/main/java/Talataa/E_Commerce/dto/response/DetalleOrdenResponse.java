@@ -17,4 +17,5 @@ public class DetalleOrdenResponse {
     private Double  unidadPrecio;
     private Double  subTotal;
     private Integer cantidadProducto;
+    private String estado;
 }

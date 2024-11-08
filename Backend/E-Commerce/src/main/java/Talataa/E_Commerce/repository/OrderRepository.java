@@ -8,11 +8,14 @@ import Talataa.E_Commerce.dto.request.PagoOrdenRequest;
 import Talataa.E_Commerce.dto.response.DetalleOrdenResponse;
 import Talataa.E_Commerce.dto.response.OrdenResponse;
 import org.apache.ibatis.annotations.*;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Mapper
 public interface OrderRepository {
+
 
 
     @Select("select orden.id as idOrden, useri.id as idUsuario,tipoDocumento.id as idTipoDocumento,ciudad.id AS idCiudad ,genero.id as idGenero  ,CONCAT_WS(' ', useri.Nombres, useri.Apellidos) as nombreCompleto,tipoDocumento.descripcion,useri.numeroDocumento,ciudad.nombre as ciudad,useri.correoElectronico,useri.telefono,genero.descripcion as genero, " +
@@ -24,6 +27,9 @@ public interface OrderRepository {
             "left join CIUDADES as ciudad on useri.idCiudad = ciudad.id " +
             "where orden.estado = 'A'")
     List<OrdenResponse> getAllOrdenDisponibles();
+
+    @Select("SELECT COALESCE(MAX(id), 0) + 1 FROM ORDEN_COMPRA")
+    Integer getNextId();
 
     @Select("select detalle.id as idDetalle , detalle.idOrdenCompra as idOrden,product.id idProducto,product.nombre nombreProducto,product.descripcion ,detalle.unidadPrecio,detalle.subTotal,detalle.cantidadProducto from DETALLES_ORDEN as detalle " +
             "left join ORDEN_COMPRA as orden on detalle.idOrdenCompra = orden.id " +
