@@ -49,4 +49,10 @@ public interface UserRepository {
             "useri.estado = 'A' and useri.nombreUsuario = #{username} and useri.contraseña = #{password}")
     Usuario BuscarUserActivo(@Param("username") String username, @Param("password") String password);
 
+    @Select("select * from USUARIOS as useri " +
+            "left join USUARIOS_ROLES as useriXRol on useri.id = useriXRol.idUsuario " +
+            "left join ROLES as rol on useriXRol.idRol =  rol.id " +
+            "where useri.nombreUsuario = #{username} and useri.contraseña = #{password} and useri.estado = 'A'")
+    Usuario BuscarAdmin(@Param("username") String username, @Param("password") String password);
+
 }

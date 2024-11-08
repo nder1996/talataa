@@ -6,6 +6,7 @@ import { GeneroModel } from 'src/model/ReferenceData/generoModel';
 import { RolModel } from 'src/model/ReferenceData/rolModel';
 import { TipoDocumentoModel } from 'src/model/ReferenceData/tipoDocumentoModel';
 import { UserRequestModel } from 'src/model/Usuarios/request/UserRequestModel';
+import { AuthService } from 'src/service/auth.service';
 import { LocalStorageService } from 'src/service/local-storage.service';
 import { ReferenceDataService } from 'src/service/ReferenceData/reference-data.service';
 import { UsuariosService } from 'src/service/Usuarios/usuarios.service';
@@ -20,7 +21,8 @@ export class NavbarComponent {
 
   constructor(private cdr: ChangeDetectorRef, private userService: UsuariosService,
     private messageService: MessageService, private localStorage: LocalStorageService,
-    private referenciaService: ReferenceDataService, private fb: FormBuilder
+    private referenciaService: ReferenceDataService, private fb: FormBuilder,
+    private authService:AuthService
   ) { }
 
 
@@ -29,6 +31,16 @@ export class NavbarComponent {
   public listaTipoDocumento: TipoDocumentoModel[] = [];
   public listaRol: RolModel[] = [];
   /* */
+
+
+  isMenuActive = false;
+  
+  toggleMenu() {
+    this.isMenuActive = !this.isMenuActive;
+  }
+
+
+
 
   public showModalBienvenida: boolean = false;
   public loginForm!: FormGroup;
@@ -173,31 +185,20 @@ export class NavbarComponent {
           username: this.loginForm.get('username')?.value,
           password: this.loginForm.get('password')?.value
         };
-  
-        // Convert the Observable to Promise and await the response
-        const response = await this.userService.login(
-          credentials.username,
-          credentials.password
-        ).toPromise();
-  
-        if (response?.data && response?.data['Auth']) {
-          // Successful login
+
+        await this.authService.login(credentials.username,credentials.password)
+        
+        const userSession:any =  this.localStorage.get("currentUser");
+    
+        if(userSession && userSession.id && userSession.nombreCompleto){
           this.messageService.add({
             severity: 'success',
             summary: 'Login Exitoso',
             detail: 'Bienvenido al sistema'
           });
           this.showModalBienvenida = false;
-          this.localStorage.save("Auth",JSON.stringify(response?.data['Auth']))
-          this.userSession = response?.data['Auth'].nombreCompleto;
-          //console.log("usuario loguiado : "+JSON.stringify(response?.data['Auth']))
-          // Here you can handle successful login actions like:
-          // - Storing the token
-          // - Redirecting to dashboard
-          // - Setting user session
-          
-        } else {
-          // No data in response
+          this.userSession = userSession.nombreCompleto;
+        }else{
           this.messageService.add({
             severity: 'warn',
             summary: 'Advertencia',
@@ -206,7 +207,6 @@ export class NavbarComponent {
           this.userSession ="";
         }
       } else {
-        // Form validation failed
         this.messageService.add({
           severity: 'warn',
           summary: 'Advertencia',
@@ -223,12 +223,18 @@ export class NavbarComponent {
     }
   }
 
+  get userName(): string {
+    const user = localStorage.getItem("currentUser");
+    return user ? JSON.parse(user).nombreCompleto : '';
+  }
+
 
   
   async saveRegistroUsuario(user: UserRequestModel) {
     try {
       const response = await this.userService.guardarUsuarioXRol(user).toPromise();
       if (response?.data && response.data['USUARIO']) {
+        alert("se guardo correctamente")
         const msj: string = response.data['USUARIO'];
         this.messageService.add({
           severity: 'success',
@@ -274,6 +280,10 @@ export class NavbarComponent {
         detail: error?.details
       });
     }
+  }
+
+  logout(){
+    this.authService.logout();
   }
 
 }

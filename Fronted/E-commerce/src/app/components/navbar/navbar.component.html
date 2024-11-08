@@ -1,477 +1,315 @@
-<style>
-    .navbar-brand img {
-        width: 120px;
-        height: 80px;
-        object-fit: contain;
-    }
-
-    .navbar-nav li {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .nav-item .p-button {
-        border-radius: 5px !important;
-    }
-
-    .p-tabview-nav {
-        border: 1px solid black;
-        color: black !important;
-        border: none !important;
-    }
-
-    /**/
-    .login-container {
-        background: white;
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        width: 400px;
-    }
-
-    .login-container h2 {
-        text-align: center;
-        color: #333;
-        margin-bottom: 30px;
-        font-size: 2em;
-    }
-
-    .input-group {
-        position: relative;
-        margin-bottom: 30px;
-    }
-
-    .input-group input {
-        width: 100%;
-        padding: 15px;
-        border: none;
-        outline: none;
-        background: #f5f5f5;
-        border-radius: 10px;
-        font-size: 16px;
-        transition: all 0.3s ease;
-    }
-
-    .input-group input:focus {
-        background: #fff;
-        box-shadow: 0 0 0 2px #2193b0;
-    }
-
-    .input-group label {
-        position: absolute;
-        left: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #888;
-        pointer-events: none;
-        transition: all 0.3s ease;
-    }
-
-    .input-group input:focus+label,
-    .input-group input:valid+label {
-        top: -10px;
-        left: 10px;
-        font-size: 14px;
-        background: white;
-        padding: 0 5px;
-        color: #2193b0;
-    }
-
-    .remember-forgot {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        font-size: 14px;
-    }
-
-    .remember-forgot label {
-        color: #666;
-        cursor: pointer;
-    }
-
-    .remember-forgot a {
-        color: #2193b0;
-        text-decoration: none;
-    }
-
-    .remember-forgot a:hover {
-        text-decoration: underline;
-    }
-
-    .login-btn {
-        width: 100%;
-        padding: 15px;
-        background: #2193b0;
-        border: none;
-        border-radius: 10px;
-        color: white;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background 0.3s ease;
-    }
-
-    .login-btn:hover {
-        background: #1c7a94;
-    }
-
-    .register-link {
-        text-align: center;
-        margin-top: 20px;
-        font-size: 14px;
-        color: #666;
-    }
-
-    .register-link a {
-        color: #2193b0;
-        text-decoration: none;
-        font-weight: 600;
-    }
-
-    .register-link a:hover {
-        text-decoration: underline;
-    }
-
-    /**/
-    .register-container {
-        background: white;
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        width: 100%;
-        max-width: 700px;
-    }
-
-    .register-container h2 {
-        text-align: center;
-        color: #333;
-        margin-bottom: 30px;
-        font-size: 2em;
-    }
-
-    .form-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-    }
-
-    .input-group {
-        position: relative;
-        margin-bottom: 20px;
-    }
-
-    .input-group input,
-    .input-group select {
-        width: 100%;
-        padding: 15px;
-        border: 1px solid #ddd;
-        outline: none;
-        background: #f8f9fa;
-        border-radius: 10px;
-        font-size: 16px;
-        transition: all 0.3s ease;
-    }
-
-    .input-group select {
-        cursor: pointer;
-    }
-
-    .input-group input:focus,
-    .input-group select:focus {
-        border-color: #3a7bd5;
-        background: #fff;
-        box-shadow: 0 0 0 2px rgba(58, 123, 213, 0.2);
-    }
-
-    .input-group label {
-        position: absolute;
-        left: 15px;
-        top: -10px;
-        background: white;
-        padding: 0 5px;
-        color: #666;
-        font-size: 14px;
-    }
-
-    .register-btn {
-        width: 100%;
-        padding: 15px;
-        background: #3a7bd5;
-        border: none;
-        border-radius: 10px;
-        color: white;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background 0.3s ease;
-        margin-top: 20px;
-    }
-
-    .register-btn:hover {
-        background: #2d62aa;
-    }
-
-    .required {
-        color: #e74c3c;
-        margin-left: 3px;
-    }
-
-    /**/
-
-    .container-registrar {
-
-        height: 650px;
-        overflow: hidden !important;
-    }
-
-    /**/
-    .container-modal-registro {
-        height: 620px;
-        overflow: auto;
-        overflow-x: hidden !important;
-        border: 1px solid whitesmoke;
-    }
-
-    .container-modal-registro .col-12 {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 10px;
-        border: 1px solid whitesmoke;
-        gap: 10px;
-    }
-
-    .container-modal-registro .msj-validation {
-        color: red !important;
-    }
-
-    /**/
-    .p-tabview-panels {
-        padding: 0 !important;
-        overflow: hidden !important;
-    }
-
-    .p-dialog-content {
-        overflow: hidden !important;
-    }
-
-    .btn-registro-cliente {
-        background-color: none !important;
-      
-    }
-
-    .login-container{
-        width: 480px !important;
-    }
-
-    .login-container .col-12{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 10px;
-
-    }
-</style>
-
-<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+<!-- HTML -->
+<nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="assets/logo-ico.ico" alt="Logo">
+        <!-- Logo -->
+        <a class="navbar-brand" routerLink="/">
+            <img src="assets/logo-ico.ico" alt="Logo" class="nav-logo">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+        <!-- Botón hamburguesa -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
+
+        <!-- Menú -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav align-items-center">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Pagina Principal</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/mis-compras">Mis Compras</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">
-                        <a class="nav-link" *ngIf="userSession">{{userSession}}</a>
-                        <p-button *ngIf="!userSession" class="btn-iniciar-estilo" class="btn-iniciar btn-iniciar-estilo"
-                            label="Iniciar Session" size="small"
-                            (click)="showModalBienvenida=true; modalBienvenida()"></p-button>
+                    <a class="nav-link" routerLink="/" routerLinkActive="active">
+                        <i class="pi pi-home"></i>
+                        Página Principal
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/mis-compras" routerLinkActive="active">
+                        <i class="pi pi-shopping-cart"></i>
+                        Mis Compras
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <ng-container *ngIf="userName; else loginButton">
+                        <p-overlayPanel #op>
+                            <div class="user-menu">
+                                <p-button label="Cerrar Sesión" icon="pi pi-sign-out"
+                                    styleClass="p-button-text p-button-danger" (click)="logout()">
+                                </p-button>
+                            </div>
+                        </p-overlayPanel>
+
+                        <a class="nav-link user-link" (click)="op.toggle($event)">
+                            <i class="pi pi-user"></i>
+                            {{userName}}
+                            <i class="pi pi-angle-down" style="margin-left: 8px;"></i>
+                        </a>
+                    </ng-container>
+
+                    <ng-template #loginButton>
+                        <p-button label="Iniciar Sesión" icon="pi pi-sign-in" styleClass="p-button-primary login-btn"
+                            (click)="showModalBienvenida=true; modalBienvenida()">
+                        </p-button>
+                    </ng-template>
+                </li>
+
+
+
+                <!---
+                <li class="nav-item">
+                    <ng-container *ngIf="userSession; else loginButton">
+                        <a class="nav-link">
+                            <i class="pi pi-user"></i>
+                            {{userSession}}
+                        </a>
+                    </ng-container>
+                    <ng-template #loginButton>
+                        <p-button label="Iniciar Sesión" icon="pi pi-sign-in" styleClass="p-button-primary login-btn"
+                            (click)="showModalBienvenida=true; modalBienvenida()">
+                        </p-button>
+                    </ng-template>
+                </li>
+            -->
             </ul>
         </div>
     </div>
 </nav>
 
-
-
 <p-dialog header="Bienvenido al Centro Comercial Santa Fe" *ngIf="showModalBienvenida" [(visible)]="showModalBienvenida"
-    [style]="{width: '600px', height: '990px'}" [modal]="true">
-    <div class="container-fluid container-login">
-        <p-tabView>
-            <p-tabPanel header="Iniciar Session">
-                <div class="container-fluid d-flex flex-column justify-content-start align-items-center" style="height: 650px;">
-                    <div class="login-container mt-5">
-                        <form  [formGroup]="loginForm">
-                            <h2>Iniciar Sesión</h2>
-                            <div class="row">
-                                <div class="col-12">
-                                    <label for="">Username</label>
-                                    <input type="text" pInputText   [style]="{width: '370px'}" formControlName="username"/>
+    [style]="{width: '650px', maxHeight: '90vh'}" [modal]="true" styleClass="auth-dialog">
+
+    <div class="container-fluid container-login p-0">
+        <p-tabView styleClass="custom-tabview">
+            <!-- Panel de Inicio de Sesión -->
+            <p-tabPanel header="Iniciar Sesión">
+                <div class="auth-container">
+                    <div class="login-container">
+                        <form [formGroup]="loginForm" class="auth-form">
+                            <h2 class="auth-title">Bienvenido de Nuevo</h2>
+                            <p class="auth-subtitle">Ingresa tus credenciales para continuar</p>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="pi pi-user"></i>
+                                    Username
+                                </label>
+                                <div class="input-container">
+                                    <input type="text" pInputText class="styled-input" formControlName="username"
+                                        placeholder="Ingresa tu nombre de usuario" />
                                 </div>
-                                <div class="col-12">
-                                    <label>Contraseña</label>
-                                    <p-password  [toggleMask]="true"  [style]="{width: '370px'}"  formControlName="password"/>
-                                </div>
-                                <div class="col-12">
-                                    <p-button label="Ingresar" [outlined]="true" severity="success" [style]="{width: '350px'}" (click)="login()"/>
-                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="pi pi-lock"></i>
+                                    Contraseña
+                                </label>
+                                <p-password formControlName="password" [toggleMask]="true" styleClass="w-100"
+                                    [inputStyle]="{'width': '100%'}" placeholder="Ingresa tu contraseña">
+                                </p-password>
+                            </div>
+
+                            <div class="mt-4">
+                                <p-button label="Iniciar Sesión" icon="pi pi-sign-in" styleClass="w-100 login-button"
+                                    (click)="login()" [raised]="true">
+                                </p-button>
                             </div>
                         </form>
                     </div>
                 </div>
             </p-tabPanel>
-            <p-tabPanel header="Registrar">
-                <div
-                    class="container-fluid container-registrar d-flex flex-column justify-content-center align-items-center">
-                    <form [formGroup]="userForm">
-                        <div class="container container-modal-registro" style="padding: 1rem ;">
-                            <div class="row">
-                                <div class="col-12">
-                                    <label>Nombres</label>
-                                    <input type="text" pInputText [style]="{width: '420px'}"
-                                        placeholder="Nombre Completo" formControlName="nombres" />
-                                    <span class="msj-validation"
-                                        *ngIf="userForm.get('nombres')?.errors?.['required'] && userForm.get('nombres')?.touched">El
-                                        campo es requerido</span>
-                                </div>
-                                <div class="col-12">
-                                    <label>Apellidos</label>
-                                    <input type="text" pInputText [style]="{width: '420px'}" placeholder="Apellidos"
-                                        formControlName="apellidos" />
-                                    <span class="msj-validation"
-                                        *ngIf="userForm.get('apellidos')?.errors?.['required'] && userForm.get('apellidos')?.touched">El
-                                        campo es requerido</span>
-                                </div>
-                                <div class="col-12">
-                                    <label>Tipo Documento</label>
-                                    <p-dropdown [style]="{width: '420px'}" [options]="listaTipoDocumento"
-                                        optionLabel="descripcion" [filter]="true" filterBy="descripcion"
-                                        [showClear]="true" placeholder="Selecciona un Tipo de Documento"
-                                        formControlName="tipoDocumento" optionValue="id">
-                                        <ng-template let-selectedOption>
-                                            <div class="flex align-items-center gap-2">
-                                                <div>{{ selectedOption.descripcion }}</div>
-                                            </div>
-                                        </ng-template>
-                                    </p-dropdown>
-                                    <span class="msj-validation"
-                                        *ngIf="userForm.get('tipoDocumento')?.errors?.['required'] && userForm.get('tipoDocumento')?.touched">El
-                                        campo es requerido</span>
-                                </div>
-                                <div class="col-12">
-                                    <label>Número Documento</label>
-                                    <input type="text" pInputText [style]="{width: '420px'}"
-                                        placeholder="Número Documento" formControlName="numeroDocumento" />
-                                    <span class="msj-validation"
-                                        *ngIf="userForm.get('numeroDocumento')?.errors?.['required'] && userForm.get('numeroDocumento')?.touched">El
-                                        campo es requerido</span>
-                                </div>
-                                <div class="col-12">
-                                    <label>Genero</label>
-                                    <p-dropdown [options]="listaGenero" optionLabel="descripcion" [filter]="true"
-                                        filterBy="descripcion" [showClear]="true" placeholder="Seleccione un Género"
-                                        [style]="{width: '420px'}" formControlName="genero" optionValue="id">
-                                        <ng-template let-selectedOption>
-                                            <div class="flex align-items-center gap-2">
-                                                <div>{{ selectedOption.descripcion }}</div>
-                                            </div>
-                                        </ng-template>
-                                    </p-dropdown>
-                                    <span class="msj-validation"
-                                        *ngIf="userForm.get('genero')?.errors?.['required'] && userForm.get('genero')?.touched">El
-                                        campo es requerido</span>
-                                </div>
-                                <div class="col-12">
-                                    <label>Rol</label>
-                                    <p-dropdown [options]="listaRol" optionLabel="nombre" [filter]="true"
-                                        filterBy="nombre" [showClear]="true" placeholder="Seleccione un Rol"
-                                        [style]="{width: '420px'}" formControlName="rol" optionValue="id">
-                                        <ng-template let-selectedOption>
-                                            <div class="flex align-items-center gap-2">
-                                                <div>{{ selectedOption.nombre }}</div>
-                                            </div>
-                                        </ng-template>
-                                    </p-dropdown>
-                                    <span class="msj-validation"
-                                        *ngIf="userForm.get('rol')?.errors?.['required'] && userForm.get('rol')?.touched">El
-                                        campo es requerido</span>
-                                </div>
-                                <div class="col-12">
-                                    <label>Ciudad</label>
-                                    <p-dropdown [options]="listaCiudad" optionLabel="nombre" [filter]="true"
-                                        filterBy="nombre" [showClear]="true" placeholder="Seleccione una Ciudad"
-                                        [style]="{width: '420px'}" formControlName="ciudad" optionValue="id">
-                                        <ng-template let-selectedOption>
-                                            <div class="flex align-items-center gap-2">
-                                                <div>{{ selectedOption.nombre }}</div>
-                                            </div>
-                                        </ng-template>
-                                    </p-dropdown>
-                                    <span class="msj-validation"
-                                        *ngIf="userForm.get('ciudad')?.errors?.['required'] && userForm.get('ciudad')?.touched">El
-                                        campo es requerido</span>
-                                </div>
-                                <div class="col-12">
-                                    <label>Username</label>
-                                    <input type="text" pInputText [style]="{width: '420px'}" placeholder="Username"
-                                        formControlName="nombreUsuario" />
-                                    <span class="msj-validation"
-                                        *ngIf="userForm.get('nombreUsuario')?.errors?.['required'] && userForm.get('nombreUsuario')?.touched">El
-                                        campo es requerido</span>
-                                </div>
-                                <div class="col-12">
-                                    <label>Contraseña</label>
-                                    <p-password [toggleMask]="true" [style]="{width: '420px'}" placeholder="Contraseña"
-                                    formControlName="password"/>
 
-                                    <span class="msj-validation"
-                                        *ngIf="userForm.get('password')?.errors?.['required'] && userForm.get('password')?.touched">El
-                                        campo es requerido</span>
+            <!-- Panel de Registro -->
+            <p-tabPanel header="Registrarse">
+                <div class="register-container">
+                    <form [formGroup]="userForm" class="register-form">
+                        <h3 class="auth-title">Crear Nueva Cuenta</h3>
+                        <p class="auth-subtitle">Complete todos los campos para registrarse</p>
+
+                        <!-- Información Personal -->
+                        <div class="form-section">
+                            <h4 class="section-title">Información Personal</h4>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            <i class="pi pi-user"></i> Nombres
+                                        </label>
+                                        <input type="text" pInputText class="styled-input" placeholder="Nombre Completo"
+                                            formControlName="nombres" />
+                                        <small class="error-message"
+                                            *ngIf="userForm.get('nombres')?.errors?.['required'] && userForm.get('nombres')?.touched">
+                                            El nombre es requerido
+                                        </small>
+                                    </div>
                                 </div>
-                                <div class="col-12">
-                                    <label>Email</label>
-                                    <input type="text" pInputText [style]="{width: '420px'}" placeholder="Email"
-                                        formControlName="email" />
-                                    <span class="msj-validation"
-                                        *ngIf="userForm.get('email')?.errors?.['required'] && userForm.get('email')?.touched">El
-                                        campo es requerido</span>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            <i class="pi pi-user"></i> Apellidos
+                                        </label>
+                                        <input type="text" pInputText class="styled-input" placeholder="Apellidos"
+                                            formControlName="apellidos" />
+                                        <small class="error-message"
+                                            *ngIf="userForm.get('apellidos')?.errors?.['required'] && userForm.get('apellidos')?.touched">
+                                            Los apellidos son requeridos
+                                        </small>
+                                    </div>
                                 </div>
-                                <div class="col-12">
-                                    <label>Dirección</label>
-                                    <input type="text" pInputText [style]="{width: '420px'}" placeholder="Dirección"
-                                        formControlName="direccion" />
-                                    <span class="msj-validation"
-                                        *ngIf="userForm.get('direccion')?.errors?.['required'] && userForm.get('direccion')?.touched">El
-                                        campo es requerido</span>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            <i class="pi pi-id-card"></i> Tipo Documento
+                                        </label>
+                                        <p-dropdown [options]="listaTipoDocumento" optionLabel="descripcion"
+                                            [filter]="true" filterBy="descripcion" [showClear]="true"
+                                            placeholder="Seleccione tipo" formControlName="tipoDocumento"
+                                            optionValue="id" styleClass="w-100">
+                                        </p-dropdown>
+                                        <small class="error-message"
+                                            *ngIf="userForm.get('tipoDocumento')?.errors?.['required'] && userForm.get('tipoDocumento')?.touched">
+                                            el tipo de documento es requeridos
+                                        </small>
+                                    </div>
                                 </div>
-                                <div class="col-12">
-                                    <label>Teléfono</label>
-                                    <input type="text" pInputText [style]="{width: '420px'}" placeholder="Teléfono"
-                                        formControlName="telefono" />
-                                    <span class="msj-validation"
-                                        *ngIf="userForm.get('telefono')?.errors?.['required'] && userForm.get('telefono')?.touched">El
-                                        campo es requerido</span>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            <i class="pi pi-id-card"></i> Número Documento
+                                        </label>
+                                        <input type="text" pInputText class="styled-input"
+                                            placeholder="Número de documento" formControlName="numeroDocumento" />
+                                        <small class="error-message"
+                                            *ngIf="userForm.get('numeroDocumento')?.errors?.['required'] && userForm.get('numeroDocumento')?.touched">
+                                            el número de documento es requerido
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            <i class="pi pi-id-card"></i> Género
+                                        </label>
+                                        <p-dropdown [options]="listaGenero" optionLabel="descripcion" [filter]="true"
+                                            filterBy="descripcion" [showClear]="true" placeholder="Seleccione tipo"
+                                            formControlName="genero" optionValue="id" styleClass="w-100">
+                                        </p-dropdown>
+                                        <small class="error-message"
+                                            *ngIf="userForm.get('genero')?.errors?.['required'] && userForm.get('genero')?.touched">
+                                            El género es requerido
+                                        </small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="text-center mt-2 mb-2 btn-registro-cliente">
-                            <p-button icon="pi pi-save" label="Agregar" [outlined]="true" (click)="guardarRegistro()" />
+
+                        <!-- Información de Cuenta -->
+                        <div class="form-section mt-4">
+                            <h4 class="section-title">Información de Cuenta</h4>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            <i class="pi pi-user"></i> Username
+                                        </label>
+                                        <input type="text" pInputText class="styled-input"
+                                            placeholder="Nombre de usuario" formControlName="nombreUsuario" />
+                                        <small class="error-message"
+                                            *ngIf="userForm.get('nombreUsuario')?.errors?.['required'] && userForm.get('nombreUsuario')?.touched">
+                                            El nombre de usuario es requerido
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            <i class="pi pi-lock"></i> Contraseña
+                                        </label>
+                                        <p-password formControlName="password" [toggleMask]="true" styleClass="w-100"
+                                            [inputStyle]="{'width': '100%'}" placeholder="Contraseña">
+                                        </p-password>
+                                        <small class="error-message"
+                                            *ngIf="userForm.get('password')?.errors?.['required'] && userForm.get('password')?.touched">
+                                            La contraseña es requerido
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            <i class="pi pi-envelope"></i> Email
+                                        </label>
+                                        <input type="email" pInputText class="styled-input"
+                                            placeholder="correo@ejemplo.com" formControlName="email" />
+                                        <small class="error-message"
+                                            *ngIf="userForm.get('password')?.errors?.['required'] && userForm.get('password')?.touched">
+                                            el email es requerido
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <br>
+
+                        <!-- Información de Contacto -->
+                        <div class="form-section mt-4">
+                            <h4 class="section-title">Información de Contacto</h4>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            <i class="pi pi-map-marker"></i> Ciudad
+                                        </label>
+                                        <p-dropdown [options]="listaCiudad" optionLabel="nombre" [filter]="true"
+                                            filterBy="nombre" [showClear]="true" placeholder="Seleccione ciudad"
+                                            formControlName="ciudad" optionValue="id" styleClass="w-100">
+                                        </p-dropdown>
+                                        <small class="error-message"
+                                            *ngIf="userForm.get('password')?.errors?.['required'] && userForm.get('ciudad')?.touched">
+                                            La ciudad es requerido
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            <i class="pi pi-phone"></i> Teléfono
+                                        </label>
+                                        <input type="tel" pInputText class="styled-input"
+                                            placeholder="Número de teléfono" formControlName="telefono" />
+                                        <small class="error-message"
+                                            *ngIf="userForm.get('telefono')?.errors?.['required'] && userForm.get('telefono')?.touched">
+                                            La teléfono es requerido
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            <i class="pi pi-map"></i> Dirección
+                                        </label>
+                                        <input type="text" pInputText class="styled-input"
+                                            placeholder="Dirección completa" formControlName="direccion" />
+                                        <small class="error-message"
+                                            *ngIf="userForm.get('direccion')?.errors?.['required'] && userForm.get('direccion')?.touched">
+                                            La dirección es requerido
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions mt-4">
+                            <p-button [raised]="true" icon="pi pi-save" label="Crear Cuenta"
+                                styleClass="w-100 register-button" (click)="guardarRegistro()">
+                            </p-button>
+                        </div>
                     </form>
                 </div>
             </p-tabPanel>

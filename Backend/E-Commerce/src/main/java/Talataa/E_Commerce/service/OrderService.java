@@ -30,11 +30,20 @@ public class OrderService {
             if (orden != null && !orden.isEmpty()) {
                 return this.responseApiBuilderService.successRespuesta(orden, "ORDEN_DISPONIBLE");
             } else {
-                return this.responseApiBuilderService.errorRespuesta("NO_ORDERS_FOUND");
+                return this.responseApiBuilderService.errorRespuesta(
+                        404,
+                        "NO_ORDERS_FOUND",
+                        "No se encontraron órdenes disponibles. Verifica los filtros o la información e intenta nuevamente. Si el problema persiste, contacta al soporte técnico."
+                );
+
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
 
@@ -44,11 +53,20 @@ public class OrderService {
             if (detalle != null && !detalle.isEmpty()) {
                 return this.responseApiBuilderService.successRespuesta(detalle, "DETALLESXORDEN");
             } else {
-                return this.responseApiBuilderService.errorRespuesta("NO_DETAILS_FOUND_FOR_ORDER");
+                return this.responseApiBuilderService.errorRespuesta(
+                        404,
+                        "NO_DETAILS_FOUND_FOR_ORDER",
+                        "No se encontraron detalles para la orden especificada. Verifica la información e intenta nuevamente. Si el problema persiste, contacta al soporte técnico."
+                );
+
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
 
@@ -89,14 +107,18 @@ public class OrderService {
                     }
                 }
             }
-            return this.responseApiBuilderService.errorRespuestaPersonalizado(
+            return this.responseApiBuilderService.errorRespuesta(
                     404,
                     "ERROR_SAVE",
                     "Error al guardar los detalles de la orden. Por favor, intente nuevamente."
             );
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
 
@@ -110,7 +132,7 @@ public class OrderService {
                         "ORDEN_ACTUALIZADA"
                 );
             } else {
-                return this.responseApiBuilderService.errorRespuestaPersonalizado(
+                return this.responseApiBuilderService.errorRespuesta(
                         404,
                         "ERROR_UPDATE",
                         "Error al actualizar el estado de la orden. Por favor, intente nuevamente."
@@ -118,7 +140,11 @@ public class OrderService {
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
 
@@ -133,7 +159,7 @@ public class OrderService {
                         "DETALLES_ACTUALIZADOS"
                 );
             } else {
-                return this.responseApiBuilderService.errorRespuestaPersonalizado(
+                return this.responseApiBuilderService.errorRespuesta(
                         404,
                         "ERROR_UPDATE",
                         "Error al actualizar el estado de los detalles. Por favor, intente nuevamente."
@@ -141,7 +167,11 @@ public class OrderService {
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
 
@@ -209,7 +239,7 @@ public class OrderService {
                         "ORDEN_ACTUALIZADA"
                 );
             } else {
-                return this.responseApiBuilderService.errorRespuestaPersonalizado(
+                return this.responseApiBuilderService.errorRespuesta(
                         404,
                         "ERROR_UPDATE",
                         "Error al actualizar la orden. Por favor, intente nuevamente."
@@ -217,7 +247,11 @@ public class OrderService {
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
 
@@ -232,7 +266,7 @@ public class OrderService {
                         "DETALLE_ACTUALIZADO"
                 );
             } else {
-                return this.responseApiBuilderService.errorRespuestaPersonalizado(
+                return this.responseApiBuilderService.errorRespuesta(
                         404,
                         "ERROR_UPDATE",
                         "Error al actualizar el detalle de la orden. Por favor, intente nuevamente."
@@ -240,7 +274,11 @@ public class OrderService {
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
 }

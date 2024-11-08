@@ -17,8 +17,8 @@ public class ProductosResponse {
     private Double productoPrecioUnidad;
     private String nombreCategoria;
     private String descripcionCategoria;
-    private Integer cantidadDisponible;
-    private String urlImg;
+
+
 
 
 

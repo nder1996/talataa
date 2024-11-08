@@ -37,10 +37,9 @@ export class PaginaPrincipalComponent {
 
   async getAllProductos() {
     try {
-      const response = await this.productoService.getAllProductoDisponibles().toPromise();
+      const response = await this.productoService.todosProductosEcommer().toPromise();
       if (response?.data && response?.data['PRODUCTOS']) {
         this.listaProducto = response.data['PRODUCTOS'];
-        console.log("lista de productos : "+JSON.stringify(this.listaProducto))
       } else {
         this.messageService.add({
           severity: 'warn',
@@ -77,6 +76,12 @@ export class PaginaPrincipalComponent {
   
       // Actualizar la lista en el localStorage
       this.localStorage.updateCompleteList("ProductosAgregados", productsList);
+
+      this.messageService.add({
+        severity: 'success',
+        summary: '',
+        detail: 'PRODUCTO AGREGADO CON ÉXITO'
+      });
      // console.log("Lista de productos:", this.localStorage.getList("ProductosAgregados"));
   }
 

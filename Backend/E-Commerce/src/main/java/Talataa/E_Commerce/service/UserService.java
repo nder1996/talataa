@@ -49,11 +49,51 @@ public class UserService {
                 /**/
                 return this.responseApiBuilderService.successRespuesta(userMap, "Auth");
             }else{
-                return this.responseApiBuilderService.errorRespuesta("USER_NOT_FOUND");
+                return this.responseApiBuilderService.errorRespuesta(
+                        404,
+                        "AUTHENTICATION_FAILED",
+                        "Error de autenticación: No fue posible autenticar al usuario. Verifique sus credenciales e intente nuevamente."
+                );
+
             }
         }catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Error del servidor: Ocurrió un problema al procesar la solicitud. Por favor, inténtelo nuevamente más tarde o contacte al administrador si el problema persiste."
+            );
+
+        }
+    }
+
+    public ApiResponse<String> loginAdmin(String username , String password){
+        try {
+            password = this.passwordEncoder.encode(password);
+            Usuario users = this.userRepository.BuscarAdmin(username,password);
+            if(users!=null && users.getId()!=null){
+                // Para un solo usuario
+                Map<String, Object> userMap = new HashMap<>();
+                userMap.put("id", users.getId());
+                userMap.put("nombreCompleto", users.getNombres() + " " + users.getApellidos());
+                /**/
+                return this.responseApiBuilderService.successRespuesta(userMap, "AuthAdmin");
+            }else{
+                return this.responseApiBuilderService.errorRespuesta(
+                        404,
+                        "AUTHENTICATION_FAILED",
+                        "Error de autenticación: No fue posible autenticar al usuario. Verifique sus credenciales e intente nuevamente."
+                );
+
+            }
+        }catch (Exception e) {
+            System.err.println(e.getMessage());
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Error del servidor: Ocurrió un problema al procesar la solicitud. Por favor, inténtelo nuevamente más tarde o contacte al administrador si el problema persiste."
+            );
+
         }
     }
 
@@ -65,11 +105,20 @@ public class UserService {
             if(users!=null && !users.isEmpty()){
                 return this.responseApiBuilderService.successRespuesta(users, "USUARIOS");
             }else{
-                return this.responseApiBuilderService.errorRespuesta("USER_NOT_FOUND");
+                return this.responseApiBuilderService.errorRespuesta(
+                        404,
+                        "USER_NOT_FOUND",
+                        "No se encontraron usuarios registrados en el sistema. Verifique los criterios de búsqueda o registre un usuario e intente nuevamente."
+                );
+
             }
         }catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Error del servidor: Ocurrió un problema inesperado. Inténtelo nuevamente más tarde o contacte al administrador si el problema persiste."
+            );
         }
     }
 
@@ -88,45 +137,29 @@ public class UserService {
                 if(row2!=null && row2>0){
                     return this.responseApiBuilderService.successRespuesta("El registro se guardó correctamente en el sistema", "USUARIO");
                 }else{
-                    return this.responseApiBuilderService.errorRespuestaPersonalizado(404,"ERROR_SAVE","Ocurrió un error al guardar el registro. Por favor, intenta nuevamente o contacta al administrador.");
+                    return this.responseApiBuilderService.errorRespuesta(
+                            404,
+                            "ERROR_SAVE",
+                            "No se pudo guardar el registro: ocurrió un error durante el proceso de guardado. Por favor, verifica los datos e intenta nuevamente. Si el problema persiste, contacta al administrador del sistema."
+                    );
                 }
             }else {
-                return this.responseApiBuilderService.errorRespuestaPersonalizado(404,"ERROR_SAVE","Ocurrió un error al guardar el registro. Por favor, intenta nuevamente o contacta al administrador.");
+                return this.responseApiBuilderService.errorRespuesta(
+                        404,
+                        "ERROR_SAVE",
+                        "No fue posible guardar el registro. Verifica los datos ingresados e intenta nuevamente. Si el problema continúa, contacta al administrador del sistema."
+                );
             }
         }catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Error del servidor: Ocurrió un problema inesperado al procesar la solicitud. Por favor, intenta nuevamente más tarde. Si el problema persiste, contacta al administrador del sistema."
+            );
         }
     }
 
-    public Integer guardarUsuario(UsuarioRequest user){
-        try {
-            Integer row = this.userRepository.guardarUsuario(user);
-            if(row!=null && row>0){
-                return row;
-            }else{
-                return 0;
-            }
-        }catch (Exception e) {
-            System.err.println(e.getMessage());
-            return 0;
-        }
-    }
-
-
-    public Integer guardarRolUsuario(Integer idRol,Integer idUsuario){
-        try {
-            Integer row = this.userRepository.guardarRolUsuario(idRol,idUsuario);
-            if(row!=null && row>0){
-                return row;
-            }else{
-                return 0;
-            }
-        }catch (Exception e) {
-            System.err.println(e.getMessage());
-            return 0;
-        }
-    }
 
     /**/
     public ApiResponse<String> inactivarRegistroUsuario(Integer id ){
@@ -135,11 +168,19 @@ public class UserService {
             if(row!=null && row>0){
                 return this.responseApiBuilderService.successRespuesta("El registro se ha borrado exitosamente.", "USUARIO");
             }else{
-                return this.responseApiBuilderService.errorRespuestaPersonalizado(404,"ERROR_DELETE","No se pudo eliminar el registro. Intente de nuevo o consulte al soporte.");
+                return this.responseApiBuilderService.errorRespuesta(
+                        404,
+                        "ERROR_DELETE",
+                        "No se pudo eliminar el registro. Por favor, inténtalo nuevamente. Si el problema persiste, contacta al soporte técnico para obtener asistencia."
+                );
             }
         }catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Error en el servidor: Ocurrió un problema inesperado al procesar la solicitud. Por favor, inténtalo nuevamente. Si el error persiste, contacta al soporte técnico para obtener asistencia."
+            );
         }
     }
     /**/
@@ -151,45 +192,32 @@ public class UserService {
                 if (row2 != null && row2 > 0) {
                     return this.responseApiBuilderService.successRespuesta("El registro se actualizó correctamente en el sistema", "USUARIO");
                 } else {
-                    return this.responseApiBuilderService.errorRespuestaPersonalizado(404, "ERROR_UPDATE",
-                            "Ocurrió un error al actualizar el rol del usuario. Por favor, intenta nuevamente o contacta al administrador.");
+                    return this.responseApiBuilderService.errorRespuesta(
+                            404,
+                            "ERROR_UPDATE",
+                            "No se pudo actualizar el rol del usuario. Verifica los datos e intenta nuevamente. Si el problema persiste, contacta al administrador del sistema para obtener asistencia."
+                    );
+
                 }
             } else {
-                return this.responseApiBuilderService.errorRespuestaPersonalizado(404, "ERROR_UPDATE",
-                        "Ocurrió un error al actualizar el usuario. Por favor, intenta nuevamente o contacta al administrador.");
+                return this.responseApiBuilderService.errorRespuesta(
+                        404,
+                        "ERROR_UPDATE",
+                        "No se pudo actualizar el usuario. Por favor, verifica los datos e intenta nuevamente. Si el problema persiste, contacta al administrador del sistema para obtener asistencia."
+                );
+
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Error en el servidor: Ocurrió un problema inesperado al procesar la solicitud. Por favor, inténtalo nuevamente. Si el error persiste, contacta al soporte técnico para obtener asistencia."
+            );
+
         }
     }
 
-    public Integer actualizarUsuario(UsuarioRequest user) {
-        try {
-            Integer row = this.userRepository.actualizarUsuario(user);
-            if (row != null && row > 0) {
-                return row;
-            } else {
-                return 0;
-            }
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            return 0;
-        }
-    }
 
-    public Integer actualizarRolUsuario(Integer id, Integer idUsuario, Integer idRol) {
-        try {
-            Integer row = this.userRepository.actualizarRolUsuario(id, idUsuario, idRol);
-            if (row != null && row > 0) {
-                return row;
-            } else {
-                return 0;
-            }
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            return 0;
-        }
-    }
 
 }

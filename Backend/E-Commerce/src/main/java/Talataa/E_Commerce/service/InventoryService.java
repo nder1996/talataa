@@ -27,11 +27,20 @@ public class InventoryService {
             if (inventario != null && !inventario.isEmpty()) {
                 return this.responseApiBuilderService.successRespuesta(inventario, "INVENTARIOS");
             } else {
-                return this.responseApiBuilderService.errorRespuesta("INVENTORY_NOT_FOUND");
+                return this.responseApiBuilderService.errorRespuesta(
+                        404,
+                        "INVENTORY_NOT_FOUND",
+                        "No se encontraron inventarios disponibles. Verifica la información e intenta nuevamente. Si el problema persiste, contacta al soporte técnico."
+                );
+
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
 
@@ -45,7 +54,7 @@ public class InventoryService {
                         "INVENTARIO"
                 );
             } else {
-                return this.responseApiBuilderService.errorRespuestaPersonalizado(
+                return this.responseApiBuilderService.errorRespuesta(
                         404,
                         "ERROR_SAVE",
                         "Ocurrió un error al guardar el inventario. Por favor, intenta nuevamente o contacta al administrador."
@@ -53,7 +62,11 @@ public class InventoryService {
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
 
@@ -67,7 +80,7 @@ public class InventoryService {
                         "INVENTARIO"
                 );
             } else {
-                return this.responseApiBuilderService.errorRespuestaPersonalizado(
+                return this.responseApiBuilderService.errorRespuesta(
                         404,
                         "ERROR_UPDATE",
                         "Ocurrió un error al actualizar el inventario. Por favor, intenta nuevamente o contacta al administrador."
@@ -75,7 +88,11 @@ public class InventoryService {
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
 
@@ -90,7 +107,7 @@ public class InventoryService {
                         "INVENTARIO"
                 );
             } else {
-                return this.responseApiBuilderService.errorRespuestaPersonalizado(
+                return this.responseApiBuilderService.errorRespuesta(
                         404,
                         "ERROR_DELETE",
                         "No se pudo Borrar el inventario. Intente de nuevo o consulte al soporte."
@@ -98,7 +115,11 @@ public class InventoryService {
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
 

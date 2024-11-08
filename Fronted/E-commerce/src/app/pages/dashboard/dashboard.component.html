@@ -43,11 +43,27 @@
                         Gestion de Ordenes Compra
                     </a>
                 </li>
-                <li class="sidebar-item" routerLink="/dashboard/modulo-reporte" routerLinkActive="active">
-                    <a class="sidebar-link">
-                        <i class="pi pi-chart-scatter"></i>
-                        Gestion de Reportes
+                <li class="sidebar-item"  >
+                    <a  class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse"
+                        aria-expanded="false"><i class="fa-solid fa-sliders"></i>
+                        <i class="pi pi-chart-bar"></i>
+                        Gestion De Reportes
                     </a>
+                    <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item" routerLink="/dashboard/reporte-productos-activos">
+                        
+                            <a  class="sidebar-link">
+                                <i class="pi pi-box"></i>
+                                Reporte Productos Activos
+                            </a>
+                        </li>
+                        <li class="sidebar-item" routerLink="/dashboard/reporte-top-productos">
+                            <a class="sidebar-link">Reporte Top 5 de lo Mas Vendidos</a>
+                        </li>
+                        <li class="sidebar-item" routerLink="/dashboard/reporte-cliente-frecuente">
+                            <a class="sidebar-link">Reporte Top 5 Clientes Frecuentes</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -59,13 +75,15 @@
             </button>
             <div class="navbar-collapse navbar">
                 <ul class="navbar-nav">
-                    <li class="nav-item dropdown" style="border:1px solid black;padding: 10px;border-radius: 10px;">
-                        <a data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-                            <i class="pi pi-user" style="font-size: 2rem"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end">
+                    <li class="nav-item dropdown" (click)="logout()">
+                        <a data-bs-toggle="dropdown" class="nav-icon pe-md-0" role="button" aria-expanded="false">
                             <i class="pi pi-user"></i>
-                            <a class="dropdown-item">Salir</a>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item">
+                                <i class="pi pi-user"></i>
+                                Salir
+                            </a>
                         </div>
                     </li>
                 </ul>

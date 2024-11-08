@@ -1,11 +1,6 @@
 package Talataa.E_Commerce.security.jwt;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cglib.core.internal.Function;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -14,7 +9,7 @@ import java.util.Map;
 
 @Component
 public class JwtUtil {
-
+/*
     @Value("${jwt.secret}")
     private String secret;
 
@@ -65,5 +60,5 @@ public class JwtUtil {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
-
+*/
 }

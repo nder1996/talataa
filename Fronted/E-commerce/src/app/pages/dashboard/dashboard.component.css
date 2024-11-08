@@ -202,3 +202,140 @@ html[data-bs-theme="dark"] .theme-toggle .fa-moon {
 html[data-bs-theme="light"] .theme-toggle .fa-sun {
     display: none;
 }
+
+/*mejoras estilos*/
+/* Estilos del navbar */
+.navbar-collapse.navbar {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.75rem 1.5rem;
+    background: var(--navbar-bg);
+    border-bottom: 1px solid var(--navbar-border);
+  }
+  
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Estilos del dropdown del usuario */
+  .nav-item.dropdown {
+    position: relative;
+    border: none !important;
+    padding: 0 !important;
+  }
+  
+  /* Botón del usuario */
+  .nav-icon.pe-md-0 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--hover-bg);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .nav-icon.pe-md-0:hover {
+    background: #f1f5f9;
+    transform: translateY(-2px);
+  }
+  
+  /* Icono de usuario */
+  .nav-icon i.pi-user {
+    font-size: 1.5rem !important;
+    color: var(--icon-color);
+  }
+  
+  /* Menú dropdown */
+  .dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 120%;
+    min-width: 200px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid var(--navbar-border);
+    box-shadow: var(--dropdown-shadow);
+    padding: 0.5rem 0;
+    z-index: 1000;
+    /* Removemos opacity y visibility para permitir que Bootstrap maneje la visibilidad */
+  }
+  
+  /* Items del dropdown */
+  .dropdown-menu i.pi-user {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-right: 8px;
+  }
+  
+  .dropdown-item {
+    display: flex !important;
+    align-items: center !important;
+    padding: 0.75rem 1.25rem !important;
+    color: var(--text-primary) !important;
+    font-size: 0.875rem !important;
+    transition: all 0.2s ease !important;
+    text-decoration: none !important;
+    background: transparent !important;
+    border: none !important;
+    width: 100% !important;
+    cursor: pointer !important;
+  }
+  
+  .dropdown-item:hover {
+    background: var(--hover-bg) !important;
+    color: #ef4444 !important; /* Color rojo al hover */
+  }
+  
+  .dropdown-item:hover i {
+    color: #ef4444 !important;
+  }
+  
+  /* Separadores */
+  .dropdown-menu hr {
+    margin: 0.5rem 0;
+    border-color: var(--navbar-border);
+  }
+  
+  /* Responsive */
+  @media (max-width: 767.98px) {
+    .navbar-collapse.navbar {
+      padding: 0.5rem 1rem;
+    }
+    
+    .nav-icon.pe-md-0 {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .dropdown-menu {
+      min-width: 180px;
+    }
+  }
+  
+  /* Animación del dropdown */
+  .dropdown-menu.show {
+    animation: dropdownAnimation 0.2s ease forwards;
+  }
+  
+  @keyframes dropdownAnimation {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Aseguramos que el dropdown se muestre cuando está activo */
+  .dropdown.show .dropdown-menu {
+    display: block !important;
+  }

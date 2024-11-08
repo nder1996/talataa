@@ -1,0 +1,411 @@
+.navbar {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 0.5rem 1rem;
+}
+
+.nav-logo {
+    height: 40px;
+    width: auto;
+}
+
+.navbar-nav {
+    gap: 1.5rem;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #333 !important;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link i {
+    font-size: 1.1rem;
+    color: #e0007a;
+}
+
+.nav-link:hover {
+    color: #e0007a !important;
+}
+
+.nav-link.active {
+    color: #8C1184 !important;
+    font-weight: 600;
+}
+
+/* Nuevo estilo para el botón de login */
+:host ::ng-deep .login-btn.p-button {
+    background: #e0007a !important; /* Color primario similar a tu imagen */
+    border: none !important;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+:host ::ng-deep .login-btn.p-button:hover {
+    background: #e0007a !important; /* Un tono más oscuro al hacer hover */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(99, 102, 241, 0.2);
+}
+
+:host ::ng-deep .login-btn.p-button .p-button-label {
+    font-weight: 500;
+}
+
+:host ::ng-deep .login-btn.p-button .p-button-icon {
+    font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .navbar-nav {
+        gap: 1rem;
+        padding: 1rem 0;
+    }
+
+    .nav-link {
+        padding: 0.5rem 0;
+    }
+    
+    :host ::ng-deep .login-btn.p-button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/*dialog editar y registrar*/
+
+/* Estilos del diálogo */
+:host ::ng-deep .auth-dialog {
+    .p-dialog-header {
+        background: #D9048E;
+        color: white;
+        padding: 1.5rem;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .p-dialog-content {
+        padding: 0;
+        border-radius: 0 0 8px 8px;
+    }
+}
+
+/* Estilos de las tabs */
+:host ::ng-deep .custom-tabview {
+    .p-tabview-nav {
+        background: #f8f9fa;
+        border: none;
+        padding: 0.5rem 1rem 0;
+
+        li {
+            margin-right: 0.5rem;
+
+            .p-tabview-nav-link {
+                background: transparent;
+                color: #495057;
+                border: none;
+                border-radius: 8px 8px 0 0;
+                padding: 1rem 1.5rem;
+                font-weight: 600;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background: rgba(33, 150, 243, 0.1);
+                    color: #D9048E;
+                }
+            }
+
+            &.p-highlight .p-tabview-nav-link {
+                background: #D9048E;
+                color: white;
+            }
+        }
+    }
+
+    .p-tabview-panels {
+        padding: 0;
+    }
+}
+
+/* Estilos de los formularios */
+.auth-container {
+    padding: 1rem;
+}
+
+.auth-title {
+    color: #D9048E;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.auth-subtitle {
+    color: #757575;
+    margin-bottom: 2rem;
+}
+
+.form-section {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.section-title {
+    color: #1e88e5;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-label {
+    display: block;
+    color: #495057;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+
+    i {
+        margin-right: 0.5rem;
+        color: #1e88e5;
+    }
+}
+
+/* Estilos de los inputs */
+:host ::ng-deep {
+    .styled-input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+
+        &:focus {
+            border-color: #2196f3;
+            box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+        }
+    }
+
+    .p-password {
+        width: 100%;
+
+        input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+        }
+    }
+
+    .p-dropdown {
+        width: 100%;
+        border-radius: 8px;
+
+        .p-dropdown-label {
+            padding: 0.75rem 1rem;
+        }
+    }
+}
+
+/* Estilos de los botones */
+:host ::ng-deep {
+    .login-button, .register-button {
+        .p-button {
+            background: #D9048E !important;
+            border: none;
+            padding: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: #D9048E !important;
+                transform: translateY(-1px);
+                box-shadow: 0 4px 12px rgba(30, 136, 229, 0.2);
+            }
+        }
+    }
+}
+
+/* Estilos de mensajes de error */
+.error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .auth-container {
+        padding: 1rem;
+    }
+
+    .form-section {
+        padding: 1rem;
+    }
+
+    .auth-title {
+        font-size: 1.5rem;
+    }
+}
+
+
+/**/
+.nav-item {
+    .user-link {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+  
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+  
+      .pi {
+        margin-right: 8px;
+      }
+    }
+  }
+  
+  .user-menu {
+    padding: 8px;
+    min-width: 150px;
+  
+    .p-button {
+      width: 100%;
+      justify-content: flex-start;
+    }
+  }
+  
+  :host ::ng-deep {
+    .p-overlaypanel {
+      .p-overlaypanel-content {
+        padding: 0;
+      }
+    }
+  }
+
+
+  /*estilos de mensaje de notificacion cuando el usuario no esta registrado*/
+
+  .payment-alert {
+    max-width: 450px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: linear-gradient(to right, #ffffff, #f8fafc);
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    animation: slideIn 0.5s ease-out;
+  }
+  
+  .alert-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: #fee2e2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .alert-icon svg {
+    width: 40px;
+    height: 40px;
+    color: #ef4444;
+  }
+  
+  .alert-title {
+    color: #1e293b;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  
+  .alert-message {
+    color: #64748b;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  
+  .alert-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  .btn {
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.1);
+  }
+  
+  .btn-primary:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
+  }
+  
+  .btn-secondary {
+    background: #f8fafc;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+  }
+  
+  .btn-secondary:hover {
+    background: #f1f5f9;
+    color: #1e293b;
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive */
+  @media (max-width: 480px) {
+    .payment-alert {
+      margin: 1rem;
+      padding: 1.5rem;
+    }
+  
+    .alert-buttons {
+      flex-direction: column;
+    }
+  
+    .btn {
+      width: 100%;
+    }
+  }

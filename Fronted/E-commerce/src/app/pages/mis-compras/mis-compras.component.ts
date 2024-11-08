@@ -12,8 +12,7 @@ import { ProductosService } from 'src/service/Productos/productos-service';
 @Component({
   selector: 'app-mis-compras',
   templateUrl: './mis-compras.component.html',
-  styleUrls: ['./mis-compras.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./mis-compras.component.css']
 })
 export class MisComprasComponent {
 
@@ -77,7 +76,7 @@ export class MisComprasComponent {
   
     this.listProductosAgregados.forEach(producto => {
       // Convertir datos a números
-      const cantidad = Number(producto.cantidadDisponible);
+      const cantidad = Number(producto.cantidadSeleccionada);
       const precioUnitario = Number(producto.productoPrecioUnidad);
       
       // Calcular precio por producto
@@ -157,6 +156,12 @@ export class MisComprasComponent {
       });
       throw error; // Re-lanzar el error si necesitas manejarlo en el componente padre
     }
+  }
+
+
+  get userName(): string {
+    const user = localStorage.getItem("currentUser");
+    return user ? JSON.parse(user).nombreCompleto : '';
   }
 
 

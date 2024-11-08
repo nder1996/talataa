@@ -6,10 +6,7 @@ export class ProductosModel {
     productoPrecioUnidad?: number;
     nombreCategoria?: number;
     descripcionCategoria?: number;
-    cantidadDisponible?: string;
-    urlImg?: string;
     cantidadSeleccionada?:number
-  
     constructor(
         idProducto?: number,
         idCategoriaProducto?: number,
@@ -18,8 +15,6 @@ export class ProductosModel {
         productoPrecioUnidad?: number,
         nombreCategoria?: number,
         descripcionCategoria?: number,
-        cantidadDisponible?: string,
-        urlImg?: string,
         cantidadSeleccionada?:number
 
     ) {
@@ -30,8 +25,6 @@ export class ProductosModel {
       this.productoPrecioUnidad = productoPrecioUnidad;
       this.nombreCategoria = nombreCategoria;
       this.descripcionCategoria = descripcionCategoria;
-      this.cantidadDisponible = cantidadDisponible;
-      this.urlImg = urlImg  ;
       this.cantidadSeleccionada = cantidadSeleccionada;
     }
   }

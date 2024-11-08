@@ -19,6 +19,14 @@ export class ProductosService {
 
   public productoUrl:string = enviroment.apiRestURL + 'api/productos'
 
+  public todosProductosEcommer(): Observable<ApiResponse<ProductosModel[]>> {
+    return this.httpClient.get<ApiResponse<ProductosModel[]>>(`${this.productoUrl}/todosProductosEcommer`);
+  }
+  
+  
+
+
+
   public getAllProductoDisponibles(): Observable<ApiResponse<ProductosModel[]>> {
     return this.httpClient.get<ApiResponse<ProductosModel[]>>(`${this.productoUrl}/getAllProductoDisponibles`);
   }

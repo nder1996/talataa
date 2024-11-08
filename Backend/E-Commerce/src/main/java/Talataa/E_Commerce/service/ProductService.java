@@ -30,33 +30,90 @@ public class ProductService {
 
 
 
-    public ApiResponse<String> getAllProducto() {
+
+    public ApiResponse<String> todosProductosEcommer() {
         try {
-            List<Producto> productos = this.productRepository.getAllProductos();
+            List<ProductosResponse> productos = this.productRepository.todosProductosEcommer();
             if (productos != null && !productos.isEmpty()) {
                 return this.responseApiBuilderService.successRespuesta(productos, "PRODUCTOS");
             } else {
-                return this.responseApiBuilderService.errorRespuesta("PRODUCTS_NOT_FOUND");
+                return this.responseApiBuilderService.errorRespuesta(
+                        404,
+                        "PRODUCTS_NOT_FOUND",
+                        "No se encontraron productos disponibles. Verifica los filtros o la información e intenta nuevamente. Si el problema persiste, contacta al soporte técnico."
+                );
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
 
-    public ApiResponse<String> getAllProductoDisponibles() {
+
+
+    public ApiResponse<String> todosProductosCrud() {
         try {
-            List<ProductosResponse> productos = this.productRepository.productosDisponibles();
+            List<ProductosResponse> productos = this.productRepository.todosProductosCrud();
             if (productos != null && !productos.isEmpty()) {
                 return this.responseApiBuilderService.successRespuesta(productos, "PRODUCTOS");
             } else {
-                return this.responseApiBuilderService.errorRespuesta("PRODUCTS_NOT_FOUND");
+                return this.responseApiBuilderService.errorRespuesta(
+                        404,
+                        "PRODUCTS_NOT_FOUND",
+                        "No se encontraron productos disponibles. Verifica los filtros o la información e intenta nuevamente. Si el problema persiste, contacta al soporte técnico."
+                );
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public ApiResponse<String> getAllProductosCrud() {
+        try {
+            List<Producto> productos = this.productRepository.getAllProductosCrud();
+            if (productos != null && !productos.isEmpty()) {
+                return this.responseApiBuilderService.successRespuesta(productos, "PRODUCTOS");
+            } else {
+                return this.responseApiBuilderService.errorRespuesta(
+                        404,
+                        "PRODUCTS_NOT_FOUND",
+                        "No se encontraron productos disponibles. Verifica los filtros o la información e intenta nuevamente. Si el problema persiste, contacta al soporte técnico."
+                );
+
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
+        }
+    }
+
+
 
     public ApiResponse<String> getAllCategoriasProductos() {
         try {
@@ -64,11 +121,20 @@ public class ProductService {
             if (categorias != null && !categorias.isEmpty()) {
                 return this.responseApiBuilderService.successRespuesta(categorias, "CATEGORIAS");
             } else {
-                return this.responseApiBuilderService.errorRespuesta("NO_PRODUCT_CATEGORIES");
+                return this.responseApiBuilderService.errorRespuesta(
+                        404,
+                        "NO_PRODUCT_CATEGORIES",
+                        "No se encontraron categorías de productos disponibles. Verifica la información e intenta nuevamente. Si el problema persiste, contacta al soporte técnico."
+                );
+
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
 
@@ -88,21 +154,22 @@ public class ProductService {
                                 "PRODUCTO"
                         );
                     }else{
-                        return this.responseApiBuilderService.errorRespuestaPersonalizado(
+                        return this.responseApiBuilderService.errorRespuesta(
                                 404,
                                 "ERROR_SAVE",
-                                "Ocurrió un error al guardar la categoría del producto. Por favor, intenta nuevamente o contacta al administrador."
+                                "No se pudo guardar la categoría del producto. Verifica los datos e intenta nuevamente. Si el problema persiste, contacta al administrador para asistencia."
                         );
+
                     }
                 } else {
-                    return this.responseApiBuilderService.errorRespuestaPersonalizado(
+                    return this.responseApiBuilderService.errorRespuesta(
                             404,
                             "ERROR_SAVE",
                             "Ocurrió un error al guardar la categoría del producto. Por favor, intenta nuevamente o contacta al administrador."
                     );
                 }
             } else {
-                return this.responseApiBuilderService.errorRespuestaPersonalizado(
+                return this.responseApiBuilderService.errorRespuesta(
                         404,
                         "ERROR_SAVE",
                         "Ocurrió un error al guardar el producto. Por favor, intenta nuevamente o contacta al administrador."
@@ -110,15 +177,19 @@ public class ProductService {
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
 
-    /**/
-    // Guardar producto
+
+
     public Integer guardarProducto(ProductoRequest producto) {
         try {
-            Integer row = this.productRepository.guardarProducto(producto);
+            Integer row = this.productRepository.guardarProductoCrud(producto);
             if(row != null && row > 0) {
                 return row;
             } else {
@@ -130,10 +201,10 @@ public class ProductService {
         }
     }
 
-    // Guardar relación producto-categoría
+
     public Integer guardarProductoCategoria(Integer idProducto, Integer idCategoria) {
         try {
-            Integer row = this.productRepository.guardarProductoCategoria(idProducto, idCategoria);
+            Integer row = this.productRepository.guardarProductoCategoriaCrud(idProducto, idCategoria);
             if(row != null && row > 0) {
                 return row;
             } else {
@@ -145,34 +216,38 @@ public class ProductService {
         }
     }
 
-    // Inactivar producto
+
     public ApiResponse<String> inactivarProducto(Integer id) {
         try {
-            Integer row = this.productRepository.inactivarProducto(id);
+            Integer row = this.productRepository.inactivarProductoCrud(id);
             if(row != null && row > 0) {
                 return this.responseApiBuilderService.successRespuesta(
-                        "El producto se ha inactivado exitosamente.",
+                        "El producto se ha borrado exitosamente.",
                         "PRODUCTO"
                 );
             } else {
-                return this.responseApiBuilderService.errorRespuestaPersonalizado(
+                return this.responseApiBuilderService.errorRespuesta(
                         404,
                         "ERROR_DELETE",
-                        "No se pudo inactivar el producto. Intente de nuevo o consulte al soporte."
+                        "No se pudo borrar el producto. Verifica los datos e intenta nuevamente. Si el problema persiste, contacta al soporte técnico para asistencia."
                 );
+
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
 
-    // Actualizar producto y su categoría
     public ApiResponse<String> actualizarProductoYCategoria(ProductoRequest producto) {
         try {
-            Integer row1 = this.productRepository.actualizarProducto(producto);
+            Integer row1 = this.actualizarProducto(producto);
             if (row1 != null && row1 > 0) {
-                Integer row2 = this.productRepository.actualizarProductoCategoria(
+                Integer row2 = this.actualizarProductoCategoria(
                         producto.getId(),
                         producto.getIdCategoriaProducto()
                 );
@@ -182,14 +257,14 @@ public class ProductService {
                             "PRODUCTO"
                     );
                 } else {
-                    return this.responseApiBuilderService.errorRespuestaPersonalizado(
+                    return this.responseApiBuilderService.errorRespuesta(
                             404,
                             "ERROR_UPDATE",
                             "Ocurrió un error al actualizar la categoría del producto. Por favor, intenta nuevamente o contacta al administrador."
                     );
                 }
             } else {
-                return this.responseApiBuilderService.errorRespuestaPersonalizado(
+                return this.responseApiBuilderService.errorRespuesta(
                         404,
                         "ERROR_UPDATE",
                         "Ocurrió un error al actualizar el producto. Por favor, intenta nuevamente o contacta al administrador."
@@ -197,14 +272,18 @@ public class ProductService {
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
 
-    // Actualizar solo producto
+
     public Integer actualizarProducto(ProductoRequest producto) {
         try {
-            Integer row = this.productRepository.actualizarProducto(producto);
+            Integer row = this.productRepository.actualizarProductoCrud(producto);
             if (row != null && row > 0) {
                 return row;
             } else {
@@ -216,10 +295,11 @@ public class ProductService {
         }
     }
 
-    // Actualizar solo la categoría del producto
+
+
     public Integer actualizarProductoCategoria(Integer idProducto, Integer idCategoria) {
         try {
-            Integer row = this.productRepository.actualizarProductoCategoria(idProducto, idCategoria);
+            Integer row = this.productRepository.actualizarProductoCategoriaCrud(idProducto, idCategoria);
             if (row != null && row > 0) {
                 return row;
             } else {

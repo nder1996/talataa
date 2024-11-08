@@ -18,11 +18,8 @@ public class Producto {
     private String descripcion;
     private Integer precioUnidad;
     private String estado;
-    private Date createAt;
-    private Integer updateAt;
+    private Date create_at;
+    private Integer update_at;
     private String url_img;
 
-    // Relaciones
-    private List<CategoriaProducto> categorias;
-    private InventarioProducto inventario;
 }

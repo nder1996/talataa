@@ -8,30 +8,77 @@ import { CrudProductosComponent } from './components/crud-productos/crud-product
 import { CrudOrdenesComponent } from './components/crud-ordenes/crud-ordenes.component';
 import { PaginaPrincipalComponent } from './pages/pagina-principal/pagina-principal.component';
 import { MisComprasComponent } from './pages/mis-compras/mis-compras.component';
-import { GenerateReportComponent } from './components/generate-report/generate-report.component';
-
+import { ReportesProductosActivosComponent } from './components/reportes-productos-activos/reportes-productos-activos.component';
+import { ReporteTopProductosComponent } from './components/reporte-top-productos/reporte-top-productos.component';
+import { ReporteClienteFrecuenteComponent } from './components/reporte-cliente-frecuente/reporte-cliente-frecuente.component';
+import { LoginDashboardComponent } from './pages/login-dashboard/login-dashboard.component';
+import { AuthGuard } from './auth/guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'principal', pathMatch: 'full' },
   {
-    path: 'dashboard', component: DashboardComponent, children: [
-      { path: 'modulo-usuario', component: CrudUsuariosComponent },
-      { path: 'modulo-inventario', component: CrudInventariosComponent },
-      { path: 'modulo-producto', component: CrudProductosComponent },
-      { path: 'modulo-orden', component: CrudOrdenesComponent },
-      { path: 'modulo-reporte', component: GenerateReportComponent } 
+    path: '',
+    redirectTo: 'principal',
+    pathMatch: 'full'
+  },
+  {
+    path: 'principal',
+    component: PaginaPrincipalComponent
+  },
+  {
+    path: 'login',
+    component: LoginDashboardComponent
+  },
+  {
+    path: 'loading',
+    component: LoadingComponent
+  },
+  {
+    path: 'mis-compras',
+    component: MisComprasComponent
+  },
+
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    children: [
+      {
+        path: 'modulo-usuario',
+        component: CrudUsuariosComponent
+      },
+      {
+        path: 'modulo-inventario',
+        component: CrudInventariosComponent
+      },
+      {
+        path: 'modulo-producto',
+        component: CrudProductosComponent
+      },
+      {
+        path: 'modulo-orden',
+        component: CrudOrdenesComponent
+      },
+      {
+        path: 'reporte-productos-activos',
+        component: ReportesProductosActivosComponent
+      },
+      {
+        path: 'reporte-top-productos',
+        component: ReporteTopProductosComponent
+      },
+      {
+        path: 'reporte-cliente-frecuente',
+        component: ReporteClienteFrecuenteComponent
+      },
     ]
   },
- 
-  { path: 'loading', component: LoadingComponent },    
-  { path: 'principal', component: PaginaPrincipalComponent } ,
-  { path: 'mis-compras', component: MisComprasComponent },
-  //
-  { path: 'modulo-usuario', component: CrudUsuariosComponent },
-  { path: 'modulo-inventario', component: CrudInventariosComponent },
-  { path: 'modulo-producto', component: CrudProductosComponent },
-  { path: 'modulo-orden', component: CrudOrdenesComponent },
-  { path: 'modulo-reporte', component: GenerateReportComponent }        
+
+  // Ruta para manejar rutas no encontradas
+  {
+    path: '**',
+    redirectTo: 'principal'
+  }
 ];
 
 @NgModule({

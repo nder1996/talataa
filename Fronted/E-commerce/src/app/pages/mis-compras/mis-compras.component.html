@@ -1,160 +1,177 @@
-<style>
-    .img-product {
-        object-fit: contain;
-        width: 120px;
-        height: 120px;
-    }
-
-    .container-compras {}
-
-
-    /***/
-    .container-pago {
-        border: 1px solid whitesmoke;
-        height: 660px;
-        overflow: auto;
-    }
-
-    .container-pago .col-6,
-    .container-pago .col-12 {
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-    }
-    /**/
-    .card-pago{
-        width: 80% !important;
-    }
-</style>
-
 <app-navbar></app-navbar>
 <br><br>
 <div class="container-fluid container-compras">
     <div class="row">
         <div class="col-7">
-            <div class="card">
-                <h2 class="text-center"><strong>Mis Productos Seleccionados</strong></h2>
-                <p-dataView #dv [value]="listProductosAgregados" [rows]="5" [paginator]="true"
-                    [ngStyle]="{'height': '610px', 'overflow-y': 'auto'}">
-                    <ng-template let-product pTemplate="listItem">
-                        <div class="col-12 mt-2" style="border: 2px solid whitesmoke;">
-                            <div class="d-flex flex-column flex-xl-row align-items-start p-4 gap-4">
-                                <img class="img-product" src="{{product.urlImg}}" [alt]="product.name" />
-                                <div
-                                    class="d-flex flex-column flex-sm-row justify-content-between align-items-center align-items-xl-start flex-grow-1 gap-4">
-                                    <div class="d-flex flex-column align-items-center align-items-sm-start gap-3">
-                                        <div class="text-2xl font-bold text-900"><strong>{{ product.productoNombre
-                                                }}</strong></div>
-                                        <span class="font-semibold">
-                                            {{ product.cantidadSeleccionada}}</span>
-                                        <div class="d-flex align-items-center gap-3">
-                                            <span class="d-flex align-items-center gap-2">
-                                                <i class="pi pi-tag"></i>
-                                                <span class="font-semibold">{{ product.nombreCategoria }}</span>
-                                            </span>
-                                            <span class="text-2xl font-semibold">{{ '$' + product.productoPrecioUnidad
-                                                }}</span>
-                                        </div>
+            <!-- HTML -->
+            <div class="selected-products-container">
+                <h2 class="section-title">Mis Productos Seleccionados</h2>
+
+                <div class="products-scroll-container">
+                    <p-dataView #dv [value]="listProductosAgregados" [rows]="5" [paginator]="true"
+                        class="custom-dataview">
+                        <ng-template let-product pTemplate="listItem">
+                            <div class="product-card">
+                                <div class="product-content">
+                                    <div class="product-image-container">
+                                        <i class="pi pi-gift gift-icon"></i>
                                     </div>
-                                    <div
-                                        class="d-flex flex-sm-column align-items-center align-items-sm-end gap-3 gap-sm-2">
-                                        <p-button icon="pi pi-times" [rounded]="true" severity="danger"
-                                            [outlined]="true" (click)="eliminarProducto(product)" />
+
+                                    <div class="product-info">
+                                        <div class="product-details">
+                                            <h3 class="product-name">{{product.productoNombre}}</h3>
+
+                                            <div class="quantity-badge">
+                                                Cantidad: {{product.cantidadSeleccionada}}
+                                            </div>
+
+                                            <div class="product-meta">
+                                                <div class="category">
+                                                    <i class="pi pi-tag"></i>
+                                                    <span>{{product.nombreCategoria}}</span>
+                                                </div>
+                                                <div class="price">
+                                                    <span class="currency">$</span>
+                                                    <span class="amount">{{product.productoPrecioUnidad}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="action-buttons">
+                                            <p-button icon="pi pi-times" [rounded]="true" severity="danger"
+                                                [outlined]="true" (click)="eliminarProducto(product)"
+                                                class="delete-button" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </ng-template>
-                </p-dataView>
+                        </ng-template>
+                    </p-dataView>
+                </div>
             </div>
+
         </div>
-        <div class="col-5">
-            <div class="container-fluid container-pago d-flex flex-column justify-content-start align-items-center">
-                <h1 class="'text-center"><strong>Información de Pago</strong></h1>
-                <p class="'text-center">Ingresa los detalles de tu tarjeta</p>
-                <div class="card card-pago mt-2">
+        <div class="col-5" *ngIf="userName">
+
+            <!-- HTML mejorado manteniendo la misma estructura -->
+            <div
+                class="container-fluid container-pago d-flex flex-column justify-content-start align-items-center payment-wrapper">
+                <h1 class="text-center payment-title">Información de Pago</h1>
+                <p class="text-center payment-subtitle">Ingresa los detalles de tu tarjeta</p>
+
+                <div class="card card-pago mt-2 payment-card">
                     <form [formGroup]="formTarjeta" (ngSubmit)="enviarCompra()">
-                        <div class="row">
+                        <!-- Nombre del titular -->
+                        <div class="row mb-4">
                             <div class="col-12">
-                                <label for="nombreTitular">Nombre Completo del Titular</label>
-                                <span class="p-input-icon-right">
-                                    <i class="pi pi-credit-card"></i>
-                                    <input 
-                                        id="nombreTitular"
-                                        type="text" 
-                                        pInputText 
-                                        formControlName="nombreTitular"
+                                <label for="nombreTitular" class="form-label">Nombre Completo del Titular</label>
+                                <span class="p-input-icon-right input-container">
+                                    <i class="pi pi-user"></i>
+                                    <input id="nombreTitular" type="text" pInputText formControlName="nombreTitular"
+                                        class="styled-input" placeholder="Ingrese el nombre como aparece en la tarjeta"
                                         [style]="{width: '450px'}" />
                                 </span>
-                                <small class="text-danger" *ngIf="formTarjeta.get('nombreTitular')?.touched && formTarjeta.get('nombreTitular')?.errors?.['required']">
+                                <small class="text-danger error-message"
+                                    *ngIf="formTarjeta.get('nombreTitular')?.touched && formTarjeta.get('nombreTitular')?.errors?.['required']">
                                     El nombre es requerido
                                 </small>
                             </div>
                         </div>
-                    
-                        <div class="row">
+
+                        <!-- Número de tarjeta -->
+                        <div class="row mb-4">
                             <div class="col-12">
-                                <label for="numeroTarjeta">Numero de tarjeta</label>
-                                <span class="p-input-icon-right">
+                                <label for="numeroTarjeta" class="form-label">Número de Tarjeta</label>
+                                <span class="p-input-icon-right input-container">
                                     <i class="pi pi-credit-card"></i>
-                                    <input 
-                                        id="numeroTarjeta"
-                                        type="text" 
-                                        pInputText 
-                                        formControlName="numeroTarjeta"
+                                    <input id="numeroTarjeta" type="text" pInputText formControlName="numeroTarjeta"
+                                        class="styled-input" placeholder="1234 5678 9012 3456"
                                         [style]="{width: '450px'}" />
                                 </span>
-                                <small class="text-danger" *ngIf="formTarjeta.get('numeroTarjeta')?.touched && formTarjeta.get('numeroTarjeta')?.errors?.['required']">
+                                <small class="text-danger error-message"
+                                    *ngIf="formTarjeta.get('numeroTarjeta')?.touched && formTarjeta.get('numeroTarjeta')?.errors?.['required']">
                                     El número de tarjeta es requerido
                                 </small>
                             </div>
                         </div>
-                    
-                        <div class="row">
-                            <div class="col-12 d-flex flex-row justify-content-center">
-                                <div class="d-flex flex-column">
-                                    <label>Fecha de Expiracion</label>
-                                    <p-inputMask 
-                                        mask="99/99" 
-                                        placeholder="00/00" 
-                                        formControlName="fechaExpiracion"
-                                        [style]="{width: '100%'}">
+
+                        <!-- Fecha y CVV -->
+                        <div class="row mb-4">
+                            <div class="col-12 d-flex flex-row justify-content-between gap-4">
+                                <div class="d-flex flex-column flex-grow-1">
+                                    <label class="form-label">Fecha de Expiración</label>
+                                    <p-inputMask mask="99/99" placeholder="MM/AA" formControlName="fechaExpiracion"
+                                        styleClass="styled-input w-100">
                                     </p-inputMask>
-                                    <small class="text-danger" *ngIf="formTarjeta.get('fechaExpiracion')?.touched && formTarjeta.get('fechaExpiracion')?.errors?.['required']">
+                                    <small class="text-danger error-message"
+                                        *ngIf="formTarjeta.get('fechaExpiracion')?.touched && formTarjeta.get('fechaExpiracion')?.errors?.['required']">
                                         La fecha es requerida
                                     </small>
                                 </div>
-                                <div class="d-flex flex-column">
-                                    <label>CVV</label>
-                                    <p-inputNumber 
-                                        inputId="cvv" 
-                                        formControlName="cvv"
-                                        [style]="{width: '100%'}">
+                                <div class="d-flex flex-column" style="width: 120px;">
+                                    <label class="form-label">CVV</label>
+                                    <p-inputNumber inputId="cvv" formControlName="cvv" styleClass="styled-input"
+                                        placeholder="123" [style]="{'width': '100px'}"
+                                        [inputStyle]="{'width': '120px'}">
                                     </p-inputNumber>
-                                    <small class="text-danger" *ngIf="formTarjeta.get('cvv')?.touched && formTarjeta.get('cvv')?.errors?.['required']">
+                                    <small class="text-danger error-message"
+                                        *ngIf="formTarjeta.get('cvv')?.touched && formTarjeta.get('cvv')?.errors?.['required']">
                                         El CVV es requerido
                                     </small>
                                 </div>
                             </div>
                         </div>
-                    
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <p-button 
-                                    type="submit"
-                                    label="Pagar" 
-                                    [outlined]="true" 
-                                    severity="success" 
-                                    [style]="{width: '100%'}" 
-                                    size="large"/>
+
+                        <!-- Botón de pago -->
+                        <div class="row mt-4">
+                            <div class="col-12 text-center">
+                                <p-button type="submit" label="Pagar" [outlined]="true" severity="success"
+                                    styleClass="payment-button" [style]="{width: '100%'}" size="large">
+                                </p-button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+
         </div>
+        <div class="col-5" *ngIf="!userName">
+            <div class="flex align-items-center justify-content-center min-h-screen">
+                <p-messages styleClass="custom-message shadow-xl w-full mx-3 md:w-8 lg:w-6">
+                  <ng-template pTemplate>
+                    <div class="flex flex-column align-items-center text-center p-4">
+                      <!-- Icono Principal -->
+                      <div class="message-icon mb-4 flex align-items-center justify-content-center">
+                        <i class="pi pi-lock text-4xl text-red-500"></i>
+                      </div>
+          
+                      <!-- Contenido -->
+                      <div class="message-content mb-4">
+                        <h2 class="text-900 text-2xl font-bold mb-2">
+                          Acceso Restringido
+                        </h2>
+                        <p class="text-600 line-height-3 m-0">
+                          Para realizar tu compra, necesitas iniciar sesión o crear una cuenta.
+                          El registro solo toma unos segundos.
+                        </p>
+                      </div>
+          
+                      <!-- Botones -->
+                      <div class="message-actions flex flex-column w-full gap-2">
+                        <button pButton 
+                          label="Crear una cuenta" 
+                          icon="pi pi-user-plus"
+                          class="p-button-raised p-button-rounded">
+                        </button>
+                        <button pButton 
+                          label="Iniciar sesión" 
+                          icon="pi pi-sign-in"
+                          class="p-button-outlined p-button-rounded">
+                        </button>
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-messages>
+              </div>
     </div>
 </div>

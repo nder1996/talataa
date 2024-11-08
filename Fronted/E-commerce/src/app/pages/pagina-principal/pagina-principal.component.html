@@ -1,103 +1,52 @@
-<style>
-  .product-container {
-    width: 92% !important;
-    overflow: hidden !important;
-    margin: auto;
-  }
-
-  .product-container .col-4 {
-    border: 1px solid whitesmoke;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    padding: 10px;
-  }
-
-  .product-container .img-card {
-    /* border: 1px solid black;*/
-    width: 250px;
-    height: 200px;
-    overflow: contain !important;
-  }
-
-
-  .p-button {
-  /*  background-color: #F28322 !important;*/
-  }
-
-  .card-product {
-    width: 500px;
-  }
-
-  .text-principal{
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-
-  .contenedor-pagar .p-button {
-    width: 90% !important;
-    padding: 7px !important;
-    border-radius: 5px;
-
-  }
-
-  .content-ico {
-    width: 100%;
-    font-size: 5rem !important;
-    border-bottom: 1px solid whitesmoke;
-  }
-</style>
 
 <app-navbar></app-navbar>
+<!-- HTML -->
+<div class="main-container">
+  <!-- Banner Section -->
+  <section class="hero-banner">
+    <div class="banner-overlay"></div>
+    <div class="banner-content">
+      <h1 class="banner-title">Bienvenido a nuestra tienda</h1>
+      <p class="banner-subtitle">Descubre productos increíbles a precios extraordinarios</p>
+    </div>
+  </section>
 
-<br><br>
-
-
-
-
-<div class="container-fluid product-container">
-  <h1 class="text-principal">
-    Productos Destacados
-  </h1>
-  <div class="row">
-    <div *ngFor="let product of listaProducto" class="col-4">
-      <div class="card card-product">
-        <div class="text-center content-ico">
-          <i class="pi pi-gift" style="font-size: 7rem;"></i>
+  <!-- Products Section -->
+  <div class="products-container">
+    <h2 class="products-title">Productos Destacados</h2>
+    
+    <div class="products-grid">
+      <div *ngFor="let product of listaProducto" class="product-card">
+        <div class="product-image">
+          <i class="pi pi-gift"></i>
         </div>
-        <!-- Imagen principal 
-        <img src="{{product.urlImg}}" class="card-img-top img-card mx-auto">
-      -->
-        <!-- Cuerpo de la tarjeta -->
-        <div class="card-body">
-          <h5 class="card-title" style="font-size: 1.5rem;">
-            <strong>{{product.productoNombre}}</strong>
-          </h5>
-          <p class="card-text text-body-secondary" style="color: grey;">{{product.productoDescripcion}}</p>
-          <p class="card-text d-flex flex-row justify-content-between">
-            <small class="text-body-secondary" style="color:#e0007a !important;font-size: 2rem !important;font-weight: bold;">${{product.productoPrecioUnidad}} COP</small>
-            <small class="text-body-secondary" style="font-weight: bold;">Disponibles: {{product.cantidadDisponible}}</small>
-          </p>
-          <!--
-          <p class="card-text">
-            <small class="text-body-secondary">Disponibles: {{product.cantidadDisponible}}</small>
-          </p>
-          -->
+        
+        <div class="product-content">
+          <h3 class="product-name">{{product.productoNombre}}</h3>
+          <p class="product-description">{{product.productoDescripcion}}</p>
+          
+          <div class="product-details">
+            <div class="price">
+              <span class="currency">$</span>
+              <span class="amount">{{product.productoPrecioUnidad}}</span>
+              <span class="currency-code">COP</span>
+            </div>
+          </div>
         </div>
 
-        <!-- Footer de la tarjeta -->
-        <div class="card-footer text-center contenedor-pagar">
-          <p-button label="Agregar" [raised]="true" severity="warning" (click)="AgregarProducto(product)"></p-button>
-          <!--
-          <p-button label="Agregar" [outlined]="true" severity="warning" (click)="AgregarProducto(product)"></p-button>
-          -->
+        <div class="product-footer">
+          <p-button 
+            label="Agregar al carrito" 
+            [raised]="true" 
+            severity="warning" 
+            (click)="AgregarProducto(product)"
+            icon="pi pi-shopping-cart"
+            iconPos="left">
+          </p-button>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
 
 

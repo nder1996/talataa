@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { enviroment } from 'src/enviroments/enviroment';
 import { Observable } from 'rxjs';
 import { UserModel } from 'src/model/Usuarios/response/userResponseModel';
@@ -34,9 +34,25 @@ export class UsuariosService {
   }
 
   login(username: string, password: string): Observable<ApiResponse<string>> {
-    return this.httpClient.get<ApiResponse<string>>(`${this.usuarioUrl}/login`, {
-      params: { username, password }
-    });
+    const headers = new HttpHeaders()
+        .set('username', username)
+        .set('password', password);
+
+    return this.httpClient.get<ApiResponse<string>>(
+        `${this.usuarioUrl}/login`,
+        { headers: headers }
+    );
+}
+
+  loginAdmin(username: string, password: string): Observable<ApiResponse<string>> {
+    const headers = new HttpHeaders()
+        .set('username', username)
+        .set('password', password);
+
+    return this.httpClient.get<ApiResponse<string>>(
+        `${this.usuarioUrl}/loginAdmin`,
+        { headers: headers }
+    );
   }
 
 }

@@ -29,11 +29,21 @@ public class ReferenceDataService {
             if(ciudades!=null && !ciudades.isEmpty()){
                 return this.responseApiBuilderService.successRespuesta(ciudades, "CIUDADES");
             }else{
-                return this.responseApiBuilderService.errorRespuesta("NO_CITY_DATA");
+                return this.responseApiBuilderService.errorRespuesta(
+                        404,
+                        "NO_CITY_DATA",
+                        "No se encontraron datos para las ciudades solicitadas. Verifica la información e intenta nuevamente. Si el problema persiste, contacta al soporte técnico."
+                );
+
             }
         }catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
+
         }
     }
 
@@ -43,11 +53,20 @@ public class ReferenceDataService {
             if(generos!=null && !generos.isEmpty()){
                 return this.responseApiBuilderService.successRespuesta(generos, "GENEROS");
             }else{
-                return this.responseApiBuilderService.errorRespuesta("NO_GENDER_DATA");
+                return this.responseApiBuilderService.errorRespuesta(
+                        404,
+                        "NO_GENDER_DATA",
+                        "No se encontraron datos de géneros disponibles. Verifica la información e intenta nuevamente. Si el problema persiste, contacta al soporte técnico."
+                );
+
             }
         }catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
 
@@ -57,11 +76,20 @@ public class ReferenceDataService {
             if(tipoDocumento!=null && !tipoDocumento.isEmpty()){
                 return this.responseApiBuilderService.successRespuesta(tipoDocumento, "TIPO_DOCUMENTOS");
             }else{
-                return this.responseApiBuilderService.errorRespuesta("NO_DOCUMENT_TYPE_DATA");
+                return this.responseApiBuilderService.errorRespuesta(
+                        404,
+                        "NO_DOCUMENT_TYPE_DATA",
+                        "No se encontraron tipos de documentos disponibles. Verifica la información e intenta nuevamente. Si el problema persiste, contacta al soporte técnico."
+                );
+
             }
         }catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
 
@@ -71,11 +99,20 @@ public class ReferenceDataService {
             if(roles!=null && !roles.isEmpty()){
                 return this.responseApiBuilderService.successRespuesta(roles, "ROLES");
             }else{
-                return this.responseApiBuilderService.errorRespuesta("NO_ROLE_DATA");
+                return this.responseApiBuilderService.errorRespuesta(
+                        404,
+                        "NO_ROLE_DATA",
+                        "No se encontraron roles disponibles. Verifica la información e intenta nuevamente. Si el problema persiste, contacta al soporte técnico."
+                );
+
             }
         }catch (Exception e) {
             System.err.println(e.getMessage());
-            return this.responseApiBuilderService.errorRespuesta("SERVER_ERROR");
+            return this.responseApiBuilderService.errorRespuesta(
+                    500,
+                    "SERVER_ERROR",
+                    "Ocurrió un error interno en el servidor. Intenta nuevamente más tarde. Si el problema persiste, contacta al soporte técnico para asistencia."
+            );
         }
     }
 

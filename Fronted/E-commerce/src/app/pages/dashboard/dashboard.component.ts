@@ -1,5 +1,6 @@
 import { Component, ElementRef } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { AuthService } from 'src/service/auth.service';
 
 declare var bootstrap: any;
 
@@ -12,7 +13,7 @@ export class DashboardComponent {
  // Definimos el tipo para el tema
  private theme: 'dark' | 'light' = 'light';
 
- constructor(private elementRef: ElementRef) {}
+ constructor(private elementRef: ElementRef,private auth:AuthService) {}
 
  ngOnInit(): void {
    // Inicialización del tema
@@ -64,6 +65,10 @@ export class DashboardComponent {
    if (sidebarToggle) {
      sidebarToggle.replaceWith(sidebarToggle.cloneNode(true));
    }
+ }
+
+ logout(){
+  this.auth.logoutAdmin();
  }
 
  /* */

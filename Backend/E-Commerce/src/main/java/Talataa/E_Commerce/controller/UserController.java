@@ -24,9 +24,16 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public ResponseEntity<ApiResponse<String>> login(@RequestParam String username,
-                                                     @RequestParam String password) {
+    public ResponseEntity<ApiResponse<String>> login( @RequestHeader("username") String username,
+                                                      @RequestHeader("password") String password) {
         ApiResponse<String> response = userService.UserAutenticacion(username, password);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/loginAdmin")
+    public ResponseEntity<ApiResponse<String>> loginAdmin(@RequestHeader("username") String username,
+                                                          @RequestHeader("password") String password) {
+        ApiResponse<String> response = userService.loginAdmin(username, password);
         return ResponseEntity.ok(response);
     }
 

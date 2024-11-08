@@ -42,7 +42,12 @@ import { TabViewModule } from 'primeng/tabview';
 import { PasswordModule } from 'primeng/password';
 import { SplitterModule } from 'primeng/splitter';
 import { MenuModule } from 'primeng/menu';
-import { GenerateReportComponent } from './components/generate-report/generate-report.component';
+import { ReportesProductosActivosComponent } from './components/reportes-productos-activos/reportes-productos-activos.component';
+import { ReporteTopProductosComponent } from './components/reporte-top-productos/reporte-top-productos.component';
+import { ReporteClienteFrecuenteComponent } from './components/reporte-cliente-frecuente/reporte-cliente-frecuente.component';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { LoginDashboardComponent } from './pages/login-dashboard/login-dashboard.component';
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
   declarations: [
@@ -58,7 +63,10 @@ import { GenerateReportComponent } from './components/generate-report/generate-r
     NavbarComponent,
     MisComprasComponent,
     CrudDetallesComponent,
-    GenerateReportComponent,
+    ReportesProductosActivosComponent,
+    ReporteTopProductosComponent,
+    ReporteClienteFrecuenteComponent,
+    LoginDashboardComponent,
     
   ],
   imports: [
@@ -84,7 +92,9 @@ import { GenerateReportComponent } from './components/generate-report/generate-r
     TabViewModule,
     PasswordModule,
     SplitterModule,
-    MenuModule
+    MenuModule,
+    OverlayPanelModule,
+    MessagesModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
