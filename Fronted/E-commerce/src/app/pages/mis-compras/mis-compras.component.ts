@@ -44,6 +44,12 @@ export class MisComprasComponent {
     this.cdr.detectChanges();
   }
 
+  calcularTotal(): number {
+    return this.listProductosAgregados.reduce((total, product) => {
+        return total + ((product.productoPrecioUnidad ?? 0) * (product.cantidadSeleccionada ?? 0));
+    }, 0);
+}
+
   eliminarProducto(product: ProductosModel) {
     this.listProductosAgregados = this.listProductosAgregados.filter(
       productDelete => productDelete.idProducto !== product.idProducto

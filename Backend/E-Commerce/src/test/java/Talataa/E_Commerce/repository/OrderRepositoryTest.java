@@ -27,7 +27,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @Sql(scripts = {
-        "classpath:cleanup.sql",
         "classpath:data.sql"
 }, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 public class OrderRepositoryTest {

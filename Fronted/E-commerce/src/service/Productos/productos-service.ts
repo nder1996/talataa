@@ -28,7 +28,7 @@ export class ProductosService {
 
 
   public getAllProductoDisponibles(): Observable<ApiResponse<ProductosModel[]>> {
-    return this.httpClient.get<ApiResponse<ProductosModel[]>>(`${this.productoUrl}/getAllProductoDisponibles`);
+    return this.httpClient.get<ApiResponse<ProductosModel[]>>(`${this.productoUrl}/todosProductosCrud`);
   }
 
   public getAllCategoriasProductos(): Observable<ApiResponse<CategoriaProductoModel[]>> {

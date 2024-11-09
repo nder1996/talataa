@@ -41,7 +41,7 @@
     align-items: center;
     text-align: center;
     padding: 2rem;
-    color: var(--text-light);
+    color: white !important;
   }
   
   .banner-title {
@@ -138,7 +138,7 @@
   
   .product-image i {
     font-size: 5rem;
-    color: var(--primary-color);
+    color:#e0007a !important;
   }
   
   .product-content {
@@ -168,7 +168,7 @@
   }
   
   .price {
-    color: var(--primary-color);
+    color: black;
     font-weight: bold;
   }
   
@@ -197,6 +197,8 @@
     background: var(--background-light);
     text-align: center;
   }
+
+ 
   
   /* Responsive Styles */
   @media (max-width: 1024px) {

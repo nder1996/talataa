@@ -18,7 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { ImageModule } from 'primeng/image';
 import { DialogModule } from 'primeng/dialog';
@@ -48,6 +48,8 @@ import { ReporteClienteFrecuenteComponent } from './components/reporte-cliente-f
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { LoginDashboardComponent } from './pages/login-dashboard/login-dashboard.component';
 import { MessagesModule } from 'primeng/messages';
+import { InterruptorLoadingService } from 'src/service/interruptor-loading.service';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -96,7 +98,14 @@ import { MessagesModule } from 'primeng/messages';
     OverlayPanelModule,
     MessagesModule
   ],
-  providers: [MessageService],
+  providers: [MessageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterruptorLoadingService,
+      multi: true
+    },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

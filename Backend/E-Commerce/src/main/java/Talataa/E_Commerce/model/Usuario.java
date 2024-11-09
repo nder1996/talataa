@@ -19,7 +19,7 @@ public class Usuario {
     private Integer idGenero;
     private String numeroDocumento;
     private String nombreUsuario;
-    private String contraseña;
+    private String contrasena;
     private String estado;
     private Date createAt;
     private Date updateAt;

@@ -310,3 +310,32 @@
       padding: 1rem;
     }
   }
+
+
+  /* Agregar al archivo de estilos */
+.total-container {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.total-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.total-label {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #495057;
+}
+
+.total-amount {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #2196F3;
+}

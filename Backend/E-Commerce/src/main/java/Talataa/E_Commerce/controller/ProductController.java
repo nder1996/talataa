@@ -31,18 +31,14 @@ public class ProductController {
 
 
 
-
-
-/*
-
     @GetMapping("/getAllProductoDisponibles")
     public ResponseEntity<ApiResponse<String>> getAllProductoDisponibles() {
-        return new ResponseEntity<>(this.productService.getAllProductoDisponibles(), HttpStatus.OK);
+        return new ResponseEntity<>(this.productService.todosProductosCrud(), HttpStatus.OK);
     }
 
     @GetMapping("/getAllProducto")
     public ResponseEntity<ApiResponse<String>> getAllProducto() {
-        return new ResponseEntity<>(this.productService.getAllProducto(), HttpStatus.OK);
+        return new ResponseEntity<>(this.productService.getAllProductosCrud(), HttpStatus.OK);
     }
 
     @GetMapping("/getAllCategoriasProductos")
@@ -65,7 +61,7 @@ public class ProductController {
     public ResponseEntity<ApiResponse<String>> inactivarProducto(@PathVariable Integer id) {
         return new ResponseEntity<>(this.productService.inactivarProducto(id), HttpStatus.OK);
     }
-    */
+
 
 
 }

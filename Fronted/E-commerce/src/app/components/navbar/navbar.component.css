@@ -81,8 +81,8 @@
 /* Estilos del diálogo */
 :host ::ng-deep .auth-dialog {
     .p-dialog-header {
-        background: #D9048E;
-        color: white;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);;
+        color: black;
         padding: 1.5rem;
         border-radius: 8px 8px 0 0;
     }
@@ -361,14 +361,12 @@
   }
   
   .btn-primary {
-    background: #3b82f6;
     color: white;
     border: none;
     box-shadow: 0 4px 6px rgba(59, 130, 246, 0.1);
   }
   
   .btn-primary:hover {
-    background: #2563eb;
     transform: translateY(-1px);
   }
   
@@ -409,3 +407,59 @@
       width: 100%;
     }
   }
+
+
+  /*BTN-INICIAR SESSION*/
+/* Aseguramos la especificidad para sobrescribir los estilos por defecto de PrimeNG */
+:host ::ng-deep {
+  .custom-login-btn.p-button.p-component {
+      /* Estilo base del botón */
+      background: #e0007a!important; /* Color naranja como ejemplo */
+      border: none !important;
+      color: white !important;
+      
+      /* Dimensiones */
+      min-width: 150px;
+      height: 45px;
+      
+      /* Efectos */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      
+      /* Hover */
+      &:hover {
+          background: #e0007a !important;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 8px rgba(255, 87, 34, 0.3);
+      }
+      
+      /* Estado activo */
+      &:active {
+          transform: translateY(0);
+      }
+      
+      /* Estilo del texto */
+      .p-button-label {
+          font-weight: 600;
+          font-size: 1.1rem;
+          letter-spacing: 0.5px;
+      }
+      
+      /* Estilo del icono */
+      .p-button-icon {
+          font-size: 1.2rem;
+          margin-right: 8px;
+      }
+  }
+
+  /* Estados adicionales */
+  .custom-login-btn.p-button.p-component:enabled:hover {
+      background: #e0007a!important;
+      border-color: transparent !important;
+  }
+
+  .custom-login-btn.p-button.p-component:enabled:active {
+      background: #e0007a !important;
+      border-color: transparent !important;
+  }
+}

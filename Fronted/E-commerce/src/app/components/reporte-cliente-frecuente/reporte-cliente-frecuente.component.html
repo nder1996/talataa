@@ -31,7 +31,7 @@
         <!-- Tabla de Productos -->
         <div class="card report-content">
             <div class="table-header">
-                <h2>Listado de Productos</h2>
+                <h2>Listado de Clientes</h2>
                 <div class="table-actions">
                     <button pButton type="button" (click)="descargarPDF()" class="p-button-primary"
                         icon="pi pi-file-pdf" label="Generar PDF">
@@ -40,9 +40,9 @@
             </div>
         </div>
 
-        <p-table #dt [value]="clientes" [rows]="clientes.length" [paginator]="true"
+        <p-table #dt [value]="listaClientesFrecuentes" [rows]="listaClientesFrecuentes.length" [paginator]="true"
             [globalFilterFields]="['name', 'description', 'category.name']" [tableStyle]="{ 'min-width': '75rem' }"
-            [rowHover]="true" dataKey="id" [loading]="loading" styleClass="p-datatable-gridlines" id="tableToExport">
+            [rowHover]="true" dataKey="id"  styleClass="p-datatable-gridlines" id="tableToExport">
 
             <ng-template pTemplate="header">
                 <tr>
@@ -54,9 +54,9 @@
 
             <ng-template pTemplate="body" let-cliente>
                 <tr>
-                    <td>{{cliente.nombreCliente}}</td>
-                    <td>{{cliente.numeroCompras}}</td>
-                    <td>{{cliente.totalGastado | currency:'USD'}}</td>
+                    <td>{{cliente.nombreCompleto}}</td>
+                    <td>{{cliente.totalCompras}}</td>
+                    <td>{{ "$ " + (cliente.montoTotal).toLocaleString('es-CO') }}</td>
                 </tr>
             </ng-template>
         </p-table>

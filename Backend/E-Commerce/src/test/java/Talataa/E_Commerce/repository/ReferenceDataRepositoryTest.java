@@ -21,7 +21,6 @@ import static org.springframework.test.util.AssertionErrors.assertNotNull;
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Sql(scripts = {
-        "classpath:cleanup.sql",
         "classpath:data.sql"
 }, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 public class ReferenceDataRepositoryTest {
@@ -34,17 +33,21 @@ public class ReferenceDataRepositoryTest {
     void getAllCiudad_DeberiaRetornarListaOrdenada() {
         // When
         List<Ciudad> ciudades = referenceDataRepository.getAllCiudad();
+        List<String> nombresOrdenados = ciudades.stream()
+                .map(Ciudad::getNombre)
+                .sorted()
+                .collect(Collectors.toList());
+        List<String> nombresOriginales = ciudades.stream()
+                .map(Ciudad::getNombre)
+                .collect(Collectors.toList());
 
         // Then
         assertAll(
                 () -> assertNotNull(ciudades.toString(), "La lista no debe ser null"),
                 () -> assertFalse(ciudades.isEmpty(), "La lista no debe estar vacía"),
                 () -> assertEquals(3, ciudades.size(), "Deberían haber 3 ciudades"),
-                () -> {
-                    Ciudad primeraCiudad = ciudades.get(0);
-                    assertEquals("Bogotá", primeraCiudad.getNombre(),
-                            "Primera ciudad debería ser Bogotá por orden alfabético");
-                }
+                () -> assertEquals(nombresOrdenados, nombresOriginales,
+                        "Las ciudades deberían estar ordenadas alfabéticamente")
         );
     }
 

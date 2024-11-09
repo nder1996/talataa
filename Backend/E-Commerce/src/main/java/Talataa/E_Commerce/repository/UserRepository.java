@@ -26,7 +26,7 @@ public interface UserRepository {
     List<UsuariosResponse> getAllUsuarios();
 
 
-    @Insert("INSERT INTO USUARIOS (idCiudad, idTipoDocumento, idGenero, numeroDocumento, estado, create_at, update_at, correoElectronico, direccion, Nombres, Apellidos, telefono, nombreUsuario, contraseña) " +
+    @Insert("INSERT INTO USUARIOS (idCiudad, idTipoDocumento, idGenero, numeroDocumento, estado, create_at, update_at, correoElectronico, direccion, Nombres, Apellidos, telefono, nombreUsuario, contrasena) " +
             "VALUES (#{idCiudad}, #{idTipoDocumento}, #{idGenero}, #{numeroDocumento}, 'A', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{email}, #{dirreccion}, #{nombres}, #{apellidos}, #{telefono}, #{nombreUsuario}, #{password})")
     @Options(useGeneratedKeys = true, keyProperty = "userId", keyColumn = "id")
     Integer guardarUsuario(UsuarioRequest usuario);
@@ -46,13 +46,13 @@ public interface UserRepository {
 
     /**/
     @Select("select * from USUARIOS as useri where " +
-            "useri.estado = 'A' and useri.nombreUsuario = #{username} and useri.contraseña = #{password}")
+            "useri.estado = 'A' and useri.nombreUsuario = #{username} and useri.contrasena = #{password}")
     Usuario BuscarUserActivo(@Param("username") String username, @Param("password") String password);
 
     @Select("select * from USUARIOS as useri " +
             "left join USUARIOS_ROLES as useriXRol on useri.id = useriXRol.idUsuario " +
             "left join ROLES as rol on useriXRol.idRol =  rol.id " +
-            "where useri.nombreUsuario = #{username} and useri.contraseña = #{password} and useri.estado = 'A'")
+            "where useri.nombreUsuario = #{username} and useri.contrasena = #{password} and useri.estado = 'A' and rol.id = 1 ")
     Usuario BuscarAdmin(@Param("username") String username, @Param("password") String password);
 
 }

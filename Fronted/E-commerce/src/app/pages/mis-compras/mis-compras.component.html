@@ -2,6 +2,13 @@
 <br><br>
 <div class="container-fluid container-compras">
     <div class="row">
+         <!-- Nuevo componente para mostrar el total -->
+    <div class="total-container">
+        <div class="total-content">
+            <span class="total-label">Total de la Compra:</span>
+            <span class="total-amount">${{ calcularTotal() | number:'1.2-2' }}</span>
+        </div>
+    </div>
         <div class="col-7">
             <!-- HTML -->
             <div class="selected-products-container">
@@ -156,7 +163,7 @@
                         </p>
                       </div>
           
-                      <!-- Botones -->
+                      <!-- Botones -
                       <div class="message-actions flex flex-column w-full gap-2">
                         <button pButton 
                           label="Crear una cuenta" 
@@ -169,6 +176,7 @@
                           class="p-button-outlined p-button-rounded">
                         </button>
                       </div>
+                    -->
                     </div>
                   </ng-template>
                 </p-messages>

@@ -27,9 +27,9 @@
           
           <div class="product-details">
             <div class="price">
-              <span class="currency">$</span>
-              <span class="amount">{{product.productoPrecioUnidad}}</span>
-              <span class="currency-code">COP</span>
+              <span class="currency">$ </span>
+              <span class="amount">{{product.productoPrecioUnidad }}</span>
+              <span class="currency-code"> COP</span>
             </div>
           </div>
         </div>
@@ -37,8 +37,8 @@
         <div class="product-footer">
           <p-button 
             label="Agregar al carrito" 
-            [raised]="true" 
-            severity="warning" 
+            [outlined]="true"
+            severity="secondary"
             (click)="AgregarProducto(product)"
             icon="pi pi-shopping-cart"
             iconPos="left">

@@ -15,14 +15,7 @@
                     <i class="pi pi-box"></i>
                     <div class="summary-details">
                         <span class="summary-label">Total Productos</span>
-                        <span class="summary-value">{{products.length}}</span>
-                    </div>
-                </div>
-                <div class="summary-card">
-                    <i class="pi pi-dollar"></i>
-                    <div class="summary-details">
-                        <span class="summary-label">Valor Total</span>
-                        <span class="summary-value">{{getTotalValue() | currency:'USD'}}</span>
+                        <span class="summary-value">{{listaProductosActivos.length}}</span>
                     </div>
                 </div>
             </div>
@@ -40,30 +33,27 @@
             </div>
         </div>
 
-        <p-table #dt [value]="products" [rows]="products.length" [paginator]="true"
+        <p-table #dt [value]="listaProductosActivos" [rows]="listaProductosActivos.length" [paginator]="true"
             [globalFilterFields]="['name', 'description', 'category.name']" [tableStyle]="{ 'min-width': '75rem' }"
-            [rowHover]="true" dataKey="id" [loading]="loading" styleClass="p-datatable-gridlines" id="tableToExport">
+            [rowHover]="true" dataKey="id"  styleClass="p-datatable-gridlines" id="tableToExport">
 
             <ng-template pTemplate="header">
                 <tr>
                     <th pSortableColumn="name">Producto <p-sortIcon field="name"></p-sortIcon></th>
                     <th pSortableColumn="description">Descripción <p-sortIcon field="description"></p-sortIcon></th>
-                    <th pSortableColumn="category.name">Categoría <p-sortIcon field="category.name"></p-sortIcon></th>
-                    <th pSortableColumn="category.description">Desc. Categoría <p-sortIcon
-                            field="category.description"></p-sortIcon></th>
+                    <th pSortableColumn="categoria">Categoria <p-sortIcon field="categoria"></p-sortIcon></th>
                     <th pSortableColumn="price">Precio <p-sortIcon field="price"></p-sortIcon></th>
                     <th pSortableColumn="stock">Stock <p-sortIcon field="stock"></p-sortIcon></th>
                 </tr>
             </ng-template>
 
-            <ng-template pTemplate="body" let-product>
+            <ng-template pTemplate="body" let-person>
                 <tr>
-                    <td>{{product.name}}</td>
-                    <td>{{product.description}}</td>
-                    <td>{{product.category.name}}</td>
-                    <td>{{product.category.description}}</td>
-                    <td>{{product.price | currency:'USD'}}</td>
-                    <td>{{product.stock}}</td>
+                    <td>{{person.nombre}}</td>
+                    <td>{{person.descripcion}}</td>
+                    <td>{{person.nombreCategoria}}</td>
+                    <td>{{person.precio}}</td>
+                    <td>{{person.cantidadDisponible}}</td>
                 </tr>
             </ng-template>
         </p-table>

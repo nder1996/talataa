@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { ReporteClienteFrecuenteModel } from 'src/model/Reportes-Dashboard/ReporteClienteFrecuenteModel ';
 import { GenerateReportService } from 'src/service/generate-report.service';
+import { ReporteDashboardService } from 'src/service/reporte-dashboard.service';
 
 
 interface Clientes {
@@ -13,7 +16,9 @@ interface Clientes {
   styleUrls: ['./reporte-cliente-frecuente.component.css']
 })
 export class ReporteClienteFrecuenteComponent {
-  constructor(private reporteService: GenerateReportService) { }
+  constructor(private reporteService: GenerateReportService, private reporteDashboard: ReporteDashboardService,
+    private messageService: MessageService
+  ) { }
 
   clientes: Clientes[] = [];
   loading: boolean = true;
@@ -28,38 +33,34 @@ export class ReporteClienteFrecuenteComponent {
     }, 0);
   }
 
-  ngOnInit() {
-    // Simulamos una carga de datos
-    setTimeout(() => {
-      this.clientes = [
-        {
-          "nombreCliente": "María Rodríguez",
-          "numeroCompras": 23,
-          "totalGastado": 500
-          },
-          {
-          "nombreCliente": "Juan Pérez",
-          "numeroCompras": 15,
-          "totalGastado": 755
-          },
-          {
-          "nombreCliente": "Ana García",
-          "numeroCompras": 42,
-          "totalGastado": 9501
-          },
-          {
-          "nombreCliente": "Carlos López",
-          "numeroCompras": 8,
-          "totalGastado": 74158
-          },
-          {
-          "nombreCliente": "Laura Martínez",
-          "numeroCompras": 31,
-          "totalGastado": 96523
-          }
-      ]
-      this.loading = false;
-    }, 1000); // Simulamos 1 segundo de carga
+  listaClientesFrecuentes: ReporteClienteFrecuenteModel[] = [];
+
+  async cargarClientesFrecuentes() {
+    try {
+      const response = await this.reporteDashboard.getClientesFrecuentes().toPromise();
+      if (response?.data && response?.data['CLIENTES_FRECUENTES']) {
+        this.listaClientesFrecuentes = response.data['CLIENTES_FRECUENTES'];
+      } else {
+        this.messageService.add({
+          severity: 'warn',
+          summary: 'Sin Clientes Frecuentes',
+          detail: 'No se encontraron clientes frecuentes.'
+        });
+      }
+    } catch (error: any) {
+      console.error("Error al consumir la API:", error?.details);
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error al cargar clientes frecuentes',
+        detail: error?.details
+      });
+    }
+  }
+
+  async ngOnInit() {
+
+   await this.cargarClientesFrecuentes();
+
   }
 
   descargarPDF() {
@@ -82,3 +83,7 @@ export class ReporteClienteFrecuenteComponent {
     });
   }
 }
+function firstValueFrom(arg0: any) {
+  throw new Error('Function not implemented.');
+}
+

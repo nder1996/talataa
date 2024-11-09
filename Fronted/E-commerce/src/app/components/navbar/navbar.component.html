@@ -1,5 +1,5 @@
 <!-- HTML -->
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container-fluid">
         <!-- Logo -->
         <a class="navbar-brand" routerLink="/">
@@ -44,7 +44,8 @@
                     </ng-container>
 
                     <ng-template #loginButton>
-                        <p-button label="Iniciar Sesión" icon="pi pi-sign-in" styleClass="p-button-primary login-btn"
+                        <p-button label="Iniciar Sesión" icon="pi pi-sign-in"
+                            styleClass="p-button-primary p-button-raised p-button-rounded custom-login-btn"
                             (click)="showModalBienvenida=true; modalBienvenida()">
                         </p-button>
                     </ng-template>
