@@ -8,6 +8,7 @@
         /* Mantiene el cursor pointer */
     }
 </style>
+<app-loading></app-loading>
 <div class="wrapper">
     <aside id="sidebar" class="js-sidebar">
         <!-- Content For Sidebar -->
@@ -43,16 +44,16 @@
                         Gestion de Ordenes Compra
                     </a>
                 </li>
-                <li class="sidebar-item"  >
-                    <a  class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse"
+                <li class="sidebar-item">
+                    <a class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse"
                         aria-expanded="false"><i class="fa-solid fa-sliders"></i>
                         <i class="pi pi-chart-bar"></i>
                         Gestion De Reportes
                     </a>
                     <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item" routerLink="/dashboard/reporte-productos-activos">
-                        
-                            <a  class="sidebar-link">
+
+                            <a class="sidebar-link">
                                 <i class="pi pi-box"></i>
                                 Reporte Productos Activos
                             </a>
@@ -92,7 +93,17 @@
         <main class="content px-3 py-2">
             <div class="container-fluid">
                 <div class="mb-3">
-                    <h4>Admin Dashboard</h4>
+                    <h4>
+                        <div class="breadcrumb-wrapper">
+                            <div class="breadcrumb-container">
+                              <p-breadcrumb 
+                                [model]="items" 
+                                [home]="home"
+                                styleClass="custom-breadcrumb max-w-full border-none"
+                              ></p-breadcrumb>
+                            </div>
+                          </div>
+                    </h4>
                 </div>
                 <div class="row">
                     <div class="col-12">

@@ -9,9 +9,9 @@ import java.util.Date;
 public class DescuentoService {
 
     // Constantes para los descuentos
-    private static final double DESCUENTO_RANGO_TIEMPO = 0.10;  // 10% descuento por horario
-    private static final double DESCUENTO_ORDEN_ALEATORIA = 0.50;  // 50% descuento orden aleatoria
-    private static final double DESCUENTO_CLIENTE_FRECUENTE = 0.05;  // 5% descuento cliente frecuente
+    private static final double DESCUENTO_RANGO_TIEMPO = 0.10;
+    private static final double DESCUENTO_ORDEN_ALEATORIA = 0.50;
+    private static final double DESCUENTO_CLIENTE_FRECUENTE = 0.05;
 
     private final LocalDateTime horaInicioDescuento;
     private final LocalDateTime horaFinDescuento;

@@ -1,1 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
+/* Estilos para asegurar que el panel se muestre correctamente */
+:host ::ng-deep .p-dropdown {
+    z-index: 1000 !important;
+}
+
+:host ::ng-deep .dropdown-panel-overlay {
+    z-index: 1000 !important;
+}
+
+:host ::ng-deep .p-dropdown-panel {
+    z-index: 1000 !important;
+    max-height: 300px !important; /* Ajusta según necesites */
+    width: auto !important;
+    min-width: 420px !important; /* Mismo ancho que el dropdown */
+}
+
+:host ::ng-deep .p-dropdown-items-wrapper {
+    max-height: 250px !important; /* Ajusta según necesites */
+}
+
+/* Asegura que el filtro sea visible */
+:host ::ng-deep .p-dropdown-filter-container {
+    position: sticky !important;
+    top: 0;
+    z-index: 1001;
+    background-color: white;
+}
+
+/* Mejora la visibilidad de las opciones */
+:host ::ng-deep .p-dropdown-items {
+    padding: 0.5rem 0;
+}
+
+:host ::ng-deep .p-dropdown-item {
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.msj-validation{
+    color :red !important;
+}

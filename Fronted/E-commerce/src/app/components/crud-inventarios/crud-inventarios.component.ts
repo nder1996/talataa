@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { Table } from 'primeng/table';
 import { InventariosRequestModel } from 'src/model/Inventarios/Request/InventarioRequestModel';
 import { InventariosModel } from 'src/model/Inventarios/Response/InventariosModel';
 import { ProductModel } from 'src/model/Productos/Response/ProductMode';
@@ -52,6 +53,17 @@ export class CrudInventariosComponent {
     this.cdr.detectChanges();
   }
 
+  
+  @ViewChild('dt') table!: Table;
+  clear() {
+    this.table.clear();
+  }
+
+
+  aplicarFiltroGlobal(event: Event) {
+    const element = event.target as HTMLInputElement;
+    this.table.filterGlobal(element.value, 'contains');
+  }
   
   async abrirModalEditar(inventory:InventariosModel){
     await this.getAllProductos();
@@ -200,4 +212,6 @@ export class CrudInventariosComponent {
     }
   }
 
+
+ 
 }

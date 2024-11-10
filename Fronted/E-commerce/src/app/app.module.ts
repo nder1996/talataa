@@ -50,7 +50,12 @@ import { LoginDashboardComponent } from './pages/login-dashboard/login-dashboard
 import { MessagesModule } from 'primeng/messages';
 import { InterruptorLoadingService } from 'src/service/interruptor-loading.service';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-
+import { SliderModule } from 'primeng/slider';
+import { CardModule } from 'primeng/card';
+import { BadgeModule } from 'primeng/badge';
+import { FormsModule } from '@angular/forms';  // Añade esta importación
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,6 +77,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     
   ],
   imports: [
+    BreadcrumbModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -96,7 +102,16 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     SplitterModule,
     MenuModule,
     OverlayPanelModule,
-    MessagesModule
+    MessagesModule,
+    SliderModule,
+    InputTextareaModule,
+    SliderModule,
+    ButtonModule,
+    CardModule,
+    SliderModule,
+    BadgeModule,
+    FormsModule,  
+
   ],
   providers: [MessageService,
     {

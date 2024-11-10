@@ -28,36 +28,38 @@ public interface ReporteEcommerRepository {
     @Select("SELECT  " +
             "    p.nombre, " +
             "    p.descripcion, " +
-            "    SUM(do.cantidadProducto) as total_vendido " +
+            "    SUM(p.precioUnidad) as totalVendido " +
             "FROM PRODUCTOS p " +
-            "INNER JOIN DETALLES_ORDEN do ON p.id = do.idProducto " +
-            "INNER JOIN ORDEN_COMPRA oc ON do.idOrdenCompra = oc.id " +
-            "WHERE oc.estado = 'A' " +
-            "AND do.estado = 'A' " +
+            "LEFT JOIN DETALLES_ORDEN details ON p.id = details.idProducto " +
+            "LEFT JOIN ORDEN_COMPRA oc ON details.idOrdenCompra = oc.id " +
+            "WHERE details.estado = 'A' " +
             "GROUP BY p.id, p.nombre, p.descripcion " +
-            "ORDER BY total_vendido DESC " +
+            "ORDER BY totalVendido DESC " +
             "LIMIT 5 ")
     List<ReporteProductoMasVendidoResponse> topProductosVendidos();
 
 
-    @Select("SELECT  " +
+    @Select("SELECT " +
             "    p.id AS id, " +
             "    p.nombre AS nombre, " +
             "    p.descripcion AS descripcion, " +
             "    i.cantidadDisponible AS cantidadDisponible, " +
-            "    cp.nombre AS nombreCategoria " +
+            "    cp.nombre AS nombreCategoria, " +
+            "    p.precioUnidad AS precio " +
             "FROM  " +
             "    PRODUCTOS p " +
-            "LEFT JOIN  " +
+            "LEFT JOIN " +
             "    PRODUCTOS_CATEGORIAS pc ON p.id = pc.idProducto " +
-            "LEFT JOIN  " +
+            "LEFT JOIN " +
             "    CATEGORIA_PRODUCTO cp ON pc.idCategoriaProducto = cp.id " +
-            "LEFT JOIN  " +
+            "LEFT JOIN " +
             "    INVENTARIO_PRODUCTOS i ON p.id = i.idProducto " +
-            "WHERE  " +
+            "LEFT JOIN  " +
+            "    DETALLES_ORDEN do ON p.id = do.idProducto " +
+            "WHERE " +
             "    p.estado = 'A' AND i.estado = 'A' " +
             "ORDER BY  " +
-            "    p.nombre ASC ")
+            "    p.nombre ASC")
     List<ReporteProductosActivos> productosActivos();
 
 

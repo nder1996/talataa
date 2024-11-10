@@ -188,6 +188,8 @@ export class NavbarComponent {
         await this.authService.login(credentials.username,credentials.password)
         
         const userSession:any =  this.localStorage.get("currentUser");
+
+        console.log("USER SESSION : "+JSON.stringify(userSession))
     
         if(userSession && userSession.id && userSession.nombreCompleto){
           this.messageService.add({
@@ -233,7 +235,7 @@ export class NavbarComponent {
     try {
       const response = await this.userService.guardarUsuarioXRol(user).toPromise();
       if (response?.data && response.data['USUARIO']) {
-        alert("se guardo correctamente")
+       // alert("se guardo correctamente")
         const msj: string = response.data['USUARIO'];
         this.messageService.add({
           severity: 'success',

@@ -55,4 +55,14 @@ public interface UserRepository {
             "where useri.nombreUsuario = #{username} and useri.contrasena = #{password} and useri.estado = 'A' and rol.id = 1 ")
     Usuario BuscarAdmin(@Param("username") String username, @Param("password") String password);
 
+    @Select("""
+            SELECT ur.id
+            FROM USUARIOS_ROLES ur
+            WHERE ur.idRol = #{idRol}
+            AND ur.idUsuario = #{idUsuario}
+           """)
+    Integer findRoleByUserAndRoleId(@Param("idRol") Integer idRol,
+                                           @Param("idUsuario") Integer idUsuario);
+
+
 }

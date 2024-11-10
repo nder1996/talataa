@@ -46,7 +46,6 @@ public interface OrderRepository {
 
 
     @Insert("INSERT INTO PAGOS_ORDEN ( idOrdenCompra, jsonRespuesta, create_at, estado) VALUES (#{idOrdenCompra},#{jsonRespuesta}, CURRENT_TIMESTAMP,'A')")
-    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     Integer guardarPagoOrden(PagoOrdenRequest pago);
 
     @Insert("INSERT INTO DETALLES_ORDEN ( idOrdenCompra, idProducto, cantidadProducto, create_at, update_at, unidadPrecio, subTotal, estado " +

@@ -64,8 +64,8 @@ export class MisComprasComponent {
 
   enviarCompra() {
     // 1. Validar autenticación
-    const auth = JSON.parse(this.localStorage.get("Auth"));
-    console.log("auth : "+JSON.stringify(auth))
+    const auth:any = this.localStorage.get("currentUser");
+    console.log("auth : "+auth)
     if (!this.formTarjeta.valid || !auth?.id || !auth?.nombreCompleto) {
       this.messageService.add({
         severity: 'error',
@@ -120,7 +120,7 @@ export class MisComprasComponent {
     };
   
     
-   // console.log("datos de la compra : "+JSON.stringify(datosPago))
+    console.log("datos de la compra : "+JSON.stringify(datosPago))
     // 5. Enviar al servicio (ejemplo)
     this.procesarOrden(datosPago);
   }

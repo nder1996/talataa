@@ -2,7 +2,7 @@ export class ProductosModel {
     idProducto?: number;
     idCategoriaProducto?: number;
     productoNombre?: string;
-    productoDescripcion?: Date;
+    productoDescripcion?: string;
     productoPrecioUnidad?: number;
     nombreCategoria?: number;
     descripcionCategoria?: number;
@@ -11,7 +11,7 @@ export class ProductosModel {
         idProducto?: number,
         idCategoriaProducto?: number,
         productoNombre?: string,
-        productoDescripcion?: Date,
+        productoDescripcion?: string,
         productoPrecioUnidad?: number,
         nombreCategoria?: number,
         descripcionCategoria?: number,

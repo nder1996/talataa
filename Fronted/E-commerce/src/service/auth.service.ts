@@ -66,6 +66,7 @@ export class AuthService {
         next: (response: ApiResponse<string>) => {
           try {
             if (response?.data && response?.data['Auth']) {
+              
               this.localStorage.save('currentUser', response.data['Auth']);
               resolve();
             } else {
@@ -127,6 +128,7 @@ export class AuthService {
   logout(): void {
     // Limpiar localStorage
     this.localStorage.remove('currentUser');
+    this.localStorage.remove('Auth');
     // Actualizar el BehaviorSubject
     this.currentUserSubject.next(null);
     // Redirigir al login
@@ -138,6 +140,7 @@ export class AuthService {
   logoutAdmin(): void {
     // Limpiar localStorage
     this.localStorage.remove('currentUserAdmin');
+    this.localStorage.remove('AuthAdmin');
     // Actualizar el BehaviorSubject
     this.currentUserSubject.next(null);
     // Redirigir al login

@@ -339,3 +339,97 @@ html[data-bs-theme="light"] .theme-toggle .fa-sun {
   .dropdown.show .dropdown-menu {
     display: block !important;
   }
+
+  /*DASHBOARD*/
+
+  .breadcrumb-container {
+    padding: 0.5rem 0;
+  }
+
+  .message-container {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+
+  ::ng-deep .custom-breadcrumb {
+    .p-breadcrumb {
+      background: transparent;
+      border: none;
+      padding: 0.5rem 0;
+
+      ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      li {
+        display: flex;
+        align-items: center;
+      }
+
+      .p-menuitem-link {
+        display: flex;
+        align-items: center;
+        color: #64748b;
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-decoration: none;
+        padding: 0.5rem 0.75rem;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+
+        &:hover {
+          color: #3b82f6;
+          background: #f1f5f9;
+        }
+
+        .p-menuitem-icon {
+          color: #3b82f6;
+          margin-right: 0.5rem;
+          font-size: 1rem;
+        }
+
+        .p-menuitem-text {
+          line-height: 1;
+        }
+      }
+
+      .p-breadcrumb-chevron {
+        color: #94a3b8;
+        margin: 0 0.25rem;
+        font-size: 0.75rem;
+      }
+
+      li:last-child .p-menuitem-link {
+        color: #1e293b;
+        font-weight: 600;
+        pointer-events: none;
+        
+        &:hover {
+          background: transparent;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .breadcrumb-wrapper {
+      padding: 1rem;
+    }
+
+    .breadcrumb-title {
+      font-size: 1.25rem;
+    }
+
+    ::ng-deep .custom-breadcrumb {
+      .p-menuitem-link {
+        padding: 0.375rem 0.5rem;
+      }
+    }
+  }

@@ -13,7 +13,7 @@ public class MetodoPagoRequest {
     private String nombreTitular;
     private String numeroTarjeta;
     private String fechaExpiracion;
-    private String cv;
+    private String CVV;
 
 
 

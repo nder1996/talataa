@@ -107,9 +107,9 @@
                                 </p-password>
                             </div>
 
-                            <div class="mt-4">
-                                <p-button label="Iniciar Sesión" icon="pi pi-sign-in" styleClass="w-100 login-button"
-                                    (click)="login()" [raised]="true">
+                            <div class="mt-4 text-center">
+                                <p-button label="Iniciar Sesión" icon="pi pi-sign-in" [outlined]="true"
+                                    severity="secondary" (click)="login()">
                                 </p-button>
                             </div>
                         </form>
@@ -306,9 +306,9 @@
                             </div>
                         </div>
 
-                        <div class="form-actions mt-4">
-                            <p-button [raised]="true" icon="pi pi-save" label="Crear Cuenta"
-                                styleClass="w-100 register-button" (click)="guardarRegistro()">
+                        <div class="form-actions mt-4 text-center mb-2">
+                            <p-button icon="pi pi-save" label="Crear Cuenta" [outlined]="true" severity="secondary"
+                                (click)="guardarRegistro()">
                             </p-button>
                         </div>
                     </form>

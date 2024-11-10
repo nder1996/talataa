@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { Table } from 'primeng/table';
 import { ProductoRequestModel } from 'src/model/Productos/Request/ProductoRequestModel';
 import { CategoriaProductoModel } from 'src/model/Productos/Response/CategoriaProductoModel';
 import { ProductosModel } from 'src/model/Productos/Response/ProductosModel';
@@ -12,8 +13,7 @@ import { UsuariosService } from 'src/service/Usuarios/usuarios.service';
 @Component({
   selector: 'app-crud-productos',
   templateUrl: './crud-productos.component.html',
-  styleUrls: ['./crud-productos.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./crud-productos.component.css']
 })
 export class CrudProductosComponent {
 
@@ -33,6 +33,7 @@ export class CrudProductosComponent {
   public listaProducto: ProductosModel[] = [];
   public listaCategoriaProducto: CategoriaProductoModel[] = [];
   public productoForm!: FormGroup;
+  
 
 
   public showModalAgregar: boolean = false;
@@ -48,6 +49,11 @@ export class CrudProductosComponent {
 
   ngAfterViewInit() {
     this.cdr.detectChanges();
+  }
+
+  @ViewChild('dt') table!: Table;
+  clear() {
+    this.table.clear();
   }
 
 
@@ -210,6 +216,7 @@ export class CrudProductosComponent {
       const response = await this.productoService.getAllProductoDisponibles().toPromise();
       if (response?.data && response?.data['PRODUCTOS']) {
         this.listaProducto = response.data['PRODUCTOS'];
+     
       } else {
         this.messageService.add({
           severity: 'warn',
@@ -232,6 +239,7 @@ export class CrudProductosComponent {
       const response = await this.productoService.getAllCategoriasProductos().toPromise();
       if (response?.data && response?.data['CATEGORIAS']) {
         this.listaCategoriaProducto = response.data['CATEGORIAS'];
+        console.log("categorias : "+JSON.stringify( this.listaCategoriaProducto))
       } else {
         this.messageService.add({
           severity: 'warn',

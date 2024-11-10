@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ReporteClienteFrecuenteModel } from 'src/model/Reportes-Dashboard/ReporteClienteFrecuenteModel ';
 import { GenerateReportService } from 'src/service/generate-report.service';
+import { LoadingService } from 'src/service/loading.service';
 import { ReporteDashboardService } from 'src/service/reporte-dashboard.service';
 
 
@@ -17,11 +18,11 @@ interface Clientes {
 })
 export class ReporteClienteFrecuenteComponent {
   constructor(private reporteService: GenerateReportService, private reporteDashboard: ReporteDashboardService,
-    private messageService: MessageService
+    private messageService: MessageService , private loadingService:LoadingService
   ) { }
 
   clientes: Clientes[] = [];
-  loading: boolean = true;
+
 
   currentDate: Date = new Date();
 
@@ -63,25 +64,32 @@ export class ReporteClienteFrecuenteComponent {
 
   }
 
-  descargarPDF() {
-    //this.reporteService.generateTablePDF('contenidoParaPDF', 'mi-documento.pdf');
-    this.reporteService.generateTablePDF('contenidoParaPDF', 'reporte_completo.pdf', {
-      orientation: 'l',
-      margins: {
-        top: 30,
-        right: 15,
-        bottom: 25,
-        left: 15
-      },
-      pageNumbers: true,
-      headerTitle: 'Reporte de Ventas',
-      footerText: '© 2024 Tu Empresa - Documento Confidencial',
-      showDate: true,
-      showTotalPages: true,
-      scale: 2,
-      compress: true
-    });
+generarReporte(){
+
+
+}
+
+descargarPDF() {
+      this.reporteService.generateTablePDF('contenidoParaPDF', 'reporte_completo.pdf', {
+        orientation: 'l',
+        margins: {
+          top: 30,
+          right: 15,
+          bottom: 25,
+          left: 15
+        },
+        pageNumbers: true,
+        headerTitle: 'REPORTE TOP 5 CLIENTES ',
+        footerText: '© 2024 Centro Comercial Santa Fe - Documento Confidencial',
+        showDate: true,
+        showTotalPages: true,
+        scale: 2,
+        compress: true
+      });
+ 
   }
+  
+
 }
 function firstValueFrom(arg0: any) {
   throw new Error('Function not implemented.');

@@ -34,34 +34,48 @@
         </div>
 
         <p-table #dt [value]="listaProductosActivos" [rows]="listaProductosActivos.length" [paginator]="true"
-            [globalFilterFields]="['name', 'description', 'category.name']" [tableStyle]="{ 'min-width': '75rem' }"
-            [rowHover]="true" dataKey="id"  styleClass="p-datatable-gridlines" id="tableToExport">
+            [globalFilterFields]="['nombre', 'descripcion', 'nombreCategoria', 'precio', 'cantidadDisponible']"
+            [tableStyle]="{ 'min-width': '75rem' }" [rowHover]="true" dataKey="id" styleClass="p-datatable-gridlines"
+            id="tableToExport">
 
             <ng-template pTemplate="header">
                 <tr>
-                    <th pSortableColumn="name">Producto <p-sortIcon field="name"></p-sortIcon></th>
-                    <th pSortableColumn="description">Descripción <p-sortIcon field="description"></p-sortIcon></th>
-                    <th pSortableColumn="categoria">Categoria <p-sortIcon field="categoria"></p-sortIcon></th>
-                    <th pSortableColumn="price">Precio <p-sortIcon field="price"></p-sortIcon></th>
-                    <th pSortableColumn="stock">Stock <p-sortIcon field="stock"></p-sortIcon></th>
+                    <th>
+                        Producto
+                        <p-columnFilter type="text" field="nombre" display="menu"></p-columnFilter>
+                    </th>
+                    <th>
+                        Descripción
+                        <p-columnFilter type="text" field="descripcion" display="menu"></p-columnFilter>
+                    </th>
+                    <th>
+                        Categoria
+                        <p-columnFilter type="text" field="nombreCategoria" display="menu"></p-columnFilter>
+                    </th>
+                    <th>
+                        Precio
+                        <p-columnFilter type="text" field="precio" display="menu"></p-columnFilter>
+                    </th>
+                    <th>
+                        Stock
+                        <p-columnFilter type="text" field="cantidadDisponible" display="menu"></p-columnFilter>
+                    </th>
                 </tr>
             </ng-template>
 
-            <ng-template pTemplate="body" let-person>
+            <ng-template pTemplate="body" let-product>
                 <tr>
-                    <td>{{person.nombre}}</td>
-                    <td>{{person.descripcion}}</td>
-                    <td>{{person.nombreCategoria}}</td>
-                    <td>{{person.precio}}</td>
-                    <td>{{person.cantidadDisponible}}</td>
+                    <td>{{product.nombre}}</td>
+                    <td>{{product.descripcion}}</td>
+                    <td>{{product.nombreCategoria}}</td>
+                    <td>$ {{ product.precio | number:'1.0-0' }}</td>
+                    <td>{{product.cantidadDisponible}}</td>
                 </tr>
             </ng-template>
         </p-table>
     </div>
 
     <div class="report-footer">
-        <p>Este reporte fue generado automáticamente por el sistema.</p>
-        <p>© {{currentDate | date:'yyyy'}} Tu Empresa - Todos los derechos reservados</p>
+        <p>© {{currentDate | date:'yyyy'}} Centro Comercial Santa Fe - Todos los derechos reservados</p>
     </div>
 </div>
-

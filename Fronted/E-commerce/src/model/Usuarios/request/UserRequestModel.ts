@@ -4,6 +4,7 @@ export class UserRequestModel {
     idGenero?: number;
     idCiudad?: number;
     idRol?: number;
+    idRolAnterior?: number;
     nombres?: string;
     telefono?: string;
     apellidos?: string;
@@ -25,7 +26,9 @@ export class UserRequestModel {
         numeroDocumento?: string,
         dirreccion?: string,
         nombreUsuario?: string,
-        password?: string
+        password?: string,
+        idRolAnterior?: number
+
     ) {
         this.userId = userId;
         this.idTipoDocumento = idTipoDocumento;
@@ -40,5 +43,6 @@ export class UserRequestModel {
         this.dirreccion = dirreccion;
         this.nombreUsuario = nombreUsuario;
         this.password = password;
+        this.idRolAnterior = idRolAnterior;
     }
 }

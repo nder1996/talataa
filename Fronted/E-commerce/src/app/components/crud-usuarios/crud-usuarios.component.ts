@@ -161,10 +161,11 @@ export class CrudUsuariosComponent {
         numeroDocumento: formValues.numeroDocumento,
         dirreccion: formValues.direccion,
         telefono: formValues.telefono,
-        nombreUsuario: formValues.nombreUsuario
+        nombreUsuario: formValues.nombreUsuario,
+        idRolAnterior: formValues.rol
+
       };
       this.editarUsuarioModal = userRequest;
-
       this.updateUsuario();
     }
 

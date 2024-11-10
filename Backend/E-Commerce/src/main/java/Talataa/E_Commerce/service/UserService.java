@@ -127,7 +127,7 @@ public class UserService {
     public ApiResponse<String> guardarUsuariosXRol(UsuarioRequest user){
         try {
             if(user.getPassword()==null || user.getPassword().isEmpty()){
-                user.setPassword("default1234567890");
+                user.setPassword(this.passwordEncoder.encode("default1234567890"));
             }else{
                 user.setPassword(this.passwordEncoder.encode(user.getPassword()));
             }
@@ -188,7 +188,10 @@ public class UserService {
         try {
             Integer row1 = this.userRepository.actualizarUsuario(user);
             if (row1 != null && row1 > 0) {
-                Integer row2 = this.userRepository.actualizarRolUsuario(user.getUserId(), user.getUserId(), user.getIdRol());
+
+               Integer idUsuarioXRol = this.userRepository.findRoleByUserAndRoleId(user.getIdRol(),user.getUserId());
+
+                Integer row2 = this.userRepository.actualizarRolUsuario(idUsuarioXRol, user.getUserId(), user.getIdRol());
                 if (row2 != null && row2 > 0) {
                     return this.responseApiBuilderService.successRespuesta("El registro se actualizó correctamente en el sistema", "USUARIO");
                 } else {

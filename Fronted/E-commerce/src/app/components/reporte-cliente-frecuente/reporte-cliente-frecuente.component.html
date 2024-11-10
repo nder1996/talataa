@@ -10,22 +10,6 @@
                     <p class="report-date">Fecha: {{currentDate | date:'dd/MM/yyyy'}}</p>
                 </div>
             </div>
-            <div class="report-summary">
-                <div class="summary-card">
-                    <i class="pi pi-box"></i>
-                    <div class="summary-details">
-                        <span class="summary-label">Total Productos</span>
-                        <span class="summary-value">{{clientes.length}}</span>
-                    </div>
-                </div>
-                <div class="summary-card">
-                    <i class="pi pi-dollar"></i>
-                    <div class="summary-details">
-                        <span class="summary-label">Valor Total</span>
-                        <span class="summary-value">{{getTotalValue() | currency:'USD'}}</span>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- Tabla de Productos -->
@@ -41,14 +25,24 @@
         </div>
 
         <p-table #dt [value]="listaClientesFrecuentes" [rows]="listaClientesFrecuentes.length" [paginator]="true"
-            [globalFilterFields]="['name', 'description', 'category.name']" [tableStyle]="{ 'min-width': '75rem' }"
-            [rowHover]="true" dataKey="id"  styleClass="p-datatable-gridlines" id="tableToExport">
+            [tableStyle]="{ 'min-width': '75rem' }" [rowHover]="true" dataKey="id" styleClass="p-datatable-gridlines"
+            id="tableToExport" [globalFilterFields]="['nombreCompleto', 'totalCompras', 'montoTotal']">
 
             <ng-template pTemplate="header">
                 <tr>
-                    <th pSortableColumn="name">Nombre del Cliente <p-sortIcon field="name"></p-sortIcon></th>
-                    <th pSortableColumn="description">Numero de Compras <p-sortIcon field="description"></p-sortIcon></th>
-                    <th pSortableColumn="category.name">Total en Compras <p-sortIcon field="category.name"></p-sortIcon></th>
+                    <th>
+                        Nombre del Cliente
+                        <p-columnFilter type="text" field="nombreCompleto" display="menu"></p-columnFilter>
+
+                    </th>
+                    <th>
+                        Numero de Compras
+                        <p-columnFilter type="text" field="totalCompras" display="menu"></p-columnFilter>
+                    </th>
+                    <th pSortableColumn="montoTotal">
+                        Total en Compras
+                        <p-columnFilter type="text" field="montoTotal" display="menu"></p-columnFilter>
+                    </th>
                 </tr>
             </ng-template>
 
@@ -63,8 +57,6 @@
     </div>
 
     <div class="report-footer">
-        <p>Este reporte fue generado automáticamente por el sistema.</p>
-        <p>© {{currentDate | date:'yyyy'}} Tu Empresa - Todos los derechos reservados</p>
+        <p>© {{currentDate | date:'yyyy'}} Centro Comercial Santa Fe - Todos los derechos reservados</p>
     </div>
 </div>
-

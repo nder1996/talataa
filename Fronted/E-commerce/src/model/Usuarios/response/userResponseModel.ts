@@ -14,6 +14,7 @@ export class UserModel {
     idGenero	?: number;
     idCiudad	?: number;
     idRol	?: number;
+    idRolAnterior?: number;
     nombres	?: string;
     apellidos	?: string;
   

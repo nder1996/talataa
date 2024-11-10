@@ -47,18 +47,45 @@
     </div>
     <p-table [value]="listaUsuarios" [tableStyle]="{ 'width': '100%' }" styleClass="p-datatable-gridlines"
         [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [scrollable]="true" scrollHeight="600px"
-        [resizableColumns]="true" [ngStyle]="{'border': '2px solid whitesmoke'}">
+        [resizableColumns]="true" [ngStyle]="{'border': '2px solid whitesmoke'}"  [globalFilterFields]="['nombreCompleto', 'tipoDocumento', 'genero', 'ciudad','email','dirreccion','telefono','nombreUsuario','rolNombre']">
         <ng-template pTemplate="header">
             <tr>
-                <th>Nombre Completo</th>
-                <th>Tipo Documento</th>
-                <th>Genero</th>
-                <th>Ciudad</th>
-                <th>email</th>
-                <th>Dirreccion</th>
-                <th>Telefono</th>
-                <th>Username</th>
-                <th>Rol</th>
+                <th>
+                    Nombre Completo
+                    <p-columnFilter type="text" field="nombreCompleto" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Tipo Documento
+                    <p-columnFilter type="text" field="tipoDocumento" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Género
+                    <p-columnFilter type="text" field="genero" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Ciudad
+                    <p-columnFilter type="text" field="ciudad" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Email
+                    <p-columnFilter type="text" field="email" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Dirección
+                    <p-columnFilter type="text" field="dirreccion" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Teléfono
+                    <p-columnFilter type="text" field="telefono" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Username
+                    <p-columnFilter type="text" field="nombreUsuario" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Rol
+                    <p-columnFilter type="text" field="rolNombre" display="menu"></p-columnFilter>
+                </th>
                 <th>Editar</th>
                 <th>Eliminar</th>
             </tr>

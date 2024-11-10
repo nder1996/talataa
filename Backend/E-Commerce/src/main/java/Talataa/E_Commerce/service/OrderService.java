@@ -94,7 +94,7 @@ public class OrderService {
             double descuentoPorcentaje = descuentoService.calcularDescuentoOrden(
                     Long.valueOf(orden.getIdUsuario()),
                     this.isOrdenAleatoria(),
-                    orden.getIdOrden()
+                    detalle.size()
             );
 
             double totalConDescuento = totalOriginal * (1 - descuentoPorcentaje);

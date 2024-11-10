@@ -42,13 +42,24 @@
 
         <p-table #dt [value]="listaProductosMasVendidos" [rows]="listaProductosMasVendidos.length" [paginator]="true"
             [globalFilterFields]="['Producto', 'descripcionProducto', 'totalVendido']" [tableStyle]="{ 'min-width': '75rem' }"
-            [rowHover]="true" dataKey="id"  styleClass="p-datatable-gridlines" id="tableToExport">
+            [rowHover]="true" dataKey="id"  styleClass="p-datatable-gridlines" id="tableToExport"
+            [globalFilterFields]="['nombre', 'descripcion', 'totalVendido']"
+            >
 
             <ng-template pTemplate="header">
                 <tr>
-                    <th pSortableColumn="nombre">Producto <p-sortIcon field="nombre"></p-sortIcon></th>
-                    <th pSortableColumn="descripcionProducto">Descripción <p-sortIcon field="descripcionProducto"></p-sortIcon></th>
-                    <th pSortableColumn="totalVendido">Total Vendido <p-sortIcon field="totalVendido"></p-sortIcon></th>
+                    <th>
+                        Producto
+                        <p-columnFilter type="text" field="nombre" display="menu"></p-columnFilter>
+                    </th>
+                    <th>
+                        Descripción
+                        <p-columnFilter type="text" field="descripcion" display="menu"></p-columnFilter>
+                    </th>
+                    <th>
+                        Total Vendido
+                        <p-columnFilter type="text" field="totalVendido" display="menu"></p-columnFilter>
+                    </th>
                 </tr>
             </ng-template>
 
@@ -56,15 +67,14 @@
                 <tr>
                     <td>{{product.nombre}}</td>
                     <td>{{product.descripcion}}</td>
-                    <td>{{product.totalVendido}}</td>
+                    <td>$ {{ product.totalVendido | number:'1.0-0' }}</td>
                 </tr>
             </ng-template>
         </p-table>
     </div>
 
     <div class="report-footer">
-        <p>Este reporte fue generado automáticamente por el sistema.</p>
-        <p>© {{currentDate | date:'yyyy'}} Tu Empresa - Todos los derechos reservados</p>
+        <p>© {{currentDate | date:'yyyy'}} Centro Comercial Santa Fe - Todos los derechos reservados</p>
     </div>
 </div>
 

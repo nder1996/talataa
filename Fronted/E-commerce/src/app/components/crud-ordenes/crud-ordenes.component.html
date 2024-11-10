@@ -2,21 +2,57 @@
 <div class="container-fluid container-orden mt-5">
     <p-table [value]="listaOrdenCompra" [tableStyle]="{ 'width': '100%' }" styleClass="p-datatable-gridlines"
         [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [scrollable]="true" scrollHeight="600px"
-        [resizableColumns]="true">
+        [resizableColumns]="true"
+        [globalFilterFields]="['idOrden', 'nombreCompleto', 'descripcion', 'numeroDocumento','telefono','genero','ciudad','subTotalCompra','descuento','totalCompra']">
         <ng-template pTemplate="header">
             <tr>
-                <th>Número de Orden</th>
-                <th>Nombre Completo</th>
-                <th>Tipo Documento</th>
-                <th>Número de Documento</th>
-                <th>Dirección</th>
-                <th>Teléfono</th>
-                <th>Género</th>
-                <th>Ciudad</th>
-                <th>Sub-Total</th>
-                <th>Descuento</th>
-                <th>Total</th>
-                <th>Detalles de Orden</th>
+                <th>
+                    Número de Orden
+                    <p-columnFilter type="text" field="idOrden" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Nombre Completo
+                    <p-columnFilter type="text" field="nombreCompleto" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Tipo Documento
+                    <p-columnFilter type="text" field="descripcion" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Número de Documento
+                    <p-columnFilter type="text" field="numeroDocumento" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Dirección
+                    <p-columnFilter type="text" field="telefono" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Teléfono
+                    <p-columnFilter type="text" field="telefono" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Género
+                    <p-columnFilter type="text" field="genero" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Ciudad
+                    <p-columnFilter type="text" field="ciudad" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Sub-Total
+                    <p-columnFilter type="text" field="subTotalCompra" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Descuento
+                    <p-columnFilter type="text" field="descuento" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Total
+                    <p-columnFilter type="text" field="totalCompra" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Detalles de Orden
+                </th>
                 <th>Eliminar</th>
             </tr>
         </ng-template>
@@ -70,14 +106,29 @@
     <div class="container-fluid tablaDetallesOrden">
         <p-table [value]="listaDetallesCompra" [tableStyle]="{ 'width': '100%' }" styleClass="p-datatable-gridlines"
             [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [scrollable]="true" scrollHeight="700px"
-            [resizableColumns]="true">
+            [resizableColumns]="true"   [globalFilterFields]="['nombreProducto', 'descripcion', 'unidadPrecio', 'subTotal', 'cantidadProducto']">
             <ng-template pTemplate="header">
                 <tr>
-                    <th>Nombre del Producto</th>
-                    <th>Descripcion del Producto</th>
-                    <th>Precio Unidad del Producto</th>
-                    <th>SubTotal del Producto</th>
-                    <th>Cantidad Producto</th>
+                    <th>
+                        Nombre del Producto
+                        <p-columnFilter type="text" field="nombreProducto" display="menu"></p-columnFilter>
+                    </th>
+                    <th>
+                        Descripcion del Producto
+                        <p-columnFilter type="text" field="descripcion" display="menu"></p-columnFilter>
+                    </th>
+                    <th>
+                        Precio Unidad del Producto
+                        <p-columnFilter type="text" field="unidadPrecio" display="menu"></p-columnFilter>
+                    </th>
+                    <th>
+                        SubTotal del Producto
+                        <p-columnFilter type="text" field="subTotal" display="menu"></p-columnFilter>
+                    </th>
+                    <th>
+                        Cantidad Producto
+                        <p-columnFilter type="text" field="cantidadProducto" display="menu"></p-columnFilter>
+                    </th>
                     <th>Eliminar</th>
                 </tr>
             </ng-template>

@@ -84,7 +84,7 @@
   
   .products-container {
     padding: 2rem;
-    max-width: 1200px;
+    max-width: 15 00px;
     margin: 0 auto;
   }
   
@@ -266,3 +266,158 @@
       font-size: 1.5rem;
     }
   }
+
+
+
+  /*--------*/
+  /* Estilos para los filtros */
+/* Contenedor principal de filtros */
+.custom-filters-container {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 1.5rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.custom-filters-container:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Encabezado de filtros */
+.filters-header {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+  padding: 1rem 1.5rem;
+  color: white;
+}
+
+.filters-title {
+  margin: 0;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #e0007a !important;
+}
+
+/* Contenedor de input personalizado */
+.custom-input-container {
+  position: relative;
+  margin: 0.5rem 0;
+}
+
+/* Estilos para el inputNumber */
+:host ::ng-deep .custom-input-number {
+  .p-inputnumber-input {
+    border-radius: 10px;
+    padding: 1rem 0.75rem;
+    font-size: 1rem;
+    border: 2px solid #E2E8F0;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      border-color: #CBD5E1;
+    }
+    
+    &:focus {
+      border-color: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    }
+  }
+
+  .p-inputnumber-button-group {
+    .p-button {
+      background: #F1F5F9;
+      border: none;
+      color: #64748B;
+      
+      &:hover {
+        background: #E2E8F0;
+        color: #334155;
+      }
+      
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+/* Etiquetas flotantes */
+:host ::ng-deep .p-float-label {
+  label {
+    background: white;
+    padding: 0 0.5rem;
+    color: #64748B;
+    font-size: 0.875rem;
+    
+    i {
+      margin-right: 0.25rem;
+    }
+  }
+}
+
+/* Botón de limpiar */
+:host ::ng-deep .custom-clear-button {
+  &.p-button {
+    width: 3rem;
+    height: 3rem;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: rgba(99, 102, 241, 0.1);
+      color: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+      transform: rotate(180deg);
+    }
+    
+    .p-button-icon {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+/* Badge personalizado */
+:host ::ng-deep .custom-badge {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+  font-size: 0.75rem;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+}
+
+/* Indicador de resultados */
+.results-indicator {
+  background: #F8FAFC;
+  padding: 0.75rem 1.5rem;
+  color: #64748B;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-top: 1px solid #E2E8F0;
+  
+  i {
+    color: #6366F1;
+  }
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .custom-filters-container {
+    margin: 1rem;
+  }
+  
+  .filters-header {
+    padding: 1rem;
+  }
+  
+  .custom-input-container {
+    margin: 0.75rem 0;
+  }
+  
+  :host ::ng-deep .custom-clear-button.p-button {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}

@@ -1,6 +1,6 @@
 <style>
     .container-modal-registro {
-        height: 540px;
+        height: 100% !important;
         overflow: hidden !important;
         border: 1px solid whitesmoke;
     }
@@ -32,30 +32,52 @@
     .container-producto {
         width: 100% !important;
         height: 100vh !important;
-       /* display: flex;
+        /* display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         gap: 10px;*/
         overflow-x: hidden !important;
     }
+
+
+    .custom-dropdown .ui-dropdown-panel {
+        z-index: 1050;
+    }
 </style>
 
 
 <div class="container-fluid container-producto">
     <div class="text-center mb-2">
-        <p-button label="Agregar Producto" [raised]="true"  severity="success" icon="pi pi-box" (click)="cargarDatosModalAgregar();showModalAgregar=true;"></p-button>
+        <p-button label="Agregar Producto" [raised]="true" severity="success" icon="pi pi-box"
+            (click)="cargarDatosModalAgregar();showModalAgregar=true;"></p-button>
     </div>
     <p-table [value]="listaProducto" [tableStyle]="{ 'width': '100%' }" styleClass="p-datatable-gridlines"
         [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [scrollable]="true" scrollHeight="600px"
-        [resizableColumns]="true" [ngStyle]="{'border': '2px solid whitesmoke'}">
+        [resizableColumns]="true" [ngStyle]="{'border': '2px solid whitesmoke'}"
+        [globalFilterFields]="['productoNombre', 'productoDescripcion', 'productoPrecioUnidad', 'nombreCategoria','descripcionCategoria']">
         <ng-template pTemplate="header">
             <tr>
-                <th>Nombre del Producto</th>
-                <th>Descripcion del Producto</th>
-                <th>Precio del Producto</th>
-                <th>Categoria del Producto</th>
-                <th>Descripcion de la Categoria</th>
+                <th>
+                    Nombre del Producto
+                    <p-columnFilter type="text" field="productoNombre" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Descripcion del Producto
+                    <p-columnFilter type="text" field="productoDescripcion" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Precio del Producto
+                    <p-columnFilter type="text" field="productoPrecioUnidad" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Categoria del Producto
+                    <p-columnFilter type="text" field="nombreCategoria" display="menu"></p-columnFilter>
+                </th>
+                <th>
+                    Descripcion de la Categoria
+                    <p-columnFilter type="text" field="descripcionCategoria" display="menu"></p-columnFilter>
+                </th>
                 <th>Editar</th>
                 <th>Eliminar</th>
             </tr>
@@ -92,7 +114,7 @@
 <p-dialog header="Agregar Producto" [(visible)]="showModalAgregar" *ngIf="showModalAgregar" [modal]="true"
     [style]="{ width: '32rem' }">
     <form [formGroup]="productoForm">
-        <div class="container container-modal-registro" style="padding: 1rem !important;">
+        <div class="container-fluid container-modal-registro" style="padding: 1rem !important;">
             <div class="row">
                 <!-- Nombre del Producto -->
                 <div class="col-12">
@@ -121,10 +143,22 @@
                 <!-- Categoría del Producto -->
                 <div class="col-12">
                     <label>Categoria del Producto</label>
-                    <p-dropdown [style]="{width: '420px'}" [options]="listaCategoriaProducto" optionLabel="descripcion"
-                        [filter]="true" filterBy="descripcion" [showClear]="true"
-                        placeholder="Selecciona la categoria del Producto" formControlName="idCategoriaProducto"
-                        optionValue="id">
+                    <p-dropdown 
+                        [style]="{width: '420px'}"
+                        [panelStyle]="{'z-index': '9999', 'min-width': '420px'}"
+                        [options]="listaCategoriaProducto" 
+                        optionLabel="descripcion"
+                        [filter]="true" 
+                        filterBy="descripcion" 
+                        [showClear]="true"
+                        placeholder="Selecciona la categoria del Producto" 
+                        formControlName="idCategoriaProducto"
+                        optionValue="id"
+                        [appendTo]="'body'"
+                        [baseZIndex]="1000"
+                        [autoZIndex]="true"
+                        [scrollHeight]="'200px'"
+                    >
                         <ng-template let-selectedOption>
                             <div class="flex align-items-center gap-2">
                                 <div>{{ selectedOption.descripcion }}</div>
@@ -154,10 +188,10 @@
         <!-- Botones -->
         <div class="text-center mt-2">
             <p-button icon="pi pi-times" label="Cancelar" [text]="true" [raised]="true" severity="secondary"
-             (click)="showModalAgregar=false"></p-button>
+                (click)="showModalAgregar=false"></p-button>
             &nbsp;&nbsp;
-            <p-button icon="pi pi-check" label="Guardar" [text]="true" [raised]="true" severity="success" (click)="saveRegistroProducto()"
-              ></p-button>
+            <p-button icon="pi pi-check" label="Guardar" [text]="true" [raised]="true" severity="success"
+                (click)="saveRegistroProducto()"></p-button>
         </div>
     </form>
 </p-dialog>
@@ -190,7 +224,7 @@
                 </div>
                 <div class="col-12">
                     <label>Categoria del Producto</label>
-                    <p-dropdown [style]="{width: '420px'}" [options]="listaCategoriaProducto" optionLabel="descripcion"
+                    <p-dropdown class="custom-dropdown" [options]="listaCategoriaProducto" optionLabel="descripcion"
                         [filter]="true" filterBy="descripcion" [showClear]="true"
                         placeholder="Selecciona la categoria del Producto" formControlName="idCategoriaProducto"
                         optionValue="id">
@@ -200,6 +234,8 @@
                             </div>
                         </ng-template>
                     </p-dropdown>
+
+
                     <span class="msj-validation"
                         *ngIf="productoForm.get('idCategoriaProducto')?.errors?.['required'] && productoForm.get('idCategoriaProducto')?.touched">El
                         campo es requerido</span>

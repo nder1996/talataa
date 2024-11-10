@@ -1,6 +1,6 @@
 <style>
     .container-modal-registro {
-        height: 700px;
+        height: 100%;
         overflow: auto;
         overflow-x: hidden !important;
         border: 1px solid whitesmoke;
@@ -14,9 +14,10 @@
         padding: 10px;
         border: 1px solid whitesmoke;
     }
+
     /**/
     .container-modal-registro {
-        height: 540px;
+        height: 100%;
         overflow: hidden !important;
         border: 1px solid whitesmoke;
     }
@@ -43,52 +44,83 @@
         vertical-align: middle;
         width: 300px !important;
     }
+
     /**/
-    
+
     /**/
     .container-inventario {
         width: 100% !important;
         height: 100vh !important;
     }
+
+    /* Orden de z-index recomendado */
+    .p-dialog {
+        z-index: 1000
+    }
+
+    .p-dropdown-panel {
+        z-index: 1100
+    }
+
+    .p-tooltip {
+        z-index: 1200
+    }
 </style>
 
 <div class="container-fluid container-inventario mt-3">
     <p-table [value]="listaInventario" [tableStyle]="{ 'width': '100%' }" styleClass="p-datatable-gridlines"
-    [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [scrollable]="true" scrollHeight="600px"
-    [resizableColumns]="true" [ngStyle]="{'border': '2px solid whitesmoke'}">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Nombre del Producto</th>
-            <th>Descripcion del Producto</th>
-            <th>Cantidad Disponible</th>
-            <th>Editar</th>
-            <th>Eliminar</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-inventory>
-        <tr>
-            <td>{{ inventory.productoNombre }}</td>
-            <td>{{ inventory.productoDescripcion }}</td>
-            <td>{{ inventory.cantidadDisponible }}</td>
+        [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [scrollable]="true" scrollHeight="600px"
+        [resizableColumns]="true" [ngStyle]="{'border': '2px solid whitesmoke'}"
+        [globalFilterFields]="['productoNombre', 'productoDescripcion', 'cantidadDisponible', 'status']">
+        <!-- Header Template with Column Filters -->
+        <ng-template pTemplate="header">
+            <tr>
+                <th>
+                    <div class="flex justify-content-between align-items-center">
+                        Nombre del Producto
+                        <p-columnFilter type="text" field="productoNombre" display="menu"></p-columnFilter>
+                    </div>
+                </th>
+                <th>
+                    <div class="flex justify-content-between align-items-center">
+                        Descripción del Producto
+                        <p-columnFilter type="text" field="productoDescripcion" display="menu"></p-columnFilter>
+                    </div>
+                </th>
+                <th>
+                    <div class="flex justify-content-between align-items-center">
+                        Cantidad Disponible
+                        <p-columnFilter type="numeric" field="cantidadDisponible" display="menu"></p-columnFilter>
+                    </div>
+                </th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-inventory>
+            <tr>
+                <td>{{ inventory.productoNombre }}</td>
+                <td>{{ inventory.productoDescripcion }}</td>
+                <td>{{ inventory.cantidadDisponible }}</td>
 
-            <td>
-                <p-button icon="pi pi-pen-to-square"  label="Editar" [outlined]="true" severity="warning"
-                    (click)="showModalEditar=true;abrirModalEditar(inventory)"></p-button>
-            </td>
-            <td>
-                <p-button icon="pi pi-times"  label="Eliminar" [outlined]="true" severity="danger"
-                    (click)="idEliminarInventario=inventory.idInventario;showModalEliminar=true"></p-button>
+                <td>
+                    <p-button icon="pi pi-pen-to-square" label="Editar" [outlined]="true" severity="warning"
+                        (click)="showModalEditar=true;abrirModalEditar(inventory)"></p-button>
+                </td>
+                <td>
+                    <p-button icon="pi pi-times" label="Eliminar" [outlined]="true" severity="danger"
+                        (click)="idEliminarInventario=inventory.idInventario;showModalEliminar=true"></p-button>
 
-            </td>
+                </td>
 
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="summary">
-        <div class="flex align-items-center justify-content-between">
-            Un total de {{listaInventario ? listaInventario.length : 0 }} Productos del Inventario.
-        </div>
-    </ng-template>
-</p-table>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                Un total de {{listaInventario ? listaInventario.length : 0 }} Productos del Inventario.
+            </div>
+        </ng-template>
+    </p-table>
 </div>
 
 
@@ -103,9 +135,11 @@
                 Esta acción eliminará permanentemente el registro del sistema.
             </div>
             <div class="col-12 mt-3 text-end">
-                <p-button label="Cancelar" [text]="true" [raised]="true" severity="success" (click)="showModalEliminar=false" ></p-button>
+                <p-button label="Cancelar" [text]="true" [raised]="true" severity="success"
+                    (click)="showModalEliminar=false"></p-button>
                 &nbsp;&nbsp;
-                <p-button label="Eliminar" [text]="true" [raised]="true" severity="danger"  (click)="inactivarRegistroInventario()"></p-button>
+                <p-button label="Eliminar" [text]="true" [raised]="true" severity="danger"
+                    (click)="inactivarRegistroInventario()"></p-button>
             </div>
         </div>
     </div>
@@ -119,20 +153,23 @@
             <div class="row">
                 <div class="col-12">
                     <label>Nombre del Producto</label>
-                    <input type="text" pInputText [style]="{width: '420px'}" placeholder="Nombre Completo"   formControlName="nombreProducto"/>
+                    <input type="text" pInputText [style]="{width: '420px'}" placeholder="Nombre Completo"
+                        formControlName="nombreProducto" />
                 </div>
                 <div class="col-12">
                     <label>Descripcion del Producto</label>
                     <div class="card flex justify-content-center">
                         <textarea rows="5" cols="30" pInputTextarea [autoResize]="true" style="resize: none;"
-                            [style]="{width: '420px'}"  formControlName="descripcionProducto"></textarea>
+                            [style]="{width: '420px'}" formControlName="descripcionProducto"></textarea>
                     </div>
 
                 </div>
                 <div class="col-12">
                     <label>Producto</label>
-                    <p-dropdown [style]="{width: '420px'}" [options]="listaProducto" optionLabel="nombre"   optionValue="id"
-                        [filter]="true" filterBy="nombre" [showClear]="true" placeholder="Selecciona el Producto" formControlName="idProducto">
+                    <p-dropdown [style]="{width: '420px', 'z-index': '9999'}" [panelStyle]="{'z-index': '9999'}"
+                        [panelStyleClass]="'my-custom-dropdown'" [options]="listaProducto" optionLabel="nombre"
+                        optionValue="id" [filter]="true" filterBy="nombre" [showClear]="true"
+                        placeholder="Selecciona el Producto" formControlName="idProducto" [appendTo]="'body'">
                         <ng-template let-selectedOption>
                             <div class="flex align-items-center gap-2">
                                 <div>{{ selectedOption.nombre }}</div>
@@ -142,14 +179,16 @@
                 </div>
                 <div class="col-12">
                     <label>Cantidad Disponible</label>
-                    <p-inputNumber inputId="integeronly" [style]="{width: '420px'}" formControlName="cantidad"> </p-inputNumber>
+                    <p-inputNumber inputId="integeronly" [style]="{width: '420px'}" formControlName="cantidad">
+                    </p-inputNumber>
                 </div>
             </div>
         </div>
         <div class="text-center mt-2">
             <p-button icon="pi pi-times" label="Cancelar" [text]="true" [raised]="true" severity="secondary"></p-button>
             &nbsp;&nbsp;
-            <p-button icon="pi pi-check" label="Actualizar" [text]="true" [raised]="true" severity="warning" (click)="actualizarRegistroInventario() "></p-button>
+            <p-button icon="pi pi-check" label="Actualizar" [text]="true" [raised]="true" severity="warning"
+                (click)="actualizarRegistroInventario() "></p-button>
         </div>
     </form>
 </p-dialog>

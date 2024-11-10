@@ -1,4 +1,3 @@
-
 <app-navbar></app-navbar>
 <!-- HTML -->
 <div class="main-container">
@@ -11,42 +10,113 @@
     </div>
   </section>
 
+
+
+
+
+
   <!-- Products Section -->
   <div class="products-container">
-    <h2 class="products-title">Productos Destacados</h2>
-    
-    <div class="products-grid">
-      <div *ngFor="let product of listaProducto" class="product-card">
-        <div class="product-image">
-          <i class="pi pi-gift"></i>
-        </div>
-        
-        <div class="product-content">
-          <h3 class="product-name">{{product.productoNombre}}</h3>
-          <p class="product-description">{{product.productoDescripcion}}</p>
-          
-          <div class="product-details">
-            <div class="price">
-              <span class="currency">$ </span>
-              <span class="amount">{{product.productoPrecioUnidad }}</span>
-              <span class="currency-code"> COP</span>
-            </div>
+
+    <!-- Filters Section -->
+
+
+
+    <div class="custom-filters-container" style="width: 80%;margin: auto;">
+      <div class="filters-header">
+        <h3 class="filters-title">
+          <i class="pi pi-filter"></i>
+          Filtrar Productos
+        </h3>
+      </div>
+
+      <div class="row" style="padding: 10px;">
+        <!-- Filtro por Nombre -->
+        <div class="col-4">
+          <div class="custom-input-container">
+            <span class="p-float-label">
+              <input id="nombreFiltro" type="text" pInputText [(ngModel)]="nombreFiltro" (input)="aplicarFiltros()"
+                class="w-full custom-text-input">
+              <label for="nombreFiltro">
+                <i class="pi pi-search"></i> Buscar por nombre
+              </label>
+            </span>
           </div>
         </div>
 
-        <div class="product-footer">
-          <p-button 
-            label="Agregar al carrito" 
-            [outlined]="true"
-            severity="secondary"
-            (click)="AgregarProducto(product)"
-            icon="pi pi-shopping-cart"
-            iconPos="left">
+        <!-- Filtro Precio Mínimo -->
+        <div class="col-4">
+          <div class="custom-input-container">
+            <span class="p-float-label">
+              <p-inputNumber id="precioMinimo" [(ngModel)]="precioMinimo" (onInput)="aplicarFiltros()" mode="currency"
+                currency="COP" [min]="0" [showButtons]="true" [step]="1000" class="w-full custom-input-number"
+                [inputStyleClass]="'custom-price-input'">
+              </p-inputNumber>
+              <label for="precioMinimo">
+                <i class="pi pi-dollar"></i> Precio mínimo
+              </label>
+            </span>
+          </div>
+        </div>
+
+        <!-- Filtro Precio Máximo -->
+        <div class="col-4">
+          <div class="custom-input-container">
+            <span class="p-float-label">
+              <p-inputNumber id="precioMaximo" [(ngModel)]="precioMaximo" (onInput)="aplicarFiltros()" mode="currency"
+                currency="COP" [min]="0" [showButtons]="true" [step]="1000" class="w-full custom-input-number"
+                [inputStyleClass]="'custom-price-input'">
+              </p-inputNumber>
+              <label for="precioMaximo">
+                <i class="pi pi-dollar"></i> Precio máximo
+              </label>
+            </span>
+          </div>
+        </div>
+
+        <!-- Botón Limpiar -->
+        <div class="col-12 text-center d-flex mt-3"
+          style="padding: 10px;display: flex;justify-content: center;align-items: center;">
+          <p-button icon="pi pi-refresh" (onClick)="limpiarFiltros()" label="Borrar Filtros" [outlined]="true"
+            severity="secondary">
           </p-button>
+        </div>
+      </div>
+
+      <!-- Indicador de Resultados -->
+    </div>
+
+
+    <!-- Products Section -->
+    <h2 class="products-title mt-3">Productos Destacados</h2>
+
+    <div class="container-fluid">
+      <div class="row" style="display: flex;justify-content: center;align-items: center;">
+        <div *ngFor="let product of listaProductoFiltrada" class="product-card col-3" style="margin: 10px;width: 400px;">
+          <div class="product-image">
+            <i class="pi pi-gift"></i>
+          </div>
+
+          <div class="product-content">
+            <h3 class="product-name">{{product.productoNombre}}</h3>
+            <p class="product-description">{{product.productoDescripcion}}</p>
+
+            <div class="product-details">
+              <div class="price">
+                <span class="currency">$</span>
+                <span class="amount">{{product.productoPrecioUnidad}}</span>
+                <span class="currency-code">COP</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-footer">
+            <p-button label="Agregar al carrito" [outlined]="true" severity="secondary"
+              (click)="AgregarProducto(product)" icon="pi pi-shopping-cart" iconPos="left">
+            </p-button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-

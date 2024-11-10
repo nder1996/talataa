@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
+import { LoadingService } from './loading.service';
 
 
 interface PdfOptions {
@@ -25,13 +26,14 @@ interface PdfOptions {
 })
 export class GenerateReportService {
 
-  constructor() { }
+  constructor( private loadingService:LoadingService) { }
 
   async generateTablePDF(
     elementId: string,
     filename: string = 'tabla.pdf',
     options: PdfOptions = {}
   ) {
+    this.loadingService.startLoading();
     // Configuración por defecto
     const defaultOptions: PdfOptions = {
       orientation: 'l',
@@ -185,5 +187,6 @@ export class GenerateReportService {
     } catch (error) {
       console.error('Error al generar el PDF:', error);
     }
+    this.loadingService.stopLoading();
   }
-}
+} 
